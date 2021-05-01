@@ -16,32 +16,50 @@
     @yield('AnotherLink')
 
     @yield('GetStyle')
+
+    <style>
+        .footer {
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            background-color: red;
+            color: white;
+            text-align: center;
+        }
+    </style>
 </head>
-<body>
-    {{-- check Error Log and show --}}
-    @if (\Session::has('success'))
-        <script>
-            swal("สำเร็จ!", "{{ \Session::get('success') }}", "success");
+    <body>
+        {{-- check Error Log and show --}}
+        @if (\Session::has('success'))
+            <script>
+                swal("สำเร็จ!", "{{ \Session::get('success') }}", "success");
 
-        </script>
-    @elseif (\Session::has('error'))
-        <script>
-            swal("ล้มเหลว!", "{{ \Session::get('error') }}", "error");
+            </script>
+        @elseif (\Session::has('error'))
+            <script>
+                swal("ล้มเหลว!", "{{ \Session::get('error') }}", "error");
 
-        </script>
-    @endif
-    {{-- Check success return --}}
+            </script>
+        @endif
+        {{-- Check success return --}}
 
-    @yield('GetBody')
+        @yield('GetBody')
 
-    @if ($show_register)
-        @yield('RegisterModal')
-    @endif
+        @if ($show_register)
+            @yield('RegisterModal')
+        @endif
 
-    @if ($show_login)
-        @yield('LoginModal')
-    @endif
+        @if ($show_login)
+            @yield('LoginModal')
+        @endif
 
-    @yield('FunctionJs')
-</body>
+        @yield('FunctionJs')
+
+    </body>
+    <footer>
+        <div class="container-fluid">
+
+        </div>
+    </footer>
 </html>

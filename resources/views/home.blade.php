@@ -22,12 +22,12 @@
 
     <style>
         body{
-            background: linear-gradient( -500deg, rgb(244, 223, 204), rgb(250, 149, 131), rgb(47, 65, 89), rgb(64, 151, 170) );
+            background: linear-gradient( -500deg, rgb(34, 36, 70), rgb(38,40,92), rgb(77,80,152), rgb(117,120,205) );
             background-size: 800% 800%;
             animation: gradient 20s ease infinite;
         }
         .animate-bg{
-            background: linear-gradient( -500deg, rgb(196, 178, 163), rgb(202, 120, 105), rgb(70, 97, 133), rgb(53, 125, 141) );
+            background: linear-gradient( -500deg, rgb(34, 36, 70), rgb(38,40,92), rgb(77,80,152), rgb(117,120,205) );
             background-size: 800% 800%;
             animation: gradient 20s ease infinite;
         }
@@ -151,60 +151,22 @@
 
         <main class="py-4">
             <div class="container">
-                <div class="row justify-content-center">
-                    <div class="col-md-8">
-                        <div class="card">
-                            {{-- Show Image promote --}}
-                            <div id="demo" class="carousel slide" data-ride="carousel">
-
-                                <!-- Indicators -->
-                                <ul class="carousel-indicators">
-                                  <li data-target="#demo" data-slide-to="0" class="active"></li>
-                                  <li data-target="#demo" data-slide-to="1"></li>
-                                  <li data-target="#demo" data-slide-to="2"></li>
-                                </ul>
-
-                                <!-- The slideshow -->
-                                <div class="carousel-inner">
-                                  <div class="carousel-item active">
-                                    <img src="{{ asset('assets/PromoteImg/pic1.jpg') }}" style="width: 100%;height: 400px;" alt="Pic1">
-                                  </div>
-                                  <div class="carousel-item">
-                                    <img src="{{ asset('assets/PromoteImg/pic2.jpg') }}" style="width: 100%;height: 400px;" alt="Pic2">
-                                  </div>
-                                  <div class="carousel-item">
-                                    <img src="{{ asset('assets/PromoteImg/pic3.jpg') }}" style="width: 100%;height: 400px;" alt="Pic3">
-                                  </div>
-                                </div>
-
-                                <!-- Left and right controls -->
-                                <a class="carousel-control-prev" href="#demo" data-slide="prev">
-                                  <span class="carousel-control-prev-icon"></span>
-                                </a>
-                                <a class="carousel-control-next" href="#demo" data-slide="next">
-                                  <span class="carousel-control-next-icon"></span>
-                                </a>
-
-                            </div>
-                            {{-- Show Image promote --}}
+                <div class="col-md-8 mx-auto mb-5">
+                    <br>
+                    <div class="container mx-auto text-white text-center">
+                        <p><h1 class="display-4">Another Profile</h1></p>
+                    </div>
+                    <form action="">
+                        <div class="form-group">
+                            <input class="form-control input-lg" id="SearchTXT_id" name="SearchTXT" type="text" placeholder="Searching another profile">
+                            <span class="glyphicon glyphicon-search form-control-feedback"></span>
                         </div>
-                        <br><br>
-                        <div class="container">
-                            <div class="col-12 set-center">
-                                {{-- <div class="row">
-                                    <div class="col">
-                                        <button class="btn-lg btn-primary">Test2</button>
-                                    </div>
-                                    <div class="col">
-                                        <button class="btn-lg btn-primary">Test2</button>
-                                    </div>
-                                    <div class="col">
-                                        <button class="btn-lg btn-primary">Test2</button>
-                                    </div>
-                                </div> --}}
-                                <button class="btn-lg btn-primary">
-                                    ตัวอย่างผลงาน
-                                </button>
+                    </form>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col text-center">
+                                <button class="btn btn-secondary">Search</button>
+                                <button class="btn btn-secondary">Reset</button>
                             </div>
                         </div>
                     </div>

@@ -31,6 +31,15 @@ Auth::routes([
         return response()->download($tmp_image, $ImageName, $headers);
     })->name('GetImage');
 
+    Route::get('get-logo', function () {
+        $path = public_path("img/logo.png");
+
+        $headers = [
+            "file_type" => 'png'
+        ];
+        return response()->download($path , "logo.png" , $headers);
+    })->name('GetLogo');
+
 // Backend route
 Route::get('/your-profile/{flag}', function ($flag) {
     if ($flag == "create") {
