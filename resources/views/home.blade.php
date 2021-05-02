@@ -247,7 +247,7 @@
 
         <!-- Modal footer -->
         <div class="modal-footer">
-        <button type="button" class="btn btn-primary" onclick="SubmitForm('login' , 'Login_Form');">{{ __('register') }}</button>
+        <button type="button" class="btn btn-primary" onclick="SubmitForm('login' , 'Login_Form');">{{ __('Login') }}</button>
         <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
         </div>
 

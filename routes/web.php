@@ -41,10 +41,12 @@ Auth::routes([
     })->name('GetLogo');
 
 // Backend route
-Route::get('/your-profile/{flag}', function ($flag) {
-    if ($flag == "create") {
-        return view('tmp_profile.profile' , compact('flag'));
-    } else if ($flag == "view" or $flag == "update") {
-        return view('tmp_profile.profile' , compact('flag'));
-    }
-})->middleware('auth')->name('your.profile');
+Route::middleware(['auth'])->group(function () {
+    Route::get('/your-profile/{flag}', function ($flag) {
+        if ($flag == "create" or $flag == "update") {
+            return view('Profile.modify');
+        } else if ($flag == "view") {
+            return view('Profile.view');
+        }
+    })->name('your.profile');
+});
