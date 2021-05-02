@@ -28,7 +28,7 @@ class RegisterController extends Controller
     // {
     //     return Validator::make($data, [
     //         'name' => ['required', 'string', 'max:255'],
-    //         'email' => ['required', 'string', 'email', 'max:255', 'unique:profile_t_login'],
+    //         'email' => ['required', 'string', 'email', 'max:255', 'unique:profile_t_master'],
     //         'password' => ['required', 'string', 'min:8', 'confirmed'],
     //     ]);
     // }
@@ -56,7 +56,7 @@ class RegisterController extends Controller
             'nickname' => ['string' , 'max:255'],
             'name_th'=> ['required', 'string', 'max:255'],
             'name_en' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:profile_t_login'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:profile_t_master'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
 
@@ -65,7 +65,7 @@ class RegisterController extends Controller
         if ($chk_exist > 0 ) {
             return redirect()->route('MainPage')->with('error' , 'Email already exists');
         } else {
-            $tmp_id = User::max('id');
+            $tmp_id = User::max('profile_id');
             $new_id = (intval($tmp_id) + 1);
             $tmp_gen = DB::raw("SELECT LPAD('$new_id' , 5 , 0) as temp_new_id FROM dual;");
             $gen = DB::select($tmp_gen);
@@ -78,7 +78,7 @@ class RegisterController extends Controller
             $filePath = $request->file('profile_img')->storeAs('img/Profile', $file_name, 'public');
         // Store file to storage
             $regist_res = new User([
-                'id' => strval($create_id),
+                'profile_id' => strval($create_id),
                 'name_th' => $request['name_th'],
                 'name_en' => $request['name_en'],
                 'nickname' => $request['nickname'],
@@ -89,7 +89,7 @@ class RegisterController extends Controller
             ]);
             $regist_res->save();
         // save data to database
-            $cnt = User::all()->where('id' , $create_id)->count();
+            $cnt = User::all()->where('profile_id' , $create_id)->count();
         // check data after insert
             if ($cnt > 0) {
                 return redirect()->route('MainPage')->with('success' , "Register complete");

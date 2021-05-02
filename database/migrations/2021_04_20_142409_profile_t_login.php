@@ -7,34 +7,40 @@ use Illuminate\Support\Facades\Schema;
 
 class ProfileTLogin extends Migration
 {
-    public $table_name = "profile_t_login";
+    private $table_name = "profile_t_master";
     public function up()
     {
         Schema::create($this->table_name, function (Blueprint $table) {
-            $table->string('id' , 5)->primary();
-            $table->string('name_th', 100);
-            $table->string('name_en', 100);
-            $table->string('nickname');
-            $table->string('photo_name');
-            $table->string('email')->unique();
-            $table->string('account_type', 1)->default('A');
+            $table->string('profile_id' , 5)->primary()->comment('รหัสผู้ใช้งาน');
+            $table->string('name_th', 100)->nullable(false)->comment('ชื่อผู้ใช้งาน (ไทย)');
+            $table->string('name_en', 100)->nullable(false)->comment('ชื่อผู้ใช้งาน (อังกฤษ)');
+            $table->string('photo_name')->nullable(false)->comment('ชื่อรูปโปรไฟล์ผู้ใช้งาน');
+            $table->string('address' , 5)->nullable(false)->comment('รหัสที่อยู่');
+            $table->string('telephone' , 15)->nullable(false)->comment('เบอร์โทรศัพท์');
+            $table->string('about' , 2000)->nullable(false)->comment('อธิบายตัวตน');
+            $table->string('email')->unique()->comment('บัญชีอีเมล์');
+            $table->string('password')->nullable(false)->comment('รหัสผ่าน');
+            $table->rememberToken()->comment('key การจดจำรหัสผ่าน');
+            $table->string('account_status', 1)->default('A')->comment('สถานะบัญชี');
             /*
                 A = Active
                 D = Delete
                 S = Stop // not delete but another people can't see this
             */
-            $table->string('gen_profile_flag' , 1)->default('N');
+            $table->string('gen_profile_flag' , 1)->default('N')->comment('สถานะการสร้างบัญชี');
             /*
                 Y = Yes (success Create)
                 N = No (Non create)
             */
-            $table->string('password');
-            $table->rememberToken();
-            $table->dateTime('create_date')->default(DB::raw('CURRENT_TIMESTAMP'));
-            $table->dateTime('last_upd_date')->default(DB::raw('CURRENT_TIMESTAMP'));
-            $table->string('upd_user_id', 5)->comment('ผู้แก้ไขข้อมูล');
+            $table->string('admin_flag' , 1)->default('N')->comment('สถานะผู้ใช้งาน');
+            /*
+                Y = Yes (Admin)
+                N = No (user)
+            */
+            $table->dateTime('create_date')->default(DB::raw('CURRENT_TIMESTAMP'))->comment('วันที่สร้างข้อมูล');
+            $table->dateTime('last_upd_date')->default(DB::raw('CURRENT_TIMESTAMP'))->comment('วันที่แก้ไขข้อมูลล่าสุด');
+            $table->string('upd_user_id', 5)->nullable(false)->comment('ผู้แก้ไขข้อมูล');
 
-            // $table->index(["id"], 'user_id_idx');
         });
     }
 

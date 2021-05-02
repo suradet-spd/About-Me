@@ -9,12 +9,13 @@ use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
-    protected $table = 'profile_t_login';
+    protected $table = 'profile_t_master';
+    protected $primaryKey = 'profile_id';
     use HasFactory, Notifiable;
 
     public $timestamps = false;
     protected $fillable = [
-        'id',
+        'profile_id',
         'name_th',
         'name_en',
         'nickname',
