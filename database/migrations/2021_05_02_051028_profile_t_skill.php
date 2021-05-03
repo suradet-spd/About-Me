@@ -15,8 +15,8 @@ class ProfileTSkill extends Migration
             $table->string('profile_id' , 5)->nullable(false)->comment('รหัสผู้ใช้งาน');
             $table->string('tech_list_id' , 5)->nullable(false)->comment('รหัสรายการความสามารถ');
             $table->integer('skill_seq')->nullable(false)->comment('ลำดับความสามารถ');
-            $table->string('skill_desc_th')->nullable(true)->default(null)->comment('ความหมายความสามารถ (ไทย)');
-            $table->string('skill_desc_en')->nullable(true)->default(null)->comment('ความหมายความสามารถ (อังกฤษ)');
+            $table->string('skill_desc_th')->nullable(true)->comment('ความหมายความสามารถ (ไทย)');
+            $table->string('skill_desc_en')->nullable(true)->comment('ความหมายความสามารถ (อังกฤษ)');
             $table->dateTime('last_upd_date')->default(DB::raw('CURRENT_TIMESTAMP'))->comment('วันที่แก้ไขข้อมูลล่าสุด');
             $table->string('upd_user_id', 5)->nullable(false)->comment('ผู้แก้ไขข้อมูล');
         });

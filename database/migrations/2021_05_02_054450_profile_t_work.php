@@ -20,7 +20,7 @@ class ProfileTWork extends Migration
             $table->string('work_desc_th')->nullable(false)->comment('อธิบายงาน (ไทย)');
             $table->string('work_desc_en')->nullable(false)->comment('อธิบายงาน (อังกฤษ)');
             $table->string('work_start_year' , 4)->nullable(false)->comment('ปีที่เริ่มงาน');
-            $table->string('work_end_year' , 4)->nullable(true)->default(null)->comment('ปีที่ออกจากงาน');
+            $table->string('work_end_year' , 4)->nullable(true)->comment('ปีที่ออกจากงาน');
             $table->dateTime('last_upd_date')->default(DB::raw('CURRENT_TIMESTAMP'))->comment('วันที่แก้ไขข้อมูลล่าสุด');
             $table->string('upd_user_id', 5)->nullable(false)->comment('ผู้แก้ไขข้อมูล');
         });

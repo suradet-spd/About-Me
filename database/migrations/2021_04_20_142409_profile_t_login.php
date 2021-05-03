@@ -14,10 +14,11 @@ class ProfileTLogin extends Migration
             $table->string('profile_id' , 5)->primary()->comment('รหัสผู้ใช้งาน');
             $table->string('name_th', 100)->nullable(false)->comment('ชื่อผู้ใช้งาน (ไทย)');
             $table->string('name_en', 100)->nullable(false)->comment('ชื่อผู้ใช้งาน (อังกฤษ)');
+            $table->string('nickname')->nullable(false)->comment('ชื่อเล่น');
             $table->string('photo_name')->nullable(false)->comment('ชื่อรูปโปรไฟล์ผู้ใช้งาน');
-            $table->string('address' , 5)->nullable(false)->comment('รหัสที่อยู่');
-            $table->string('telephone' , 15)->nullable(false)->comment('เบอร์โทรศัพท์');
-            $table->string('about' , 2000)->nullable(false)->comment('อธิบายตัวตน');
+            $table->string('address' , 5)->nullable(true)->comment('รหัสที่อยู่');
+            $table->string('telephone' , 15)->nullable(true)->comment('เบอร์โทรศัพท์');
+            $table->string('about' , 2000)->nullable(true)->comment('อธิบายตัวตน');
             $table->string('email')->unique()->comment('บัญชีอีเมล์');
             $table->string('password')->nullable(false)->comment('รหัสผ่าน');
             $table->rememberToken()->comment('key การจดจำรหัสผ่าน');
