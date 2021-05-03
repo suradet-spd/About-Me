@@ -6,7 +6,8 @@
 @extends('layouts.main-master')
 
 @section('GetTitleName')
-    Generate profile [home]
+    {{-- Generate profile [home] --}}
+    {{ __('home.idx') }}
 @endsection
 
 @section('GetStyle')
@@ -143,6 +144,26 @@
                                 </h5>
                             </li>
                         @endguest
+
+                        <li class="nav-item dropdown">
+                            <h5>
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle text-white" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    <b>{{ strtoupper(Config::get('app.locale')) }}</b>
+                                </a>
+
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    @if (Config::get('app.locale') == "en")
+                                        <a class="dropdown-item" href="{{ url('change' , 'th') }}">
+                                            TH
+                                        </a>
+                                    @else
+                                        <a class="dropdown-item" href="{{ url('change' , 'en') }}">
+                                            EN
+                                        </a>
+                                    @endif
+                                </div>
+                            </h5>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -154,7 +175,7 @@
                 <div class="col-md-8 mx-auto mb-5">
                     <br>
                     <div class="container mx-auto text-white text-center">
-                        <p><h1 class="display-4">Another Profile</h1></p>
+                        <p><h1 class="display-4">Searching</h1></p>
                     </div>
                     <form action="">
                         <div class="form-group">

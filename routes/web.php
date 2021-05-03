@@ -3,12 +3,19 @@
 use App\Http\Controllers\Auth\RegisterController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\App;
 
 // root route
 Route::get('/', function () {
     return view('home');
 })->name('MainPage');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+// Language route
+Route::get('change/{locale}', function ($locale) {
+    session()->put('locale', $locale);
+    return redirect()->back();
+});
 
 // Frontend route
 Route::post('/register', [RegisterController::class , 'req_Register'])->name('submit-register');
