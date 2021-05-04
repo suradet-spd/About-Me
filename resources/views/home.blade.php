@@ -7,7 +7,7 @@
 
 @section('GetTitleName')
     {{-- Generate profile [home] --}}
-    {{ __('home.idx') }}
+    {{ trans('home.TitleTab') }}
 @endsection
 
 @section('GetStyle')
@@ -64,7 +64,7 @@
         <nav class="navbar navbar-expand-md navbar-light shadow-sm animate-bg">
             <div class="container">
                 <a class="navbar-brand text-white" href="{{ url('/') }}">
-                    <h4>Generate Profile</h4>
+                    <h4>{{ trans('home.LogoName') }}</h4>
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -85,7 +85,7 @@
                                     {{-- <a class="nav-link text-white" href="{{ route('login') }}"><h5>{{ __('Login') }}</h5></a> --}}
                                     <a id="LoginBTN" class="nav-link text-white" style="cursor: pointer" data-toggle="modal" data-target="#md_login">
                                         <h5>
-                                            <b>Login</b>
+                                            <b>{{ trans('home.LoginMenu') }}</b>
                                         </h5>
                                     </a>
                                 </li>
@@ -93,7 +93,7 @@
                             <li class="nav-item">
                                 <a id="RegisterBTN" class="nav-link text-white" style="cursor: pointer" data-toggle="modal" data-target="#md_register">
                                     <h5>
-                                        <b>register</b>
+                                        <b>{{ trans('home.RegisterMenu') }}</b>
                                     </h5>
                                 </a>
                             </li>
@@ -175,19 +175,19 @@
                 <div class="col-md-8 mx-auto mb-5">
                     <br>
                     <div class="container mx-auto text-white text-center">
-                        <p><h1 class="display-4">Searching</h1></p>
+                        <p><h1 class="display-4">{{ trans('home.PromoteTextHead') }}</h1></p>
                     </div>
                     <form action="">
                         <div class="form-group">
-                            <input class="form-control input-lg" id="SearchTXT_id" name="SearchTXT" type="text" placeholder="Searching another profile">
+                            <input class="form-control input-lg" id="SearchTXT_id" name="SearchTXT" type="text" placeholder="{{ trans('home.PlaceHolderText') }}">
                             <span class="glyphicon glyphicon-search form-control-feedback"></span>
                         </div>
                     </form>
                     <div class="container">
                         <div class="row">
                             <div class="col text-center">
-                                <button class="btn btn-secondary">Search</button>
-                                <button class="btn btn-secondary">Reset</button>
+                                <button class="btn btn-secondary">{{ trans('home.SearchButton') }}</button>
+                                <button class="btn btn-secondary">{{ trans('home.ResetButton') }}</button>
                             </div>
                         </div>
                     </div>
@@ -205,7 +205,7 @@
 
         <!-- Modal Header -->
         <div class="modal-header">
-        <h4 class="modal-title">Login form</h4>
+        <h4 class="modal-title">{{ trans('login.LoginModalHeader') }}</h4>
         <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
 
@@ -215,7 +215,7 @@
                 @csrf
 
                 <div class="form-group row">
-                    <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+                    <label for="email" class="col-md-4 col-form-label text-md-right">{{ trans('login.EmailUser') }}</label>
 
                     <div class="col-md-6">
                         <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
@@ -229,7 +229,7 @@
                 </div>
 
                 <div class="form-group row">
-                    <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
+                    <label for="password" class="col-md-4 col-form-label text-md-right">{{ trans('login.PasswordUser') }}</label>
 
                     <div class="col-md-6">
                         <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
@@ -248,13 +248,13 @@
                             <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
 
                             <label class="form-check-label" for="remember">
-                                {{ __('Remember Me') }}
+                                {{ trans('login.RememberButton') }}
                             </label>
                         </div>
                     </div>
                 </div>
 
-                <div class="form-group row mb-0">
+                {{-- <div class="form-group row mb-0">
                     <div class="col-md-8 offset-md-4">
                         @if (Route::has('password.request'))
                             <a class="btn btn-link" href="{{ route('password.request') }}">
@@ -262,14 +262,14 @@
                             </a>
                         @endif
                     </div>
-                </div>
+                </div> --}}
             </form>
         </div>
 
         <!-- Modal footer -->
         <div class="modal-footer">
-        <button type="button" class="btn btn-primary" onclick="SubmitForm('login' , 'Login_Form');">{{ __('Login') }}</button>
-        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" onclick="SubmitForm('login' , 'Login_Form');">{{ trans('login.LoginButton') }}</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal">{{ trans('login.CloseLoginButton') }}</button>
         </div>
 
     </div>
@@ -285,7 +285,7 @@
 
         <!-- Modal Header -->
         <div class="modal-header">
-        <h4 class="modal-title">Register form</h4>
+        <h4 class="modal-title">{{ trans('register.RegisterModalHeader') }}</h4>
         <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
 
@@ -295,15 +295,15 @@
             @csrf
 
             <div class="form-group row">
-                <label for="profile_img" class="col-md-4 col-form-label text-md-right">{{ __('Profile image') }}</label>
+                <label for="profile_img" class="col-md-4 col-form-label text-md-right">{{ trans('register.ImageUser') }}</label>
 
                 <div class="col-md-6">
                     <div class="custom-file mb-3">
-                        <input type="file" class="custom-file-input @error('profile_img') is-invalid @enderror" id="profile_img_id" name="profile_img" value="{{ old('profile_img') }}" required autocomplete="profile_img" autofocus>
-                        <label class="custom-file-label" for="profile_img">Choose file</label>
+                        <input type="file" class="custom-file-input @error('regist_profile_img') is-invalid @enderror" id="regist_profile_img_id" name="regist_profile_img" value="{{ old('regist_profile_img') }}" required autocomplete="regist_profile_img" autofocus>
+                        <label class="custom-file-label" for="regist_profile_img">{{ trans('register.ImageDesc') }}</label>
                     </div>
-                    <p style="color: red">เฉพาะไฟล์ jpeg , jpg , png ขนาดไม่เกิน 10 MB เท่านั้น</p>
-                    @error('profile_img')
+                    <p style="color: red">{{ trans('register.ImageRemark') }}</p>
+                    @error('regist_profile_img')
                         <script>
                             swal("Your name can't verify !" , "{{ $message }}" , 'error');
                         </script>
@@ -312,12 +312,12 @@
             </div>
 
             <div class="form-group row">
-                <label for="nickname" class="col-md-4 col-form-label text-md-right">{{ __('Nickname') }}</label>
+                <label for="regist_nickname" class="col-md-4 col-form-label text-md-right">{{ trans('register.NicknameUser') }}</label>
 
                 <div class="col-md-6">
-                    <input id="nickname_id" type="text" class="form-control @error('nickname') is-invalid @enderror" name="nickname" value="{{ old('nickname') }}" required autocomplete="nickname" autofocus>
+                    <input id="regist_nickname_id" type="text" class="form-control @error('regist_nickname') is-invalid @enderror" name="regist_nickname" value="{{ old('regist_nickname') }}" required autocomplete="regist_nickname" autofocus>
 
-                    @error('nickname')
+                    @error('regist_nickname')
                         <script>
                             swal("Your nickname can't verify !" , "{{ $message }}" , 'error');
                         </script>
@@ -326,12 +326,12 @@
             </div>
 
             <div class="form-group row">
-                <label for="name_th" class="col-md-4 col-form-label text-md-right">{{ __('Name (thai)') }}</label>
+                <label for="regist_name_th" class="col-md-4 col-form-label text-md-right">{{ trans('register.UserNameTH') }}</label>
 
                 <div class="col-md-6">
-                    <input id="name_th_id" type="text" class="form-control @error('name_th') is-invalid @enderror" name="name_th" value="{{ old('name_th') }}" required autocomplete="name_th" autofocus>
+                    <input id="regist_name_th_id" type="text" class="form-control @error('regist_name_th') is-invalid @enderror" name="regist_name_th" value="{{ old('regist_name_th') }}" required autocomplete="regist_name_th" autofocus>
 
-                    @error('name_th')
+                    @error('regist_name_th')
                         <script>
                             swal("Your name can't verify !" , "{{ $message }}" , 'error');
                         </script>
@@ -340,12 +340,12 @@
             </div>
 
             <div class="form-group row">
-                <label for="name_en" class="col-md-4 col-form-label text-md-right">{{ __('Name (eng)') }}</label>
+                <label for="regist_name_en" class="col-md-4 col-form-label text-md-right">{{ trans('register.UserNameEN') }}</label>
 
                 <div class="col-md-6">
-                    <input id="name_en_id" type="text" class="form-control @error('name_en') is-invalid @enderror" name="name_en" value="{{ old('name_en') }}" required autocomplete="name_en" autofocus>
+                    <input id="regist_name_en_id" type="text" class="form-control @error('regist_name_en') is-invalid @enderror" name="regist_name_en" value="{{ old('regist_name_en') }}" required autocomplete="regist_name_en" autofocus>
 
-                    @error('name_en')
+                    @error('regist_name_en')
                         <script>
                             swal("Your name can't verify !" , "{{ $message }}" , 'error');
                         </script>
@@ -354,12 +354,12 @@
             </div>
 
             <div class="form-group row">
-                <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+                <label for="regist_email" class="col-md-4 col-form-label text-md-right">{{ trans('register.UserEmail') }}</label>
 
                 <div class="col-md-6">
-                    <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
+                    <input id="regist_email" type="email" class="form-control @error('regist_email') is-invalid @enderror" name="regist_email" value="{{ old('regist_email') }}" required autocomplete="regist_email">
 
-                    @error('email')
+                    @error('regist_email')
                         <script>
                             swal("Email can't verify !" , "{{ $message }}" , 'error');
                         </script>
@@ -369,12 +369,12 @@
             </div>
 
             <div class="form-group row">
-                <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
+                <label for="regist_password" class="col-md-4 col-form-label text-md-right">{{ trans('register.UserPassword') }}</label>
 
                 <div class="col-md-6">
-                    <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
-
-                    @error('password')
+                    <input id="regist_password" type="password" class="form-control @error('regist_password') is-invalid @enderror" name="regist_password" required autocomplete="new-password">
+{{-- {{ dd($errors->get('regist_password')) }} --}}
+                    @error('regist_password')
                         <script>
                             swal("Your password can't verify !" , "{{ $message }}" , 'error');
                         </script>
@@ -383,10 +383,10 @@
             </div>
 
             <div class="form-group row">
-                <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
+                <label for="regist_password-confirm" class="col-md-4 col-form-label text-md-right">{{ trans('register.UserConfirmPassword') }}</label>
 
                 <div class="col-md-6">
-                    <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                    <input id="regist_password-confirm" type="password" class="form-control" name="regist_password_confirmation" required autocomplete="new-password">
                 </div>
             </div>
         </form>
@@ -394,8 +394,8 @@
 
         <!-- Modal footer -->
         <div class="modal-footer">
-        <button type="button" class="btn btn-primary" onclick="SubmitForm('register' , 'Regist_Form');">{{ __('register') }}</button>
-        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" onclick="SubmitForm('register' , 'Regist_Form');">{{ trans('register.RegisterButton') }}</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal">{{ trans('register.CancelButton') }}</button>
         </div>
 
     </div>
