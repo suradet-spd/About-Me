@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
+
 return [
     // Title bar
     "TitleTab" => "Gen Profile program",
@@ -13,5 +15,9 @@ return [
     "SearchButton" => "Search",
     "ResetButton" => "Reset",
 
+    // Menu zone
+    "CreateMenu" => "Create Profile",
+    "ViewMenu" => "Your Profile" ,
+    "LogoutMenu" => "Logout" ,
 ];
 

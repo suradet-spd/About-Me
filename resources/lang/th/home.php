@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
+
 return [
     // Title bar
     "TitleTab" => "โปรแกรมสร้างโปรไฟล์",
@@ -12,4 +14,9 @@ return [
     "PlaceHolderText" => "ค้นหาบุคคลอื่น ๆ ที่รู้จัก",
     "SearchButton" => "ค้นหา",
     "ResetButton" => "ล้างค่า",
+
+    // Menu zone
+    "CreateMenu" => "สร้างโปรไฟล์",
+    "ViewMenu" => "ดูข้อมูลโปรไฟล์" ,
+    "LogoutMenu" => "ออกจากระบบ",
 ];

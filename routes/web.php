@@ -38,22 +38,40 @@ Auth::routes([
         return response()->download($tmp_image, $ImageName, $headers);
     })->name('GetImage');
 
-    Route::get('get-logo', function () {
-        $path = public_path("img/logo.png");
-
-        $headers = [
-            "file_type" => 'png'
-        ];
-        return response()->download($path , "logo.png" , $headers);
-    })->name('GetLogo');
-
 // Backend route
 Route::middleware(['auth'])->group(function () {
-    Route::get('/your-profile/{flag}', function ($flag) {
+
+    Route::get('profile/{flag}', function ($flag) {
         if ($flag == "create" or $flag == "update") {
             return view('Profile.modify');
         } else if ($flag == "view") {
             return view('Profile.view');
         }
-    })->name('your.profile');
+    });
+
+    Route::group(['prefix' => 'profile/{flag}'] , function ($flag) {
+            Route::get('/about', function ($flag) {
+                return view('Profile.template.1.about' , compact('flag'));
+            })->name('profile.about');
+
+            Route::get('/awards', function ($flag) {
+                return view('Profile.template.1.awards' , compact('flag'));
+            })->name('profile.awards');
+
+            Route::get('/education', function ($flag) {
+                return view('Profile.template.1.education' , compact('flag'));
+            })->name('profile.education');
+
+            Route::get('/experience', function ($flag) {
+                return view('Profile.template.1.experience' , compact('flag'));
+            })->name('profile.experience');
+
+            Route::get('/portfolio', function ($flag) {
+                return view('Profile.template.1.portfolio' , compact('flag'));
+            })->name('profile.portfolio');
+
+            Route::get('/skills', function ($flag) {
+                return view('Profile.template.1.skills' , compact('flag'));
+            })->name('profile.skills');
+    });
 });

@@ -100,9 +100,9 @@
                         @else
                             @if (Auth::user()->gen_profile_flag == "N")
                                 <li class="nav-item">
-                                    <a href="{{ route('your.profile' , 'create') }}" target="_blank" class="nav-link text-white" style="cursor: pointer">
+                                    <a href="{{ route('profile.about' , 'create') }}" target="_blank" class="nav-link text-white" style="cursor: pointer">
                                         <h5>
-                                            <b>Create your profile</b>
+                                            <b>{{ trans('home.CreateMenu') }}</b>
                                         </h5>
                                     </a>
                                 </li>
@@ -110,15 +110,7 @@
                                 <li class="nav-item">
                                     <a href="#" class="nav-link text-white" style="cursor: pointer">
                                         <h5>
-                                            <b>Your profile</b>
-                                        </h5>
-                                    </a>
-                                </li>
-
-                                <li class="nav-item">
-                                    <a href="#" class="nav-link text-white" style="cursor: pointer">
-                                        <h5>
-                                            <b>Manage your profile</b>
+                                            <b>{{ trans('home.ViewMenu') }}</b>
                                         </h5>
                                     </a>
                                 </li>
@@ -127,34 +119,47 @@
                             <li class="nav-item dropdown">
                                 <h5>
                                     <a id="navbarDropdown" class="nav-link dropdown-toggle text-white" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                        <b>{{ Auth::user()->name_en }}</b>
+                                        <b>
+                                            @if (Config::get('app.locale') == "th")
+                                                {{ Auth::user()->name_th }}
+                                            @else
+                                                {{ Auth::user()->name_en }}
+                                            @endif
+                                        </b>
                                     </a>
-
                                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                         <a class="dropdown-item" href="{{ route('logout') }}"
                                            onclick="event.preventDefault();
                                                          document.getElementById('logout-form').submit();">
-                                            {{ __('Logout') }}
+                                            {{ trans('home.LogoutMenu') }}
                                         </a>
 
                                         <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                             @csrf
                                         </form>
                                     </div>
+
                                 </h5>
+
                             </li>
                         @endguest
 
                         <li class="nav-item dropdown">
                             <h5>
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle text-white" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    <b>{{ strtoupper(Config::get('app.locale')) }}</b>
+                                    <b>
+                                        @if (Config::get('app.locale') == "th")
+                                            ไทย
+                                        @else
+                                            {{ strtoupper(Config::get('app.locale')) }}
+                                        @endif
+                                    </b>
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                     @if (Config::get('app.locale') == "en")
                                         <a class="dropdown-item" href="{{ url('change' , 'th') }}">
-                                            TH
+                                            ไทย
                                         </a>
                                     @else
                                         <a class="dropdown-item" href="{{ url('change' , 'en') }}">
