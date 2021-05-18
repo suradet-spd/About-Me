@@ -30,6 +30,11 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav">
                     <hr width="95%">
+                    @if (Config::get('app.locale') == "en")
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{{ url('change' , 'th') }}">{{ trans('profile.MenuChangeLang') }}</a></li>
+                    @else
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{{ url('change' , 'en') }}">{{ trans('profile.MenuChangeLang') }}</a></li>
+                    @endif
                     <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#">{{ trans('profile.MenuCustomBG') }}</a></li>
                     <hr width="95%">
                     <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{{ route('MyProfile' , 'about') }}">{{ trans('profile.MenuAbout') }}</a></li>

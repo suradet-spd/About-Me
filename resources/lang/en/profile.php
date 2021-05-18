@@ -6,6 +6,7 @@ return [
 
     // Tab Menu
     "MenuCustomBG" => "Custom Background",
+    "MenuChangeLang" => "Change to thai",
     "MenuAbout" => "About",
     "MenuExperience" => "Experience",
     "MenuEducation" => "Education",
