@@ -100,7 +100,7 @@
                         @else
                             @if (Auth::user()->gen_profile_flag == "N")
                                 <li class="nav-item">
-                                    <a href="{{ route('profile.about' , 'create') }}" target="_blank" class="nav-link text-white" style="cursor: pointer">
+                                    <a href="{{ route('MyProfile' , 'about') }}" target="_blank" class="nav-link text-white" style="cursor: pointer">
                                         <h5>
                                             <b>{{ trans('home.CreateMenu') }}</b>
                                         </h5>
@@ -115,7 +115,6 @@
                                     </a>
                                 </li>
                             @endif
-
                             <li class="nav-item dropdown">
                                 <h5>
                                     <a id="navbarDropdown" class="nav-link dropdown-toggle text-white" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>

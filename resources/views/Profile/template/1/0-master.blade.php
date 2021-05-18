@@ -27,12 +27,15 @@
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav">
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{{ route('profile.about' , $flag) }}">About</a></li>
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{{ route('profile.experience' , $flag) }}">Experience</a></li>
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{{ route('profile.education' , $flag) }}">Education</a></li>
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{{ route('profile.portfolio' , $flag) }}">Portfolio</a></li>
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{{ route('profile.skills' , $flag) }}">Skills</a></li>
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{{ route('profile.awards' , $flag) }}">Awards</a></li>
+                    <hr width="95%">
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#">Custom background</a></li>
+                    <hr width="95%">
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{{ route('MyProfile' , 'about') }}">About</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{{ route('MyProfile' , 'experience') }}">Experience</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{{ route('MyProfile' , 'education') }}">Education</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{{ route('MyProfile' , 'portfolio') }}">Portfolio</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{{ route('MyProfile' , 'skills') }}">Skills</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{{ route('MyProfile' , 'awards') }}">Awards</a></li>
                 </ul>
             </div>
         </nav>

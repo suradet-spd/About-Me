@@ -41,37 +41,24 @@ Auth::routes([
 // Backend route
 Route::middleware(['auth'])->group(function () {
 
-    Route::get('profile/{flag}', function ($flag) {
-        if ($flag == "create" or $flag == "update") {
-            return view('Profile.modify');
-        } else if ($flag == "view") {
-            return view('Profile.view');
+    Route::get('Profile/{type}', function ($type) {
+
+        if ($type == "about") {
+            return view('Profile.template.1.about');
+        } else if ($type == "awards") {
+            return view('Profile.template.1.awards');
+        } else if ($type == "education") {
+            return view('Profile.template.1.education');
+        } else if ($type == "experience") {
+            return view('Profile.template.1.experience');
+        } else if ($type == "portfolio") {
+            return view('Profile.template.1.portfolio');
+        } else if ($type == "skills") {
+            return view('Profile.template.1.skills');
+        } else {
+            return redirect()->route('MainPage')->with('error' , 'ไม่พบ url ที่กำหนด');
         }
-    });
-
-    Route::group(['prefix' => 'profile/{flag}'] , function ($flag) {
-            Route::get('/about', function ($flag) {
-                return view('Profile.template.1.about' , compact('flag'));
-            })->name('profile.about');
-
-            Route::get('/awards', function ($flag) {
-                return view('Profile.template.1.awards' , compact('flag'));
-            })->name('profile.awards');
-
-            Route::get('/education', function ($flag) {
-                return view('Profile.template.1.education' , compact('flag'));
-            })->name('profile.education');
-
-            Route::get('/experience', function ($flag) {
-                return view('Profile.template.1.experience' , compact('flag'));
-            })->name('profile.experience');
-
-            Route::get('/portfolio', function ($flag) {
-                return view('Profile.template.1.portfolio' , compact('flag'));
-            })->name('profile.portfolio');
-
-            Route::get('/skills', function ($flag) {
-                return view('Profile.template.1.skills' , compact('flag'));
-            })->name('profile.skills');
-    });
+    })->name('MyProfile');
 });
+
+
