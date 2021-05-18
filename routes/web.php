@@ -56,7 +56,7 @@ Route::middleware(['auth'])->group(function () {
         } else if ($type == "skills") {
             return view('Profile.template.1.skills');
         } else {
-            return redirect()->route('MainPage')->with('error' , 'ไม่พบ url ที่กำหนด');
+            return redirect()->route('MainPage')->with('error' , trans('route_error.create_profile_error'));
         }
     })->name('MyProfile');
 });

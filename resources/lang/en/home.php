@@ -19,5 +19,12 @@ return [
     "CreateMenu" => "Create Profile",
     "ViewMenu" => "Your Profile" ,
     "LogoutMenu" => "Logout" ,
+
+    // Regist account confirm
+    "HeaderRegist" => "Confirm for register",
+    "ConfirmRegist" => "Are you sure to submit form?",
+
+    // Error Register
+    "Error_msg_header" => "Something went wrong!",
 ];
 

@@ -309,7 +309,7 @@
                     <p style="color: red">{{ trans('register.ImageRemark') }}</p>
                     @error('regist_profile_img')
                         <script>
-                            swal("Your name can't verify !" , "{{ $message }}" , 'error');
+                            swal("{{ trans('home.Error_msg_header') }}" , "{{ $message }}" , 'error');
                         </script>
                     @enderror
                 </div>
@@ -323,7 +323,7 @@
 
                     @error('regist_nickname')
                         <script>
-                            swal("Your nickname can't verify !" , "{{ $message }}" , 'error');
+                            swal("{{ trans('home.Error_msg_header') }}" , "{{ $message }}" , 'error');
                         </script>
                     @enderror
                 </div>
@@ -337,7 +337,7 @@
 
                     @error('regist_name_th')
                         <script>
-                            swal("Your name can't verify !" , "{{ $message }}" , 'error');
+                            swal("{{ trans('home.Error_msg_header') }}" , "{{ $message }}" , 'error');
                         </script>
                     @enderror
                 </div>
@@ -351,7 +351,7 @@
 
                     @error('regist_name_en')
                         <script>
-                            swal("Your name can't verify !" , "{{ $message }}" , 'error');
+                            swal("{{ trans('home.Error_msg_header') }}" , "{{ $message }}" , 'error');
                         </script>
                     @enderror
                 </div>
@@ -365,7 +365,7 @@
 
                     @error('regist_email')
                         <script>
-                            swal("Email can't verify !" , "{{ $message }}" , 'error');
+                            swal("{{ trans('home.Error_msg_header') }}" , "{{ $message }}" , 'error');
                         </script>
                     @enderror
 
@@ -377,10 +377,9 @@
 
                 <div class="col-md-6">
                     <input id="regist_password" type="password" class="form-control @error('regist_password') is-invalid @enderror" name="regist_password" required autocomplete="new-password">
-{{-- {{ dd($errors->get('regist_password')) }} --}}
                     @error('regist_password')
                         <script>
-                            swal("Your password can't verify !" , "{{ $message }}" , 'error');
+                            swal("{{ trans('home.Error_msg_header') }}" , "{{ $message }}" , 'error');
                         </script>
                     @enderror
                 </div>
@@ -431,8 +430,8 @@
                 document.getElementById(FormID).submit();
         } else {
             swal({
-                title: "Are you sure to submit form?",
-                text: "you submitting form for this site!",
+                title: "{{ trans('home.HeaderRegist') }}",
+                text: "{{ trans('home.ConfirmRegist') }}",
                 icon: "warning",
                 buttons: true,
                 dangerMode: true,

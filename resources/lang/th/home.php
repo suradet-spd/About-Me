@@ -19,4 +19,11 @@ return [
     "CreateMenu" => "สร้างโปรไฟล์",
     "ViewMenu" => "ดูข้อมูลโปรไฟล์" ,
     "LogoutMenu" => "ออกจากระบบ",
+
+    // Regist account confirm
+    "HeaderRegist" => "ยืนยันการสมัคร",
+    "ConfirmRegist" => "คุณต้องการสมัครบัญชีใช่หรือไม่?",
+
+    // Error Register
+    "Error_msg_header" => "เกิดข้อผิดพลาดในระบบ!",
 ];
