@@ -10,6 +10,11 @@
     {{ trans('home.TitleTab') }}
 @endsection
 
+@section('AnotherLink')
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+@endsection
+
 @section('GetStyle')
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -372,6 +377,21 @@
                 </div>
             </div>
 
+            {{-- <div class="form-group row">
+                <label for="regist_address" class="col-md-4 col-form-label text-md-right">{{ trans('register.Address') }}</label>
+
+                <div class="col-md-6">
+                    <input id="regist_address" type="text" class="form-control @error('regist_address') is-invalid @enderror" name="regist_address" value="{{ old('regist_address') }}" require autocomplete="regist_address">
+
+                    @error('regist_address')
+                        <script>
+                            swal("{{ trans('home.Error_msg_header') }}" , "{{ $message }}" , 'error');
+                        </script>
+                    @enderror
+                </div>
+            </div> --}}
+
+
             <div class="form-group row">
                 <label for="regist_password" class="col-md-4 col-form-label text-md-right">{{ trans('register.UserPassword') }}</label>
 
@@ -418,11 +438,14 @@
                 backdrop: "static"
             }, 'show');
         });
+
         $("#LoginBTN").click(function() {
             $("#md_login").modal({
                 backdrop: "static"
             }, 'show');
         });
+
+        $('.class_select_2').select2();
     });
 
     function SubmitForm(FunctionType , FormID) {
