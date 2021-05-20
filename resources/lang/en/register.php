@@ -9,6 +9,7 @@ return [
     "UserNameTH" => "Name (thai)",
     "UserNameEN" => "Name (eng)",
     "UserEmail" => "E-Mail Address",
+    "UserTelephone" => "Telephone",
     "UserPassword" => "Password",
     "UserConfirmPassword" => "Confirm Password",
     "RegisterButton" => "Register",
@@ -41,7 +42,11 @@ return [
         "err_email_max" => "Your email is too long.",
         "err_email_mail" => "Your Email is invalid.",
         "err_email_str" => "Only characters are allowed.",
-    // [email]
+    // [telephone]
+        "err_phone_req" => "Please enter your telephone.",
+        "err_phone_min" => "Your phone number is too short.",
+        "err_phone_max" => "Your Phone number is too long.",
+    // [password]
         "err_pass_req" => "Please enter password.",
         "err_pass_min" => "The minimum password must be 8 characters or more.",
         "err_pass_confirm" => "Your confirm password does not match.",

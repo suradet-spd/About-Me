@@ -29,20 +29,41 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav">
-                    <hr width="95%">
-                    @if (Config::get('app.locale') == "en")
-                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{{ url('change' , 'th') }}">{{ trans('profile.MenuChangeLang') }}</a></li>
+
+                    @if (Auth::user()->language_flag == "N")
+                        <script>
+                            alert("Select language");
+                        </script>
+
+                        {{-- set language (create modal and this modal can't close if user close modal redirect to home) --}}
                     @else
-                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{{ url('change' , 'en') }}">{{ trans('profile.MenuChangeLang') }}</a></li>
-                    @endif
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#">{{ trans('profile.MenuCustomBG') }}</a></li>
+                        {{-- @if (Auth::user()->language_flag == "E" or Auth::user()->language_flag == "T")
+                            <script>
+                                var lang = "{{ Auth::user()->language_flag }}";
+                                window.location = "{{ url('change' , " + lang + ") }}";
+                            </script>
+                        @endif --}}
                     <hr width="95%">
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{{ route('MyProfile' , 'about') }}">{{ trans('profile.MenuAbout') }}</a></li>
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#">{{ trans('profile.MenuCustomBG') }}</a></li>
+                    <hr width="95%">
+                    <li class="nav-item" disabled><a class="nav-link js-scroll-trigger" href="{{ route('MyProfile' , 'about') }}">{{ trans('profile.MenuAbout') }}</a></li>
                     <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{{ route('MyProfile' , 'experience') }}">{{ trans('profile.MenuExperience') }}</a></li>
                     <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{{ route('MyProfile' , 'education') }}">{{ trans('profile.MenuEducation') }}</a></li>
                     <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{{ route('MyProfile' , 'portfolio') }}">{{ trans('profile.MenuPortfolio') }}</a></li>
                     <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{{ route('MyProfile' , 'skills') }}">{{ trans('profile.MenuSkill') }}</a></li>
                     <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{{ route('MyProfile' , 'awards') }}">{{ trans('profile.MenuAward') }}</a></li>
+
+                    @if (Auth::user()->language_flag == "A")
+                        <hr width="95%">
+                            @if (Config::get('app.locale') == "en")
+                                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{{ url('change' , 'th') }}">{{ trans('profile.MenuChangeLang') }}</a></li>
+                            @else
+                                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{{ url('change' , 'en') }}">{{ trans('profile.MenuChangeLang') }}</a></li>
+                            @endif
+                        <hr width="95%">
+                    @endif
+                    @endif
+
                 </ul>
             </div>
         </nav>

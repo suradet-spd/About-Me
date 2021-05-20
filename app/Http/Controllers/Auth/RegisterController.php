@@ -51,14 +51,15 @@ class RegisterController extends Controller
     //     return redirect()->route('MainPage')->with('success' , "Register complete1");
     // }
 
-    protected function req_Register(Request $request){
-
-        $validate_res = Validator::make($request->all(), [
+    protected function validate_data(array $data)
+    {
+        return Validator::make($data, [
             'regist_profile_img' => ['mimes:jpeg,jpg,png' , 'required' , 'max:10000'],
             'regist_nickname' => ['required' ,'string' , 'max:255'],
             'regist_name_th'=> ['required', 'string', 'max:255'],
             'regist_name_en' => ['required', 'string', 'max:255'],
             'regist_email' => ['required', 'string', 'email', 'max:255'],
+            'regist_telephone' => ['required' , 'min:9' , 'max:20'],
             'regist_password' => ['required', 'min:8', 'confirmed'],
         ] , $messages = [
         // profile Image
@@ -82,11 +83,19 @@ class RegisterController extends Controller
             'regist_email.string' => trans('register.err_email_str'),
             'regist_email.email' => trans('register.err_email_mail'),
             'regist_email.max' => trans('register.err_email_max'),
+        // profile telephone
+            'regist_telephone.required' => trans('register.err_phone_req'),
+            'regist_telephone.min' => trans('register.err_phone_min'),
+            'regist_telephone.max' => trans('register.err_phone_max'),
         // password
             'regist_password.required' => trans('register.err_pass_req'),
             'regist_password.min' => trans('register.err_pass_min'),
             'regist_password.confirmed' => trans('register.err_pass_confirm'),
         ])->validate();
+    }
+    protected function req_Register(Request $request){
+
+        $this->validate_data($request->all()); // Validate form
 
         $chk_exist = User::all()->where('email' , $request->get('regist_email'))->count();
 
@@ -112,6 +121,7 @@ class RegisterController extends Controller
                 'nickname' => $request['regist_nickname'],
                 'photo_name' => $file_name,
                 'email' => $request['regist_email'],
+                'telephone' => $request['regist_telephone'],
                 'password' => Hash::make($request['regist_password']),
                 'upd_user_id' => DB::raw("LPAD('$new_id' , 5 , 0)"),
             ]);

@@ -9,6 +9,7 @@ return [
     "UserNameTH" => "ชื่อ-นามสกุล (ไทย)",
     "UserNameEN" => "ชื่อ-นามสกุล (อังกฤษ)",
     "UserEmail" => "บัญชีอีเมล์",
+    "UserTelephone" => "เบอร์โทรศัพท์",
     "UserPassword" => "รหัสผ่าน",
     "UserConfirmPassword" => "ยืนยันรหัสผ่าน",
     "RegisterButton" => "ลงทะเบียน",
@@ -41,6 +42,10 @@ return [
         "err_email_max" => "อีเมล์ของคุณยาวเกินไป",
         "err_email_mail" => "โปรดระบุอีเมล์ที่ถูกต้อง",
         "err_email_str" => "อนุญาตเฉพาะอักษรเท่านั้น",
+    // [telephone]
+        "err_phone_req" => "โปรดระบุเบอร์โทรศัพท์ของคุณ",
+        "err_phone_min" => "เบอร์โทรศัพท์คุณสั้นเกินไป",
+        "err_phone_max" => "เบอร์โทรศัพท์คุณยาวเกินไป",
     // [password]
         "err_pass_req" => "โปรดระบุรหัสผ่านของคุณ",
         "err_pass_min" => "รหัสผ่านขั้นต่ำ 8 ตัวอักษรขึ้นไป",

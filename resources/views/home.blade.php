@@ -377,6 +377,20 @@
                 </div>
             </div>
 
+            <div class="form-group row">
+                <label for="regist_telephone" class="col-md-4 col-form-label text-md-right">{{ trans('register.UserTelephone') }}</label>
+
+                <div class="col-md-6">
+                    <input id="regist_telephone" type="tel" class="form-control @error('regist_telephone') is-invalid @enderror" name="regist_telephone" value="{{ old('regist_telephone') }}" required autocomplete="regist_telephone">
+
+                    @error('regist_telephone')
+                        <script>
+                            swal("{{ trans('home.Error_msg_header') }}" , "{{ $message }}" , 'error');
+                        </script>
+                    @enderror
+                </div>
+            </div>
+
             {{-- <div class="form-group row">
                 <label for="regist_address" class="col-md-4 col-form-label text-md-right">{{ trans('register.Address') }}</label>
 

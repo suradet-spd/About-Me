@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\App;
 
 // root route
 Route::get('/', function () {
+
     return view('home');
 })->name('MainPage');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
@@ -42,7 +43,6 @@ Auth::routes([
 Route::middleware(['auth'])->group(function () {
 
     Route::get('Profile/{type}', function ($type) {
-
         if ($type == "about") {
             return view('Profile.template.1.about');
         } else if ($type == "awards") {
