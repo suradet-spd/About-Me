@@ -1,10 +1,18 @@
 <?php
 
 return [
-    // Tab title
+// Tab title
     "TabTitle" => "โปรไฟล์ของคุณ",
 
-    // Tab Menu
+// List normal words
+    "BtnSave" => "บันทึก" ,
+    "BtnClose" => "ปิด",
+
+// Master alert List
+    "AlertSuccess" => "สำเร็จ!",
+    "AlertError" => "เกิดข้อผิดพลาด!",
+
+// Tab Menu
     "MenuCustomBG" => "ตั่งค่าสีพื้นหลัง",
     "MenuChangeLang" => "สลับเป็นภาษาอังกฤษ",
     "MenuAbout" => "เกี่ยวกับคุณ",
@@ -13,4 +21,15 @@ return [
     "MenuPortfolio" => "แฟ้มผลงาน",
     "MenuSkill" => "ความสามารถ",
     "MenuAward" => "รางวัล",
+
+// modal zone
+    /*[ Set language ]*/
+    "SetLangHeader" => "ตั้งค่าภาษาสำหรับโปรไฟล์",
+    "SetLangLabel" => "โปรดเลือกภาษาสำหรับโปรไฟล์ของคุณ" ,
+
+    /* [ option language list ] */
+    "OptionList" => "โปรดเลือกภาษา",
+    "OptionListT" => "ภาษาไทย",
+    "OptionListE" => "ภาษาอังกฤษ",
+    "OptionListA" => "สองภาษา (ไทย และ อังกฤษ)",
 ];

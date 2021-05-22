@@ -1,9 +1,11 @@
 <?php
 
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\ctl_language\ctl_set_profile_lang;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Config;
 
 // root route
 Route::get('/', function () {
@@ -41,7 +43,6 @@ Auth::routes([
 
 // Backend route
 Route::middleware(['auth'])->group(function () {
-
     Route::get('Profile/{type}', function ($type) {
         if ($type == "about") {
             return view('Profile.template.1.about');
@@ -59,6 +60,9 @@ Route::middleware(['auth'])->group(function () {
             return redirect()->route('MainPage')->with('error' , trans('route_error.create_profile_error'));
         }
     })->name('MyProfile');
+
+// Set Profile Lang
+    Route::post('SetLanguageProfile', [ctl_set_profile_lang::class , 'SetLang'])->name('ctl.set.lang');
 });
 
 

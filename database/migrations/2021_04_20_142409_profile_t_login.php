@@ -20,8 +20,16 @@ class ProfileTLogin extends Migration
             $table->string('telephone' , 15)->nullable(true)->comment('เบอร์โทรศัพท์');
             $table->string('about' , 2000)->nullable(true)->comment('อธิบายตัวตน');
             $table->string('email')->unique()->comment('บัญชีอีเมล์');
+            $table->string('telephone')->unique()->comment('เบอร์โทรศัพท์');
             $table->string('password')->nullable(false)->comment('รหัสผ่าน');
             $table->rememberToken()->comment('key การจดจำรหัสผ่าน');
+            $table->string('language_flag' , 1)->default('N')->comment('สถานะการตั้งค่าภาษา');
+            /*
+                N = Not set
+                E = English only
+                T = Thai only
+                A = English & Thai
+            */
             $table->string('account_status', 1)->default('A')->comment('สถานะบัญชี');
             /*
                 A = Active
