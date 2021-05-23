@@ -52,12 +52,12 @@
             {{-- check Error Log and show --}}
             @if (\Session::has('success'))
                 <script>
-                    swal("{{ trans('profile.AlertSuccess') }}", "{{ \Session::get('success') }}", "success");
+                    swal("{{ trans('profile.AlertSuccess') }}", "{{ Session::get('success') }}", "success");
 
                 </script>
             @elseif (\Session::has('error'))
                 <script>
-                    swal("{{ trans('profile.AlertError') }}", "{{ \Session::get('error') }}", "error");
+                    swal("{{ trans('profile.AlertError') }}", "{{ Session::get('error') }}", "error");
 
                 </script>
             @endif
@@ -157,7 +157,7 @@
                 var formMaster = document.getElementById('SetLangForm');
                 var tmp_lang = formMaster.elements["Lang"].value;
                 if (tmp_lang === "" || tmp_lang == null) {
-                    swal("Somethings went wrong!" , "Pls select Language" , "error");
+                    swal("{{ trans('profile.AlertError') }}" , "{{ trans('profile.AlertLangNull') }}" , "error");
                 } else {
                     document.getElementById('SetLangForm').submit();
                 }

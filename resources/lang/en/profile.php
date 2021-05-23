@@ -12,6 +12,9 @@ return [
     "AlertSuccess" => "Complete!",
     "AlertError" => "Something went wrong!",
 
+// Set Lang Validate
+    "AlertLangNull" => "Please select language!",
+
 // Tab Menu
     "MenuCustomBG" => "Custom Background",
     "MenuChangeLang" => "Change to thai",

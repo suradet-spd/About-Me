@@ -12,6 +12,9 @@ return [
     "AlertSuccess" => "สำเร็จ!",
     "AlertError" => "เกิดข้อผิดพลาด!",
 
+// Set Lang Validate
+    "AlertLangNull" => "โปรดเลือกภาษา !",
+
 // Tab Menu
     "MenuCustomBG" => "ตั่งค่าสีพื้นหลัง",
     "MenuChangeLang" => "สลับเป็นภาษาอังกฤษ",
