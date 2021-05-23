@@ -1,11 +1,17 @@
 <?php
 
-use App\Http\Controllers\Auth\RegisterController;
-use App\Http\Controllers\Profile_config\config_language;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\App;
-use Illuminate\Support\Facades\Config;
+// Use System Library
+    use Illuminate\Support\Facades\Auth;
+    use Illuminate\Support\Facades\Route;
+    use Illuminate\Support\Facades\App;
+    use Illuminate\Support\Facades\Config;
+
+// Use Controller file
+    use App\Http\Controllers\Auth\RegisterController;
+    use App\Http\Controllers\Profile_config\config_language;
+
+// Use Model file
+
 
 // root route
 Route::get('/', function () {
