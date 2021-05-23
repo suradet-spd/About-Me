@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\ctl_language;
+namespace App\Http\Controllers\Profile_config;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class ctl_set_profile_lang extends Controller
+class config_language extends Controller
 {
     public function SetLang(Request $request)
     {

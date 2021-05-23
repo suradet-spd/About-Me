@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\RegisterController;
-use App\Http\Controllers\ctl_language\ctl_set_profile_lang;
+use App\Http\Controllers\Profile_config\config_language;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\App;
@@ -62,7 +62,7 @@ Route::middleware(['auth'])->group(function () {
     })->name('MyProfile');
 
 // Set Profile Lang
-    Route::post('SetLanguageProfile', [ctl_set_profile_lang::class , 'SetLang'])->name('ctl.set.lang');
+    Route::post('SetLanguageProfile', [config_language::class , 'SetLang'])->name('ctl.set.lang');
 });
 
 
