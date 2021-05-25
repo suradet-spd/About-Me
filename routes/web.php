@@ -8,7 +8,9 @@
 
 // Use Controller file
     use App\Http\Controllers\Auth\RegisterController;
-    use App\Http\Controllers\Profile_config\config_language;
+use App\Http\Controllers\Profile_config\config_background;
+use App\Http\Controllers\Profile_config\config_language;
+use App\Models\config_profile;
 
 // Use Model file
 
@@ -50,18 +52,42 @@ Auth::routes([
 // Backend route
 Route::middleware(['auth'])->group(function () {
     Route::get('Profile/{type}', function ($type) {
+
+    // set data
+        $tmp_config = config_profile::all()
+                            ->where('profile_id' , Auth::user()->profile_id)
+                            ->where('config_type' , 'BC')
+                            ->whereNull('exp_date')
+                            ->toArray();
+        foreach ($tmp_config as $config) {
+            $tmp = decrypt($config["config_desc"]);
+            $ConfigProfile = json_decode($tmp);
+        }
+
         if ($type == "about") {
-            return view('Profile.template.1.about');
+            return view('Profile.template.1.about' , compact(
+                'ConfigProfile'
+            ));
         } else if ($type == "awards") {
-            return view('Profile.template.1.awards');
+            return view('Profile.template.1.awards' , config(
+                'ConfigProfile'
+            ));
         } else if ($type == "education") {
-            return view('Profile.template.1.education');
+            return view('Profile.template.1.education' , compact(
+                'ConfigProfile'
+            ));
         } else if ($type == "experience") {
-            return view('Profile.template.1.experience');
+            return view('Profile.template.1.experience' , compact(
+                'ConfigProfile'
+            ));
         } else if ($type == "portfolio") {
-            return view('Profile.template.1.portfolio');
+            return view('Profile.template.1.portfolio' , compact(
+                'ConfigProfile'
+            ));
         } else if ($type == "skills") {
-            return view('Profile.template.1.skills');
+            return view('Profile.template.1.skills' , compact(
+                'ConfigProfile'
+            ));
         } else {
             return redirect()->route('MainPage')->with('error' , trans('route_error.create_profile_error'));
         }
@@ -69,6 +95,8 @@ Route::middleware(['auth'])->group(function () {
 
 // Set Profile Lang
     Route::post('SetLanguageProfile', [config_language::class , 'SetLang'])->name('ctl.set.lang');
+// Set profile color
+    Route::post('SetColorProfile', [config_background::class , 'SetBackgroundColor'])->name('ctl.set.background');
 });
 
 

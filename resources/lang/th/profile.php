@@ -26,6 +26,8 @@ return [
     "MenuAward" => "รางวัล",
 
 // modal zone
+
+// set Language modal
     /*[ Set language ]*/
     "SetLangHeader" => "ตั้งค่าภาษาสำหรับโปรไฟล์",
     "SetLangLabel" => "โปรดเลือกภาษาสำหรับโปรไฟล์ของคุณ" ,
@@ -35,4 +37,10 @@ return [
     "OptionListT" => "ภาษาไทย",
     "OptionListE" => "ภาษาอังกฤษ",
     "OptionListA" => "สองภาษา (ไทย และ อังกฤษ)",
+
+// set background color
+
+    /* [Main Modal] */
+    "CustomBackgroundHeader" => "",
+
 ];
