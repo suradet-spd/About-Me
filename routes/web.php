@@ -10,7 +10,11 @@
     use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Profile_config\config_background;
 use App\Http\Controllers\Profile_config\config_language;
+use App\Http\Controllers\Profile_info\set_address;
 use App\Models\config_profile;
+use App\Models\location;
+use App\Models\User;
+use Illuminate\Support\Facades\DB;
 
 // Use Model file
 
@@ -64,9 +68,41 @@ Route::middleware(['auth'])->group(function () {
             $ConfigProfile = json_decode($tmp);
         }
 
+        $master = User::all()->where('profile_id' , Auth::user()->profile_id)->toArray();
+
+        foreach ($master as $pf) {
+            $profile_id = $pf["profile_id"];
+            $profile_location = $pf["location_id"];
+        }
+
         if ($type == "about") {
+
+            $addr_province = DB::table('profile_t_location')
+                ->select('province_code', 'province_th' , 'province_en')
+                ->distinct()
+                ->get();
+            $addr_amphoe = DB::table('profile_t_location')
+                ->select('district_code', 'district_th', 'district_en' , 'province_code')
+                ->distinct()
+                ->get();
+            $addr_district = DB::table('profile_t_location')
+                ->select('sub_district_code', 'sub_district_th', 'sub_district_en', 'district_code' , 'province_code')
+                ->distinct()
+                ->get();
+            $addr_post_code = DB::table('profile_t_location')
+                ->select('zip_code', 'sub_district_code')
+                ->distinct()
+                ->get();
+            $location_det = location::all()->where('location_id' , $profile_location)->toArray();
+
             return view('Profile.template.1.about' , compact(
-                'ConfigProfile'
+                'ConfigProfile' ,
+                'master' ,
+                'addr_province' ,
+                'addr_amphoe' ,
+                'addr_district' ,
+                'addr_post_code' ,
+                'location_det'
             ));
         } else if ($type == "awards") {
             return view('Profile.template.1.awards' , config(
@@ -95,8 +131,13 @@ Route::middleware(['auth'])->group(function () {
 
 // Set Profile Lang
     Route::post('SetLanguageProfile', [config_language::class , 'SetLang'])->name('ctl.set.lang');
+
 // Set profile color
     Route::post('SetColorProfile', [config_background::class , 'SetBackgroundColor'])->name('ctl.set.background');
+
+// Set profile address
+    Route::post('SetProfileAddress', [set_address::class , 'SetAddress'])->name('ctl.set.profileAddress');
+
 });
 
 

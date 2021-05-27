@@ -35,4 +35,28 @@ return [
     "OptionListT" => "Thai",
     "OptionListE" => "English",
     "OptionListA" => "All (Thai and English)",
+
+// About page
+    "MenuAddAddress" => "Add your address",
+
+    // Modal
+    "ModaladdrHeader" => "Set your address",
+    "ModalPVBody" => "Province : ",
+    "ModalDTBody" => "District : ",
+    "ModalSTBody" => "Sub-District : ",
+    "ModalZipCodeBody" => "Zip code : ",
+
+    // select option
+    "SelectProvinceLabel" => "Select Province" ,
+    "SelectDistrictLabel" => "Select District" ,
+    "SelectSubDistrictLabel" => "Select Sub-District",
+
+    // validate form
+    "ValidProvince" => "Please select Province!",
+    "ValidDistrict" => "Please select District!",
+    "ValidSubDistrict" => "Please select Sub-District",
+
+    // Message from controller
+    "MsgReturnError" => "Can't update your address!",
+    "MsgReturnSuccess" => "Update your address complete!",
 ];

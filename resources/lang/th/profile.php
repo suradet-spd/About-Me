@@ -26,8 +26,6 @@ return [
     "MenuAward" => "รางวัล",
 
 // modal zone
-
-// set Language modal
     /*[ Set language ]*/
     "SetLangHeader" => "ตั้งค่าภาษาสำหรับโปรไฟล์",
     "SetLangLabel" => "โปรดเลือกภาษาสำหรับโปรไฟล์ของคุณ" ,
@@ -38,9 +36,23 @@ return [
     "OptionListE" => "ภาษาอังกฤษ",
     "OptionListA" => "สองภาษา (ไทย และ อังกฤษ)",
 
-// set background color
+// About page
+    "MenuAddAddress" => "เพิ่มที่อยู่ของคุณ",
 
-    /* [Main Modal] */
-    "CustomBackgroundHeader" => "",
+    // Modal
+    "ModaladdrHeader" => "ตั้งค่าที่อยู่ของคุณ",
+    "ModalPVBody" => "จังหวัด : ",
+    "ModalDTBody" => "อำเภอ : ",
+    "ModalSTBody" => "ตำบล : ",
+    "ModalZipCodeBody" => "รหัสไปรษณีย์ : ",
 
+    // select option
+    "SelectProvinceLabel" => "เลือกจังหวัด" ,
+    "SelectDistrictLabel" => "เลือกอำเภอ" ,
+    "SelectSubDistrictLabel" => "เลือกตำบล",
+
+    // validate form
+    "ValidProvince" => "โปรดเลือกจังหวัด!",
+    "ValidDistrict" => "โปรดเลือกอำเภอ!",
+    "ValidSubDistrict" => "โปรดเลือกตำบล",
 ];
