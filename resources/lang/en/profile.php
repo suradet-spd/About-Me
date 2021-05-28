@@ -37,6 +37,7 @@ return [
     "OptionListA" => "All (Thai and English)",
 
 // About page
+    /* add Address */
     "MenuAddAddress" => "Add your address",
 
     // Modal
@@ -59,4 +60,24 @@ return [
     // Message from controller
     "MsgReturnError" => "Can't update your address!",
     "MsgReturnSuccess" => "Update your address complete!",
+
+    /* Add about menu */
+
+    // Modal
+    "ModalAboutHeader" => "Set your description",
+    "ModalAboutLabel_th" => "Your description (thai)",
+    "ModalAboutLabel_en" => "Your description (eng)",
+    "ModalPlaceHolder_th" => "ตัวอย่างเช่น : #โปรแกรมเมอร์ #ดาต้าเอ็นจิเนียร์",
+    "ModalPlaceHolder_en" => "Example : #Programmer #DataEngineer",
+
+    // Js Validate form
+    "ErrJsAboutTH" => "Please enter your description (thai)" ,
+    "ErrJsAboutEN" => "Please enter your description (eng)" ,
+    "ErrJsOther" => "Somethings went wrong. Please contact administrator" ,
+
+    // Controller return msg
+    "ErrControllerMsg" => "Please Enter data in form!",
+    "MsgCompleteAbout" => "Update your description complete" ,
+    "MsgErrorAbout" => "Can't update your about!" ,
+
 ];

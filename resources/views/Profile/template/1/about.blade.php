@@ -42,12 +42,18 @@
                     @endif
                 </div>
 
-                    @if ($data["about"] == null)
+                    @if ($data["about_th"] == null and $data["about_en"] == null)
                         <div class="subheading mb-5">
-                            <a href="#" data-toggle="modal" data-target="SetProfileAbout">Add about</a>
+                            <a href="#" data-toggle="modal" data-target="#SetProfileAbout">Add about</a>
                         </div>
                     @else
-                        <p class="lead mb-5">{{ $data["about"] }}</p>
+                        <p class="lead mb-5">
+                            @if ($lang == "th")
+                                {{ $data["about_th"] }}
+                            @else
+                                {{ $data["about_en"] }}
+                            @endif
+                        </p>
                     @endif
 
                 <div class="social-icons">
@@ -123,6 +129,69 @@
             </div>
         </div>
         <!-- The Modal [set Address]-->
+
+        <!-- The Modal [set About]-->
+        <div class="modal fade" id="SetProfileAbout">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h4 class="modal-title">{{ trans('profile.ModalAboutHeader') }}</h4>
+                    </div>
+                <!-- Modal body -->
+                    <div class="modal-body">
+                        <form action="{{ route('ctl.set.profileAbout') }}" method="POST" id="SetAboutForm">
+                            @csrf
+
+                            @if ($data["language_flag"] == "A" or $data["language_flag"] == "E" or $data["language_flag"] == "T")
+                                @if ($data["language_flag"] == "T")
+                                    <div class="form-group row">
+                                        <div class="col-md-12">
+                                            <label for="about_tag" class="col-md-12 col-form-label text-md-left">{{ trans('profile.ModalAboutLabel_th') }}</label>
+                                            <div class="container">
+                                                <textarea name="about_tag_th" id="about_tag_th_id" style="width: 100%;" rows="5" placeholder="{{ trans('profile.ModalPlaceHolder_th') }}"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @elseif ($data["language_flag"] == "E")
+                                    <div class="form-group row">
+                                        <div class="col-md-12">
+                                            <label for="about_tag" class="col-md-12 col-form-label text-md-left">{{ trans('profile.ModalAboutLabel_en') }}</label>
+                                            <div class="container">
+                                                <textarea name="about_tag_en" id="about_tag_en_id" style="width: 100%;" rows="5" placeholder="{{ trans('profile.ModalPlaceHolder_en') }}"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @else
+                                    <div class="form-group row">
+                                        <div class="col-md-12">
+                                            <label for="about_tag" class="col-md-12 col-form-label text-md-left">{{ trans('profile.ModalAboutLabel_th') }}</label>
+                                            <div class="container">
+                                                <textarea name="about_tag_th" id="about_tag_th_id" style="width: 100%;" rows="5" placeholder="{{ trans('profile.ModalPlaceHolder_th') }}"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-md-12">
+                                            <label for="about_tag" class="col-md-12 col-form-label text-md-left">{{ trans('profile.ModalAboutLabel_en') }}</label>
+                                            <div class="container">
+                                                <textarea name="about_tag_en" id="about_tag_en_id" style="width: 100%;" rows="5" placeholder="{{ trans('profile.ModalPlaceHolder_en') }}"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endif
+                            @endif
+                        </form>
+                    </div>
+                <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-success" onclick="Javascript:ValidateFormAbout('{{ Auth::user()->language_flag }}');">{{ trans('profile.BtnSave') }}</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">{{ trans('profile.BtnClose') }}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- The Modal [set About]-->
     @endsection
 @endforeach
 
@@ -190,6 +259,47 @@
                 swal("{{ trans('profile.AlertError') }}" , "{{ trans('profile.ValidSubDistrict') }}" , "error");
             } else {
                 document.getElementById("SetAddressForm").submit();
+            }
+        }
+
+        function ValidateFormAbout(lang) {
+            var formMast = document.getElementById("SetAboutForm");
+
+            if (lang == "T") {
+                var About_th_val = formMast.elements["about_tag_th"].value;
+                var About_en_val = null;
+            } else if(lang == "E"){
+                var About_th_val = null;
+                var About_en_val = formMast.elements["about_tag_en"].value;
+            } else {
+                var About_th_val = formMast.elements["about_tag_th"].value;
+                var About_en_val = formMast.elements["about_tag_en"].value;
+            }
+
+            if (
+                lang == "A" &&
+                (About_th_val != "" && About_th_val != null) &&
+                (About_en_val != "" && About_en_val != null)
+            ) {
+                document.getElementById("SetAboutForm").submit();
+            } else if (lang == "T" && (About_th_val != "" && About_th_val != null)) {
+                document.getElementById("SetAboutForm").submit();
+            } else if (lang == "E" && (About_en_val != "" && About_en_val != null)){
+                document.getElementById("SetAboutForm").submit();
+            } else {
+                if (lang == "A") {
+                    if (About_th_val == "" || About_th_val == null) {
+                        swal("{{ trans('profile.AlertError') }}" , "{{ trans('profile.ErrJsAboutTH') }}" , "error");
+                    } else if (About_en_val == "" || About_en_val == null) {
+                        swal("{{ trans('profile.AlertError') }}" , "{{ trans('profile.ErrJsAboutEN') }}" , "error");
+                    }
+                } else if (lang == "T" && (About_th_val == "" || About_th_val == null)) {
+                    swal("{{ trans('profile.AlertError') }}" , "{{ trans('profile.ErrJsAboutTH') }}" , "error");
+                } else if (lang == "E" && (About_en_val == "" || About_en_val == null)) {
+                    swal("{{ trans('profile.AlertError') }}" , "{{ trans('profile.ErrJsAboutEN') }}" , "error");
+                } else {
+                    swal("{{ trans('profile.AlertError') }}" , "{{ trans('profile.ErrJsOther') }}" , "error");
+                }
             }
         }
     </script>

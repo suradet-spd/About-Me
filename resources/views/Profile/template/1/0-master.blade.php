@@ -128,9 +128,12 @@
                             </script>
                                 {{-- set language (create modal and this modal can't close if user close modal redirect to home) --}}
                             @else
-                            <hr width="95%">
-                                <li class="nav-item"><a class="nav-link js-scroll-trigger" style="cursor: pointer" id="BtnCustomBackground">Public Profile</a></li>
-                                <li class="nav-item"><a class="nav-link js-scroll-trigger" style="cursor: pointer" id="BtnCustomBackground" data-toggle="modal" data-target="#SetBackground">{{ trans('profile.MenuCustomBG') }}</a></li>
+
+                                @if ($mast["profile_id"] == Auth::user()->profile_id)
+                                    <hr width="95%">
+                                    <li class="nav-item"><a class="nav-link js-scroll-trigger" style="cursor: pointer" id="BtnCustomBackground">Public Profile</a></li>
+                                    <li class="nav-item"><a class="nav-link js-scroll-trigger" style="cursor: pointer" id="BtnCustomBackground" data-toggle="modal" data-target="#SetBackground">{{ trans('profile.MenuCustomBG') }}</a></li>
+                                @endif
                                 {{-- <li class="nav-item"><a class="nav-link js-scroll-trigger" style="cursor: pointer" id="BtnCustomBackground" data-toggle="modal" data-target="#SetBackground">font color</a></li> --}}
                             <hr width="95%">
                             <li class="nav-item" disabled><a class="nav-link js-scroll-trigger" href="{{ route('MyProfile' , 'about') }}">{{ trans('profile.MenuAbout') }}</a></li>

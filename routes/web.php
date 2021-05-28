@@ -10,6 +10,7 @@
     use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Profile_config\config_background;
 use App\Http\Controllers\Profile_config\config_language;
+use App\Http\Controllers\Profile_info\set_about;
 use App\Http\Controllers\Profile_info\set_address;
 use App\Models\config_profile;
 use App\Models\location;
@@ -138,6 +139,8 @@ Route::middleware(['auth'])->group(function () {
 // Set profile address
     Route::post('SetProfileAddress', [set_address::class , 'SetAddress'])->name('ctl.set.profileAddress');
 
+// Set profile about
+    Route::post('SetProfileAbout', [set_about::class , 'SetAbout'])->name('ctl.set.profileAbout');
 });
 
 

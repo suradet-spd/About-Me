@@ -37,6 +37,7 @@ return [
     "OptionListA" => "สองภาษา (ไทย และ อังกฤษ)",
 
 // About page
+    /* add Address */
     "MenuAddAddress" => "เพิ่มที่อยู่ของคุณ",
 
     // Modal
@@ -55,4 +56,27 @@ return [
     "ValidProvince" => "โปรดเลือกจังหวัด!",
     "ValidDistrict" => "โปรดเลือกอำเภอ!",
     "ValidSubDistrict" => "โปรดเลือกตำบล",
+
+    // Message from controller
+    "MsgReturnError" => "ไม่สามรถบันทึกข้อมูลที่อยู่ได้ !",
+    "MsgReturnSuccess" => "บันทึกข้อมูลที่อยู่เรียบร้อย!",
+
+    /* Add about menu */
+
+    // Modal
+    "ModalAboutHeader" => "ตั้งค่าคำอธิบายเกี่ยวกับคุณ",
+    "ModalAboutLabel_th" => "คำอธิบายเกี่ยวกับคุณ (ไทย)",
+    "ModalAboutLabel_en" => "คำอธิบายเกี่ยวกับคุณ (อังกฤษ)",
+    "ModalPlaceHolder_th" => "ตัวอย่างเช่น : #โปรแกรมเมอร์ #ดาต้าเอ็นจิเนียร์",
+    "ModalPlaceHolder_en" => "Example : #Programmer #DataEngineer",
+
+    // Js Validate form
+    "ErrJsAboutTH" => "โปรดระบุคำอธิบาย (ภาษาไทย) ที่เกี่ยวกับคุณ" ,
+    "ErrJsAboutEN" => "โปรดระบุคำอธิบาย (ภาษาอังกฤษ) ที่เกี่ยวกับคุณ" ,
+    "ErrJsOther" => "เกิดข้อผิดพลาดในระบบโปรดติดต่อผู้ดูแลระบบ" ,
+
+    // Controller return msg
+    "ErrControllerMsg" => "โปรดเพิ่มข้อมูลในฟอร์มให้ครบถ้วน !",
+    "MsgCompleteAbout" => "บันทึกข้อมูลคำอธิบายสำเร็จแล้ว !" ,
+    "MsgErrorAbout" => "ไม่สามารถบันทึกข้อมูลคำอธิบายได้ !" ,
 ];
