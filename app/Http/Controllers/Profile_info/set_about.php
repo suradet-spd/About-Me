@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class set_about extends Controller
 {
@@ -30,7 +31,9 @@ class set_about extends Controller
             $update_res = User::where('profile_id' , Auth::user()->profile_id)
                             ->update([
                                 "about_th" => $about_th ,
-                                "about_en" => $about_en
+                                "about_en" => $about_en ,
+                                "last_upd_date" => DB::raw('CURRENT_TIMESTAMP()'),
+                                "upd_user_id" => DB::raw("LPAD('" . Auth::user()->profile_id . "' , 5 , 0)")
                             ]);
 
             if ($update_res == 0) {

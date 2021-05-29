@@ -30,6 +30,11 @@
                     @if ($data["location_id"] == null)
                         <a href="#" id="BTNAddaddress" data-toggle="modal" data-target="#SetProfileLocation">{{ trans('profile.MenuAddAddress') }}</a>
                     @else
+                        @if ($modifyFlag)
+                            <a class="social-icon" style="cursor: pointer" data-toggle="modal" data-target="#SetProfileLocation">
+                                <b><u>{{ trans('profile.EditLabel') }}</u></b>
+                            </a>
+                        @endif
                         @foreach ($location_det as $loc)
                             @if ($lang == "th")
                                 {{ $loc["sub_district_th"] . " " . $loc["district_th"] . " " . $loc["province_th"] . " " . $loc["zip_code"] }}
@@ -48,6 +53,11 @@
                         </div>
                     @else
                         <p class="lead mb-5">
+                            @if ($modifyFlag)
+                                <a class="social-icon" style="cursor: pointer" data-toggle="modal" data-target="#SetProfileAbout">
+                                    <b><u>{{ trans('profile.EditLabel') }}</u></b>
+                                </a>
+                            @endif
                             @if ($lang == "th")
                                 {{ $data["about_th"] }}
                             @else

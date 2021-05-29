@@ -36,6 +36,9 @@ return [
     "OptionListE" => "ภาษาอังกฤษ",
     "OptionListA" => "สองภาษา (ไทย และ อังกฤษ)",
 
+    /*[menu label]*/
+    "EditLabel" => "คลิกเพื่อแก้ไข",
+
 // About page
     /* add Address */
     "MenuAddAddress" => "เพิ่มที่อยู่ของคุณ",

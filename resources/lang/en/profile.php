@@ -36,6 +36,9 @@ return [
     "OptionListE" => "English",
     "OptionListA" => "All (Thai and English)",
 
+    /*[menu label]*/
+    "EditLabel" => "Click for edit",
+
 // About page
     /* add Address */
     "MenuAddAddress" => "Add your address",

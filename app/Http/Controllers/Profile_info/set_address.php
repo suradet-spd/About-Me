@@ -29,7 +29,11 @@ class set_address extends Controller
         }
 
         $insert_res = User::where('profile_id' , Auth::user()->profile_id)
-                        ->update(['location_id' => $location_code]);
+                        ->update([
+                            'location_id' => $location_code,
+                            'last_upd_date' => DB::raw('CURRENT_TIMESTAMP()'),
+                            'upd_user_id' => DB::raw("LPAD('" . Auth::user()->profile_id . "' , 5 , 0)")
+                        ]);
         if ($insert_res == 0) {
             return redirect()->back()->with('error' , trans('profile.MsgReturnError'));
         } else {
