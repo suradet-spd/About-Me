@@ -63,6 +63,9 @@ return [
 
     /* Add about menu */
 
+    // Label
+    "AboutLabel" => "เพิ่มคำอธิบายตัวตน" ,
+
     // Modal
     "ModalAboutHeader" => "ตั้งค่าคำอธิบายเกี่ยวกับคุณ",
     "ModalAboutLabel_th" => "คำอธิบายเกี่ยวกับคุณ (ไทย)",
@@ -79,4 +82,22 @@ return [
     "ErrControllerMsg" => "โปรดเพิ่มข้อมูลในฟอร์มให้ครบถ้วน !",
     "MsgCompleteAbout" => "บันทึกข้อมูลคำอธิบายสำเร็จแล้ว !" ,
     "MsgErrorAbout" => "ไม่สามารถบันทึกข้อมูลคำอธิบายได้ !" ,
+
+    /* Add Social list */
+
+    // Label
+
+    // Modal
+    "ModalSocialHeader" => "ตั้งค่าบัญชีผู้ใช้งาน",
+    "ModalOptionSocial" => "ประเภทบัญชี : ",
+    "ModalUrlSocial" => "Url ของบัญชี : ",
+
+    // Js Validate form
+    "JsValidateSocialOption" => "โปรดเลือกประเภทของบัญชี!",
+    "JsValidateSocialUrl" => "โปรดระบุ Url ของบัญชีที่เลือก!",
+
+    // Controller return msg
+    "MsgDuplicateSocial" => "บัญชีโซเชี่ยลที่เพิ่มมีอยู่แล้ว!",
+    "MsgCompleteSocial" => "เพิ่มบัญชีโซเชี่ยลเรียบร้อยแล้ว" ,
+    "MsgErrorSocial" => "ไม่สามารถเพิ่มข้อมูลได้โปรดติดต่อผู้ดูแลระบบ" ,
 ];

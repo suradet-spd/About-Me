@@ -44,7 +44,7 @@
 
                     @if ($data["about_th"] == null and $data["about_en"] == null)
                         <div class="subheading mb-5">
-                            <a href="#" data-toggle="modal" data-target="#SetProfileAbout">Add about</a>
+                            <a href="#" data-toggle="modal" data-target="#SetProfileAbout">{{ trans('profile.AboutLabel') }}</a>
                         </div>
                     @else
                         <p class="lead mb-5">
@@ -57,10 +57,19 @@
                     @endif
 
                 <div class="social-icons">
-                    <a class="social-icon" href="#"><i class="fab fa-linkedin-in"></i></a>
-                    <a class="social-icon" href="#"><i class="fab fa-github"></i></a>
-                    <a class="social-icon" href="#"><i class="fab fa-twitter"></i></a>
-                    <a class="social-icon" href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a class="social-icon" style="cursor: pointer" data-toggle="modal" data-target="#SetProfileSocial">
+                        <i class="fas fa-plus"></i>
+                    </a>
+                    @foreach ($tmp_social as $ts)
+                        @foreach ($social_list as $tmp_si)
+                            @if ($ts->social_list_id == $tmp_si["social_list_id"])
+                                <a class="social-icon" style="cursor: pointer" href="{{ $ts->social_account_link }}" target="_blank">
+                                    <i class="{{ $tmp_si["social_list_icon_name"] }}"></i>
+                                </a>
+                            @endif
+                        @endforeach
+                    @endforeach
+
                 </div>
             </div>
         </section>
@@ -192,6 +201,48 @@
             </div>
         </div>
         <!-- The Modal [set About]-->
+
+        <!-- The Modal [set Social list]-->
+        <div class="modal fade" id="SetProfileSocial">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h4 class="modal-title">{{ trans('profile.ModalSocialHeader') }}</h4>
+                    </div>
+                <!-- Modal body -->
+                    <div class="modal-body">
+                        <form action="{{ route('ctl.set.SocialAccount') }}" method="POST" id="SetSocialAccountForm">
+                            @csrf
+                            <div class="form-group row">
+                                <div class="col-md-12">
+                                    <label for="social_select" class="col-md-12 col-form-label text-md-left">{{ trans('profile.ModalOptionSocial') }}</label>
+                                    <select class="form-control" name="social_select" id="social_select_id" style="width: 100%">
+                                        <option value="" selected disabled>Select social account type</option>
+                                        @foreach ($social_icon as $si)
+                                            <option value="{{ $si["social_list_id"] }}">{{ $si["social_list_name"] }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-md-12">
+                                    <label for="profile_link" class="col-md-12 col-form-label text-md-left">{{ trans('profile.ModalUrlSocial') }}</label>
+                                    <input type="text" name="profile_link" id="profile_link_id" class="form-control">
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+                <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-success" onclick="Javascript:ValidateFormSocialAccount();">{{ trans('profile.BtnSave') }}</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">{{ trans('profile.BtnClose') }}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- The Modal [set Social list]-->
     @endsection
 @endforeach
 
@@ -300,6 +351,20 @@
                 } else {
                     swal("{{ trans('profile.AlertError') }}" , "{{ trans('profile.ErrJsOther') }}" , "error");
                 }
+            }
+        }
+
+        function ValidateFormSocialAccount() {
+            var formMast = document.getElementById("SetSocialAccountForm");
+            var optionSelect = formMast.elements["social_select"].value;
+            var linkValue = formMast.elements["profile_link"].value;
+
+            if(optionSelect == "" || optionSelect == null){
+                swal("{{ trans('profile.AlertError') }}" , "{{ trans('profile.JsValidateSocialOption') }}" , "error");
+            } else if(linkValue == "" || linkValue == null) {
+                swal("{{ trans('profile.AlertError') }}" , "{{ trans('profile.JsValidateSocialUrl') }}" , "error");
+            } else {
+                document.getElementById("SetSocialAccountForm").submit();
             }
         }
     </script>

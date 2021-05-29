@@ -8,14 +8,16 @@
 
 // Use Controller file
     use App\Http\Controllers\Auth\RegisterController;
-use App\Http\Controllers\Profile_config\config_background;
-use App\Http\Controllers\Profile_config\config_language;
-use App\Http\Controllers\Profile_info\set_about;
-use App\Http\Controllers\Profile_info\set_address;
-use App\Models\config_profile;
-use App\Models\location;
-use App\Models\User;
-use Illuminate\Support\Facades\DB;
+    use App\Http\Controllers\Profile_config\config_background;
+    use App\Http\Controllers\Profile_config\config_language;
+    use App\Http\Controllers\Profile_info\set_about;
+    use App\Http\Controllers\Profile_info\set_address;
+    use App\Http\Controllers\Profile_info\set_social;
+    use App\Models\config_profile;
+    use App\Models\location;
+    use App\Models\social_list;
+    use App\Models\User;
+    use Illuminate\Support\Facades\DB;
 
 // Use Model file
 
@@ -64,9 +66,14 @@ Route::middleware(['auth'])->group(function () {
                             ->where('config_type' , 'BC')
                             ->whereNull('exp_date')
                             ->toArray();
-        foreach ($tmp_config as $config) {
-            $tmp = decrypt($config["config_desc"]);
-            $ConfigProfile = json_decode($tmp);
+
+        if ($tmp_config != null) {
+            foreach ($tmp_config as $config) {
+                $tmp = decrypt($config["config_desc"]);
+                $ConfigProfile = json_decode($tmp);
+            }
+        } else {
+            $ConfigProfile = json_decode("");
         }
 
         $master = User::all()->where('profile_id' , Auth::user()->profile_id)->toArray();
@@ -78,24 +85,33 @@ Route::middleware(['auth'])->group(function () {
 
         if ($type == "about") {
 
-            $addr_province = DB::table('profile_t_location')
-                ->select('province_code', 'province_th' , 'province_en')
-                ->distinct()
-                ->get();
-            $addr_amphoe = DB::table('profile_t_location')
-                ->select('district_code', 'district_th', 'district_en' , 'province_code')
-                ->distinct()
-                ->get();
-            $addr_district = DB::table('profile_t_location')
-                ->select('sub_district_code', 'sub_district_th', 'sub_district_en', 'district_code' , 'province_code')
-                ->distinct()
-                ->get();
-            $addr_post_code = DB::table('profile_t_location')
-                ->select('zip_code', 'sub_district_code')
-                ->distinct()
-                ->get();
+        // Declare Variable
+            $addr_province = DB::table('profile_t_location')->select('province_code', 'province_th' , 'province_en')->distinct()->get();
+            $addr_amphoe = DB::table('profile_t_location')->select('district_code', 'district_th', 'district_en' , 'province_code')->distinct()->get();
+            $addr_district = DB::table('profile_t_location')->select('sub_district_code', 'sub_district_th', 'sub_district_en', 'district_code' , 'province_code')->distinct()->get();
+            $addr_post_code = DB::table('profile_t_location')->select('zip_code', 'sub_district_code')->distinct()->get();
             $location_det = location::all()->where('location_id' , $profile_location)->toArray();
+            $tmp_social = DB::table('profile_t_social')->where('profile_id' , Auth::user()->profile_id)->distinct()->get()->toArray();
+            $social_list = social_list::all()->where('active_flag' , 'Y')->toArray();
 
+        // Process
+        if ($tmp_social == null) {
+            $social_icon = array();
+            foreach ($social_list as $sl) {
+                array_push($social_icon , $sl);
+            }
+        } else {
+            foreach ($tmp_social as $ts) {
+                $social_icon = array();
+                foreach ($social_list as $sl) {
+                    if ($ts->social_list_id != $sl["social_list_id"]) {
+                        array_push($social_icon , $sl);
+                    }
+                }
+            }
+        }
+
+        // Return to view
             return view('Profile.template.1.about' , compact(
                 'ConfigProfile' ,
                 'master' ,
@@ -103,7 +119,10 @@ Route::middleware(['auth'])->group(function () {
                 'addr_amphoe' ,
                 'addr_district' ,
                 'addr_post_code' ,
-                'location_det'
+                'location_det' ,
+                'social_icon' ,
+                'social_list' ,
+                'tmp_social'
             ));
         } else if ($type == "awards") {
             return view('Profile.template.1.awards' , config(
@@ -141,6 +160,9 @@ Route::middleware(['auth'])->group(function () {
 
 // Set profile about
     Route::post('SetProfileAbout', [set_about::class , 'SetAbout'])->name('ctl.set.profileAbout');
+
+// set profile social account
+    Route::post('SetProfileSocialAccount', [set_social::class , 'SetSocialAccount'])->name('ctl.set.SocialAccount');
 });
 
 

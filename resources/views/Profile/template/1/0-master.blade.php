@@ -50,49 +50,50 @@
 
                 {{-- Another script link --}}
 
-                @if ($ConfigProfile->color_type == "C")
+                @if ($ConfigProfile != null)
+                    @if ($ConfigProfile->color_type == "C")
+                        <style>
+                            body{
+                                background-color: {{ $ConfigProfile->background_color }};
+                            }
+
+                            .bg-primary{
+                                background-color:{{ $ConfigProfile->menu_color }};
+                            }
+                        </style>
+                    @else
+                        <style>
+                            body{
+                                background: linear-gradient( -500deg, {{ $ConfigProfile->background_color }} , rgb(255, 255, 255) , {{ $ConfigProfile->background_color }});
+                                background-size: 800% 800%;
+                                animation: gradient 20s ease infinite;
+                            }
+
+                            .bg-primary{
+                                background: linear-gradient( -500deg,rgb(255, 255, 255) , {{ $ConfigProfile->menu_color }} , rgb(255, 255, 255));
+                                background-size: 800% 800%;
+                                animation: gradient 20s ease infinite;
+                            }
+
+                            @keyframes gradient {
+                                0% {
+                                    background-position: 0% 50%;
+                                }
+                                50% {
+                                    background-position: 100% 50%;
+                                }
+                                100% {
+                                    background-position: 0% 50%;
+                                }
+                            }
+                        </style>
+                    @endif
                     <style>
-                        body{
-                            background-color: {{ $ConfigProfile->background_color }};
-                        }
-
-                        .bg-primary{
-                            background-color:{{ $ConfigProfile->menu_color }};
-                        }
-                    </style>
-                @else
-                    <style>
-                        body{
-                            background: linear-gradient( -500deg, {{ $ConfigProfile->background_color }} , rgb(255, 255, 255) , {{ $ConfigProfile->background_color }});
-                            background-size: 800% 800%;
-                            animation: gradient 20s ease infinite;
-                        }
-
-                        .bg-primary{
-                            background: linear-gradient( -500deg,rgb(255, 255, 255) , {{ $ConfigProfile->menu_color }} , rgb(255, 255, 255));
-                            background-size: 800% 800%;
-                            animation: gradient 20s ease infinite;
-                        }
-
-                        @keyframes gradient {
-                            0% {
-                                background-position: 0% 50%;
-                            }
-                            50% {
-                                background-position: 100% 50%;
-                            }
-                            100% {
-                                background-position: 0% 50%;
-                            }
+                        .social-icons .social-icon:hover{
+                            background-color: {{ $ConfigProfile->menu_color }};
                         }
                     </style>
                 @endif
-
-                <style>
-                    .social-icons .social-icon:hover{
-                        background-color: {{ $ConfigProfile->menu_color }};
-                    }
-                </style>
 
             </head>
             <body id="page-top">
@@ -205,12 +206,17 @@
                                 @csrf
                                 @php
 
-                                    if ($ConfigProfile->background_color == "" && $ConfigProfile->menu_color == "") {
+                                    if ($ConfigProfile != null) {
+                                        if ($ConfigProfile->background_color == "" && $ConfigProfile->menu_color == "") {
+                                            $bg_color = "#ffffff";
+                                            $mn_color = "#bd5d38";
+                                        } else {
+                                            $bg_color = $ConfigProfile->background_color;
+                                            $mn_color = $ConfigProfile->menu_color;
+                                        }
+                                    } else {
                                         $bg_color = "#ffffff";
                                         $mn_color = "#bd5d38";
-                                    } else {
-                                        $bg_color = $ConfigProfile->background_color;
-                                        $mn_color = $ConfigProfile->menu_color;
                                     }
 
                                 @endphp

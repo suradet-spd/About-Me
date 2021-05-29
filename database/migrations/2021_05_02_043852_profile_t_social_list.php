@@ -12,8 +12,7 @@ class ProfileTSocialList extends Migration
     {
         Schema::create($this->table_name, function (Blueprint $table) {
             $table->string('social_list_id' , 5)->primary()->comment('รหัสรายการบัญชีโซเชี่ยล');
-            $table->string('social_list_name_th')->nullable(false)->comment('ชื่อรายการบัญชีโซเชี่ยล (ไทย)');
-            $table->string('social_list_name_en')->nullable(false)->comment('ชื่อรายการบัญชีโซเชี่ยล (อังกฤษ)');
+            $table->string('social_list_name')->nullable(false)->comment('ชื่อรายการบัญชีโซเชี่ยล');
             $table->string('social_list_icon_name')->nullable(false)->comment('ชื่อสัญลักษณ์บัญชีโซเชี่ยล');
             $table->string('active_flag' , 1)->default('Y')->comment('สถานะการใช้งาน');
             /*

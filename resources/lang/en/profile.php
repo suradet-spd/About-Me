@@ -63,6 +63,9 @@ return [
 
     /* Add about menu */
 
+    // Label
+    "AboutLabel" => "Add your description" ,
+
     // Modal
     "ModalAboutHeader" => "Set your description",
     "ModalAboutLabel_th" => "Your description (thai)",
@@ -79,5 +82,23 @@ return [
     "ErrControllerMsg" => "Please Enter data in form!",
     "MsgCompleteAbout" => "Update your description complete" ,
     "MsgErrorAbout" => "Can't update your about!" ,
+
+    /* Add Social list */
+
+    // Label
+
+    // Modal
+    "ModalSocialHeader" => "Set your social account",
+    "ModalOptionSocial" => "Social type : ",
+    "ModalUrlSocial" => "Account URL : ",
+
+    // Js Validate form
+    "JsValidateSocialOption" => "Please select social account type!",
+    "JsValidateSocialUrl" => "Please enter your link profile!",
+
+    // Controller return msg
+    "MsgDuplicateSocial" => "This social account is already exist!",
+    "MsgCompleteSocial" => "Add your Social account complete" ,
+    "MsgErrorSocial" => "Can't update your social account!" ,
 
 ];
