@@ -77,6 +77,7 @@ Route::middleware(['auth'])->group(function () {
         }
 
         $master = User::all()->where('profile_id' , Auth::user()->profile_id)->toArray();
+        $modifyFlag = true;
 
         foreach ($master as $pf) {
             $profile_id = $pf["profile_id"];
@@ -94,43 +95,30 @@ Route::middleware(['auth'])->group(function () {
             $tmp_social = DB::table('profile_t_social')->where('profile_id' , Auth::user()->profile_id)->distinct()->get()->toArray();
             $social_list = social_list::all()->where('active_flag' , 'Y')->toArray();
 
-        // Process
-        if ($tmp_social == null) {
-            $social_icon = array();
-            foreach ($social_list as $sl) {
-                array_push($social_icon , $sl);
-            }
-        } else {
-            foreach ($tmp_social as $ts) {
-                $social_icon = array();
-                foreach ($social_list as $sl) {
-                    if ($ts->social_list_id != $sl["social_list_id"]) {
-                        array_push($social_icon , $sl);
-                    }
-                }
-            }
-        }
-
         // Return to view
             return view('Profile.template.1.about' , compact(
                 'ConfigProfile' ,
                 'master' ,
+                'modifyFlag' ,
                 'addr_province' ,
                 'addr_amphoe' ,
                 'addr_district' ,
                 'addr_post_code' ,
                 'location_det' ,
-                'social_icon' ,
                 'social_list' ,
                 'tmp_social'
             ));
         } else if ($type == "awards") {
             return view('Profile.template.1.awards' , config(
-                'ConfigProfile'
+                'ConfigProfile' ,
+                'master' ,
+                'modifyFlag' ,
             ));
         } else if ($type == "education") {
             return view('Profile.template.1.education' , compact(
-                'ConfigProfile'
+                'ConfigProfile' ,
+                'master' ,
+                'modifyFlag' ,
             ));
         } else if ($type == "experience") {
             return view('Profile.template.1.experience' , compact(
@@ -138,11 +126,15 @@ Route::middleware(['auth'])->group(function () {
             ));
         } else if ($type == "portfolio") {
             return view('Profile.template.1.portfolio' , compact(
-                'ConfigProfile'
+                'ConfigProfile' ,
+                'master' ,
+                'modifyFlag' ,
             ));
         } else if ($type == "skills") {
             return view('Profile.template.1.skills' , compact(
-                'ConfigProfile'
+                'ConfigProfile' ,
+                'master' ,
+                'modifyFlag' ,
             ));
         } else {
             return redirect()->route('MainPage')->with('error' , trans('route_error.create_profile_error'));

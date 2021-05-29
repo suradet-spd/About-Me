@@ -26,7 +26,19 @@ class set_social extends Controller
                         ->where('social_list_id' , $get_social_type)
                         ->count();
             if ($chk_dup > 0) {
-                return redirect()->back()->with('error' , trans('profile.MsgDuplicateSocial'));
+                $upd_flag = social::where('profile_id' , Auth::user()->profile_id)
+                                    ->where('social_list_id' , $get_social_type)
+                                    ->update([
+                                        "social_account_link" => $link_detail,
+                                        "last_upd_date" => DB::raw('CURRENT_TIMESTAMP()'),
+                                        "upd_user_id" => DB::raw("LPAD('" . Auth::user()->profile_id . "' , 5 , 0)")
+                                    ]);
+                if ($upd_flag == 0) {
+                    return redirect()->back()->with('error' , trans('profile.MsgErrorSocial'));
+                } else {
+                    return redirect()->back()->with('success' , trans('profile.MsgCompleteSocial'));
+                }
+
             } else {
                 $insert_res = new social([
                     'profile_id' => DB::raw("LPAD('" . Auth::user()->profile_id . "' , 5 , 0)"),

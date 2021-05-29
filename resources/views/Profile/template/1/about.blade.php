@@ -219,7 +219,7 @@
                                     <label for="social_select" class="col-md-12 col-form-label text-md-left">{{ trans('profile.ModalOptionSocial') }}</label>
                                     <select class="form-control" name="social_select" id="social_select_id" style="width: 100%">
                                         <option value="" selected disabled>Select social account type</option>
-                                        @foreach ($social_icon as $si)
+                                        @foreach ($social_list as $si)
                                             <option value="{{ $si["social_list_id"] }}">{{ $si["social_list_name"] }}</option>
                                         @endforeach
                                     </select>
