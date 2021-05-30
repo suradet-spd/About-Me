@@ -28,6 +28,9 @@ Route::get('/', function () {
     return view('home');
 })->name('MainPage');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/test', function () {
+    return view('Profile.template.1.profile_type1');
+});
 
 // Language route
 Route::get('change/{locale}', function ($locale) {
@@ -112,29 +115,31 @@ Route::middleware(['auth'])->group(function () {
             return view('Profile.template.1.awards' , config(
                 'ConfigProfile' ,
                 'master' ,
-                'modifyFlag' ,
+                'modifyFlag'
             ));
         } else if ($type == "education") {
             return view('Profile.template.1.education' , compact(
                 'ConfigProfile' ,
                 'master' ,
-                'modifyFlag' ,
+                'modifyFlag'
             ));
         } else if ($type == "experience") {
             return view('Profile.template.1.experience' , compact(
-                'ConfigProfile'
+                'ConfigProfile' ,
+                'master' ,
+                'modifyFlag'
             ));
         } else if ($type == "portfolio") {
             return view('Profile.template.1.portfolio' , compact(
                 'ConfigProfile' ,
                 'master' ,
-                'modifyFlag' ,
+                'modifyFlag'
             ));
         } else if ($type == "skills") {
             return view('Profile.template.1.skills' , compact(
                 'ConfigProfile' ,
                 'master' ,
-                'modifyFlag' ,
+                'modifyFlag'
             ));
         } else {
             return redirect()->route('MainPage')->with('error' , trans('route_error.create_profile_error'));
