@@ -13,11 +13,13 @@
     use App\Http\Controllers\Profile_info\set_about;
     use App\Http\Controllers\Profile_info\set_address;
     use App\Http\Controllers\Profile_info\set_social;
-    use App\Models\config_profile;
+use App\Http\Controllers\Profile_info\set_work_experience;
+use App\Models\config_profile;
     use App\Models\location;
     use App\Models\social_list;
     use App\Models\User;
-    use Illuminate\Support\Facades\DB;
+use App\Models\work;
+use Illuminate\Support\Facades\DB;
 
 // Use Model file
 
@@ -63,9 +65,17 @@ Auth::routes([
 Route::middleware(['auth'])->group(function () {
     Route::get('Profile/{type}', function ($type) {
 
+        $master = User::all()->where('profile_id' , Auth::user()->profile_id)->toArray();
+        $modifyFlag = true;
+
+        foreach ($master as $pf) {
+            $profile_id = $pf["profile_id"];
+            $profile_location = $pf["location_id"];
+        }
+
     // set data
         $tmp_config = config_profile::all()
-                            ->where('profile_id' , Auth::user()->profile_id)
+                            ->where('profile_id' , $profile_id)
                             ->where('config_type' , 'BC')
                             ->whereNull('exp_date')
                             ->toArray();
@@ -79,14 +89,6 @@ Route::middleware(['auth'])->group(function () {
             $ConfigProfile = json_decode("");
         }
 
-        $master = User::all()->where('profile_id' , Auth::user()->profile_id)->toArray();
-        $modifyFlag = true;
-
-        foreach ($master as $pf) {
-            $profile_id = $pf["profile_id"];
-            $profile_location = $pf["location_id"];
-        }
-
         if ($type == "about") {
 
         // Declare Variable
@@ -95,7 +97,7 @@ Route::middleware(['auth'])->group(function () {
             $addr_district = DB::table('profile_t_location')->select('sub_district_code', 'sub_district_th', 'sub_district_en', 'district_code' , 'province_code')->distinct()->get();
             $addr_post_code = DB::table('profile_t_location')->select('zip_code', 'sub_district_code')->distinct()->get();
             $location_det = location::all()->where('location_id' , $profile_location)->toArray();
-            $tmp_social = DB::table('profile_t_social')->where('profile_id' , Auth::user()->profile_id)->distinct()->get()->toArray();
+            $tmp_social = DB::table('profile_t_social')->where('profile_id' , $profile_id)->distinct()->get()->toArray();
             $social_list = social_list::all()->where('active_flag' , 'Y')->toArray();
 
         // Return to view
@@ -124,10 +126,13 @@ Route::middleware(['auth'])->group(function () {
                 'modifyFlag'
             ));
         } else if ($type == "experience") {
+            $work = work::all()->where('profile_id' , $profile_id)->toArray();
+
             return view('Profile.template.1.experience' , compact(
                 'ConfigProfile' ,
                 'master' ,
-                'modifyFlag'
+                'modifyFlag' ,
+                'work'
             ));
         } else if ($type == "portfolio") {
             return view('Profile.template.1.portfolio' , compact(
@@ -160,6 +165,9 @@ Route::middleware(['auth'])->group(function () {
 
 // set profile social account
     Route::post('SetProfileSocialAccount', [set_social::class , 'SetSocialAccount'])->name('ctl.set.SocialAccount');
+
+// set profile work experience
+    Route::post('SetProfileWork', [set_work_experience::class , 'SetWork'])->name('ctl.set.work');
 });
 
 
