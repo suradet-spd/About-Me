@@ -14,6 +14,8 @@ return [
 
 // Set Lang Validate
     "AlertLangNull" => "โปรดเลือกภาษา !",
+    "ValidateToken" => "Token ไม่ถูกต้อง !" ,
+    "LosingToken" => "ไม่พบ Token โปรดลองอีกครั้ง!" ,
 
 // Tab Menu
     "MenuCustomBG" => "ตั่งค่าสีพื้นหลัง",
@@ -103,4 +105,31 @@ return [
     "MsgDuplicateSocial" => "บัญชีโซเชี่ยลที่เพิ่มมีอยู่แล้ว!",
     "MsgCompleteSocial" => "เพิ่มบัญชีโซเชี่ยลเรียบร้อยแล้ว" ,
     "MsgErrorSocial" => "ไม่สามารถเพิ่มข้อมูลได้โปรดติดต่อผู้ดูแลระบบ" ,
+
+// Work Experience Page
+
+    // Render page
+    "WorkEndDateRender" => "ปัจจุบัน",
+
+    // modal label
+    "ModalWorkHeader" => "เพิ่มข้อมูลประวัติการทำงาน" ,
+    "label_ModalOfficeNameTh" => "ชื่อสถานที่ทำงาน (ไทย) :" ,
+    "label_ModalOfficeNameEN" => "ชื่อสถานที่ทำงาน (อังกฤษ) :" ,
+    "label_ModalStartDate" => "วันที่เริ่มงาน (MM/DD/YYYY) : " ,
+    "label_ModalEndDate" => "วันที่ออกจากงาน (MM/DD/YYYY) : " ,
+    "label_ModalCheckRetireFlag" => "ยังไม่ลาออกจากงาน" ,
+    "label_ModalPositionNameTH" => "ตำแหน่ง (ไทย) : " ,
+    "label_ModalPositionNameEN" => "ตำแหน่ง (อังกฤษ) : " ,
+    "label_ModalAboutTH" => "อธิบายลักษณะงาน (ไทย) : " ,
+    "label_ModalAboutEN" => "อธิบายลักษณะงาน (อังกฤษ) : " ,
+
+    /*Place holder text*/
+    "place_About" => "อธิบายเกี่ยวกับงานที่ทำ หรืออธิบายถึงลักษณะงานที่เกี่ยวข้อง" ,
+
+    /*JsValidateText*/
+    "Js_Workerror" => "เกิดข้อผิดพลาดในระบบบันทึกข้อมูลการทำงาน โปรดติดต่อผู้ดูแลระบบ!",
+    "Js_officeName_require" => "โปรดระบุชื่อสถานที่ทำงานให้ครบถ้วน" ,
+    "Js_Recheck_workDate" => "โปรดตรวจสอบวันที่เริ่มงาน - วันที่สิ้นสุดการทำงาน" ,
+    "Js_position_require" => "โปรดระบุตำแหน่งงานของคุณให้ครบถ้วน" ,
+    "Js_About_require" => "โปรดอธิบายขอบเขตของงานให้ครบถ้วน" ,
 ];

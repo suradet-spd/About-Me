@@ -14,6 +14,8 @@ return [
 
 // Set Lang Validate
     "AlertLangNull" => "Please select language!",
+    "ValidateToken" => "Token is invalid !" ,
+    "LosingToken" => "Can't get token. Please try again" ,
 
 // Tab Menu
     "MenuCustomBG" => "Custom Background",
@@ -104,4 +106,30 @@ return [
     "MsgCompleteSocial" => "Add your Social account complete" ,
     "MsgErrorSocial" => "Can't update your social account!" ,
 
+// Work Experience Page
+
+    // Render page
+    "WorkEndDateRender" => "Present",
+
+    // modal label
+    "ModalWorkHeader" => "Add work experience" ,
+    "label_ModalOfficeNameTh" => "Office name (thai) :" ,
+    "label_ModalOfficeNameEN" => "Office name (eng) :" ,
+    "label_ModalStartDate" => "Start date (MM/DD/YYYY) : " ,
+    "label_ModalEndDate" => "Leaving date (MM/DD/YYYY) : " ,
+    "label_ModalCheckRetireFlag" => "Still working" ,
+    "label_ModalPositionNameTH" => "Position (thai) : " ,
+    "label_ModalPositionNameEN" => "Position (eng) : " ,
+    "label_ModalAboutTH" => "Work description (thai) : " ,
+    "label_ModalAboutEN" => "Work description (eng) : " ,
+
+    /*Place holder text*/
+    "place_About" => "Write for Job description" ,
+
+    /*JsValidateText*/
+    "Js_Workerror" => "An error occurred in the recording system. Please contact the administrator!",
+    "Js_officeName_require" => "Please enter your office name" ,
+    "Js_Recheck_workDate" => "Please Re-check your work start date and Leaving date" ,
+    "Js_position_require" => "Please enter your position!" ,
+    "Js_About_require" => "Please enter your work description!" ,
 ];

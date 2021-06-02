@@ -21,14 +21,14 @@ class set_work_experience extends Controller
             "work_desc_th" => 'required_if:lang_flag,A,T',
             "work_desc_en" => 'required_if:lang_flag,A,E'
         ] , $messages = [
-            'office_name_th.required_if' => "pls enter office thai name",
-            'office_name_en.required_if' => "pls enter office eng name",
+            'office_name_th.required_if' => trans('profile.Js_officeName_require'),
+            'office_name_en.required_if' => trans('profile.Js_officeName_require'),
 
-            'position_name_th.required_if' => "pls enter position thai name",
-            'position_name_en.required_if' => "pls enter position eng name",
+            'position_name_th.required_if' => trans('profile.Js_position_require'),
+            'position_name_en.required_if' => trans('profile.Js_position_require'),
 
-            'work_desc_th.required_if' => "pls enter work desc thai",
-            'work_desc_en.required_if' => "pls enter work desc eng",
+            'work_desc_th.required_if' => trans('profile.Js_About_require'),
+            'work_desc_en.required_if' => trans('profile.Js_About_require'),
         ])->validate();
     }
 
@@ -41,13 +41,13 @@ class set_work_experience extends Controller
         $tk = $req->exists('_token');
         if (!$tk) {
 
-            return redirect()->back()->with('error' , 'Token is invalid pls try again!');
+            return redirect()->back()->with('error' , trans('profile.LosingToken'));
 
         } else {
 
             if ($tk != csrf_field()) {
 
-                return redirect()->back()->with('error' , 'Token is not verify pls try again!');
+                return redirect()->back()->with('error' , trans('profile.ValidateToken'));
 
             } else {
 
@@ -87,9 +87,9 @@ class set_work_experience extends Controller
                 $chk_profile = work::all()->where('profile_id' , Auth::user()->profile_id)->where('work_seq' , (intval($cnt_work) + 1))->count();
 
                 if ($chk_profile == 1) {
-                    return redirect()->back()->with('success' , 'insert data complete');
+                    return redirect()->back()->with('success' , trans('profile.MsgReturnSuccess'));
                 } else {
-                    return redirect()->back()->with('error' , 'Something wentwrong');
+                    return redirect()->back()->with('error' , trans('profile.MsgReturnError'));
                 }
 
 

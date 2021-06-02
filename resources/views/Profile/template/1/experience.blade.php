@@ -23,7 +23,7 @@
                     <div class="subheading mb-3">{{ ($lang == "th") ? $wk["work_office_th"] : $wk["work_office_en"] }}</div>
                     <p>{{ ($lang == "th") ? $wk["work_desc_th"] : $wk["work_desc_en"] }}</p>
                 </div>
-                <div class="flex-shrink-0"><span class="text-primary">{{ $wk["work_start_date"] }} - {{ ($wk["work_end_date"] == null) ? trans('profile.WorkEndDateRender') : $wk["work_end_date"] }}</span></div>
+                <div class="flex-shrink-0"><span class="text-primary">{{ date_format(date_create($wk["work_start_date"]) , 'M Y') }} - {{ ($wk["work_end_date"] == null) ? trans('profile.WorkEndDateRender') : $wk["work_end_date"] }}</span></div>
             </div>
         @endforeach
 
@@ -50,27 +50,27 @@
                     @if ($lang_flag == "A")
                         <div class="form-group row">
                             <div class="col-md-12">
-                                <label for="office_name_th" class="col-md-12 col-form-label text-md-left">office_name_thai</label>
+                                <label for="office_name_th" class="col-md-12 col-form-label text-md-left">{{ trans('profile.label_ModalOfficeNameTh') }}</label>
                                 <input type="text" name="office_name_th" id="office_name_th_id" class="form-control">
                             </div>
                         </div>
                         <div class="form-group row">
                             <div class="col-md-12">
-                                <label for="office_name_en" class="col-md-12 col-form-label text-md-left">office_name_eng</label>
+                                <label for="office_name_en" class="col-md-12 col-form-label text-md-left">{{ trans('profile.label_ModalOfficeNameEN') }}</label>
                                 <input type="text" name="office_name_en" id="office_name_en_id" class="form-control">
                             </div>
                         </div>
                     @elseif ($lang_flag == "T")
                         <div class="form-group row">
                             <div class="col-md-12">
-                                <label for="office_name_th" class="col-md-12 col-form-label text-md-left">office_name_thai</label>
+                                <label for="office_name_th" class="col-md-12 col-form-label text-md-left">{{ trans('profile.label_ModalOfficeNameTh') }}</label>
                                 <input type="text" name="office_name_th" id="office_name_th_id" class="form-control">
                             </div>
                         </div>
                     @elseif ($lang_flag == "E")
                         <div class="form-group row">
                             <div class="col-md-12">
-                                <label for="office_name_en" class="col-md-12 col-form-label text-md-left">office_name_eng</label>
+                                <label for="office_name_en" class="col-md-12 col-form-label text-md-left">{{ trans('profile.label_ModalOfficeNameEN') }}</label>
                                 <input type="text" name="office_name_en" id="office_name_en_id" class="form-control">
                             </div>
                         </div>
@@ -79,47 +79,47 @@
                 {{-- Get work time --}}
                     <div class="form-group row">
                         <div class="col-md-12">
-                            <label for="start_date" class="col-md-12 col-form-label text-md-left">start_date</label>
+                            <label for="start_date" class="col-md-12 col-form-label text-md-left">{{ trans('profile.label_ModalStartDate') }}</label>
                             <input type="date" name="start_date" id="start_date_id" class="form-control" value="{{ date('Y-m-d') }}">
                         </div>
                     </div>
 
                     <div class="form-group row">
                         <div class="col-md-12 mb-2">
-                            <label for="end_date" class="col-md-12 col-form-label text-md-left">end_date</label>
+                            <label for="end_date" class="col-md-12 col-form-label text-md-left">{{ trans('profile.label_ModalEndDate') }}</label>
                             <input type="date" name="exp_date" id="exp_date_id" class="form-control" value="{{ date('Y-m-d') }}" disabled>
                         </div>
                     </div>
                     <div class="custom-control custom-checkbox mb-3">
                         <input type="checkbox" class="custom-control-input" onchange="Javascript:DisabledText()" id="chk_disableExpiredate" name="chk_disable" checked>
-                        <label class="custom-control-label" for="chk_disableExpiredate">ยังไม่ลาออก</label>
+                        <label class="custom-control-label" for="chk_disableExpiredate">{{ trans('profile.label_ModalCheckRetireFlag') }}</label>
                     </div>
 
                 {{-- Get position Name --}}
                     @if ($lang_flag == "A")
                         <div class="form-group row">
                             <div class="col-md-12">
-                                <label for="position_name_th" class="col-md-12 col-form-label text-md-left">position_name_thai</label>
+                                <label for="position_name_th" class="col-md-12 col-form-label text-md-left">{{ trans('profile.label_ModalPositionNameTH') }}</label>
                                 <input type="text" name="position_name_th" id="position_name_th_id" class="form-control">
                             </div>
                         </div>
                         <div class="form-group row">
                             <div class="col-md-12">
-                                <label for="position_name_en" class="col-md-12 col-form-label text-md-left">position_name_eng</label>
+                                <label for="position_name_en" class="col-md-12 col-form-label text-md-left">{{ trans('profile.label_ModalPositionNameEN') }}</label>
                                 <input type="text" name="position_name_en" id="position_name_en_id" class="form-control">
                             </div>
                         </div>
                     @elseif ($lang_flag == "T")
                         <div class="form-group row">
                             <div class="col-md-12">
-                                <label for="position_name_th" class="col-md-12 col-form-label text-md-left">position_name_thai</label>
+                                <label for="position_name_th" class="col-md-12 col-form-label text-md-left">{{ trans('profile.label_ModalPositionNameTH') }}</label>
                                 <input type="text" name="position_name_th" id="position_name_th_id" class="form-control">
                             </div>
                         </div>
                     @elseif ($lang_flag == "E")
                         <div class="form-group row">
                             <div class="col-md-12">
-                                <label for="position_name_en" class="col-md-12 col-form-label text-md-left">position_name_eng</label>
+                                <label for="position_name_en" class="col-md-12 col-form-label text-md-left">{{ trans('profile.label_ModalPositionNameEN') }}</label>
                                 <input type="text" name="position_name_en" id="position_name_en_id" class="form-control">
                             </div>
                         </div>
@@ -129,35 +129,35 @@
                     @if ($lang_flag == "A")
                         <div class="form-group row">
                             <div class="col-md-12">
-                                <label for="work_desc_th" class="col-md-12 col-form-label text-md-left">work_desc_th</label>
+                                <label for="work_desc_th" class="col-md-12 col-form-label text-md-left">{{ trans('profile.label_ModalAboutTH') }}</label>
                                 {{-- <div class="container"> --}}
-                                    <textarea name="work_desc_th" id="work_desc_th_id" style="width: 100%;" rows="5" placeholder="อธิบายลักษณะของงาน"></textarea>
+                                    <textarea name="work_desc_th" id="work_desc_th_id" style="width: 100%;" rows="5" placeholder="{{ trans('profile.place_About') }}"></textarea>
                                 {{-- </div> --}}
                             </div>
                         </div>
                         <div class="form-group row">
                             <div class="col-md-12">
-                                <label for="work_desc_en" class="col-md-12 col-form-label text-md-left">work_desc_en</label>
+                                <label for="work_desc_en" class="col-md-12 col-form-label text-md-left">{{ trans('profile.label_ModalAboutEN') }}</label>
                                 {{-- <div class="container"> --}}
-                                    <textarea name="work_desc_en" id="work_desc_en_id" style="width: 100%;" rows="5" placeholder="อธิบายลักษณะของงาน"></textarea>
+                                    <textarea name="work_desc_en" id="work_desc_en_id" style="width: 100%;" rows="5" placeholder="{{ trans('profile.place_About') }}"></textarea>
                                 {{-- </div> --}}
                             </div>
                         </div>
                     @elseif ($lang_flag == "T")
                         <div class="form-group row">
                             <div class="col-md-12">
-                                <label for="work_desc_th" class="col-md-12 col-form-label text-md-left">work_desc_th</label>
+                                <label for="work_desc_th" class="col-md-12 col-form-label text-md-left">{{ trans('profile.label_ModalAboutTH') }}</label>
                                 {{-- <div class="container"> --}}
-                                    <textarea name="work_desc_th" id="work_desc_th_id" style="width: 100%;" rows="5" placeholder="อธิบายลักษณะของงาน"></textarea>
+                                    <textarea name="work_desc_th" id="work_desc_th_id" style="width: 100%;" rows="5" placeholder="{{ trans('profile.place_About') }}"></textarea>
                                 {{-- </div> --}}
                             </div>
                         </div>
                     @elseif ($lang_flag == "E")
                         <div class="form-group row">
                             <div class="col-md-12">
-                                <label for="work_desc_en" class="col-md-12 col-form-label text-md-left">work_desc_en</label>
+                                <label for="work_desc_en" class="col-md-12 col-form-label text-md-left">{{ trans('profile.label_ModalAboutEN') }}</label>
                                 {{-- <div class="container"> --}}
-                                    <textarea name="work_desc_en" id="work_desc_en_id" style="width: 100%;" rows="5" placeholder="อธิบายลักษณะของงาน"></textarea>
+                                    <textarea name="work_desc_en" id="work_desc_en_id" style="width: 100%;" rows="5" placeholder="{{ trans('profile.place_About') }}"></textarea>
                                 {{-- </div> --}}
                             </div>
                         </div>
@@ -219,18 +219,18 @@
                 validate_elements["position_name_en"] = formMast.elements["position_name_en"].value;
                 validate_elements["work_desc_en"] = formMast.elements["work_desc_en"].value;
             } else {
-                swal("error" , "some thing wentwrong pls contact your admin" , "error");
+                swal("{{ trans('profile.AlertError') }}" , "{{ trans('profile.Js_Workerror') }}" , "error");
             }
 
         // Validate
             if ((validate_elements["office_name_th"] == null || validate_elements["office_name_th"] == "") && (validate_elements["office_name_en"] == null || validate_elements["office_name_en"] == "")) {
-                swal("error" , "pls enter your office name" , "error");
+                swal("{{ trans('profile.AlertError') }}" , "{{ trans('profile.Js_officeName_require') }}" , "error");
             } else if (validate_elements["retire_flag"] == false && validate_elements["start_date"] >= validate_elements["end_date"]) {
-                swal("error" , "pls recheck your start and end date" , "error");
+                swal("{{ trans('profile.AlertError') }}" , "{{ trans('profile.Js_Recheck_workDate') }}" , "error");
             } else if ((validate_elements["position_name_th"] == null || validate_elements["position_name_th"] == "") && (validate_elements["position_name_en"] == null || validate_elements["position_name_en"] == "")) {
-                swal("error" , "pls enter your position" , "error");
+                swal("{{ trans('profile.AlertError') }}" , "{{ trans('profile.Js_position_require') }}" , "error");
             } else if ((validate_elements["work_desc_th"] == null || validate_elements["work_desc_th"] == "") && (validate_elements["work_desc_en"] == null || validate_elements["work_desc_en"] == "")) {
-                swal("error" , "pls enter your work description");
+                swal("{{ trans('profile.AlertError') }}" , "{{ trans('profile.Js_About_require') }}");
             } else{
                 document.getElementById("SetSocialAccountForm").submit();
             }
