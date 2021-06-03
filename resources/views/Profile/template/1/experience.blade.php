@@ -23,7 +23,50 @@
                     <div class="subheading mb-3">{{ ($lang == "th") ? $wk["work_office_th"] : $wk["work_office_en"] }}</div>
                     <p>{{ ($lang == "th") ? $wk["work_desc_th"] : $wk["work_desc_en"] }}</p>
                 </div>
-                <div class="flex-shrink-0"><span class="text-primary">{{ date_format(date_create($wk["work_start_date"]) , 'M Y') }} - {{ ($wk["work_end_date"] == null) ? trans('profile.WorkEndDateRender') : $wk["work_end_date"] }}</span></div>
+                <div class="flex-shrink-0">
+                    <span class="text-primary">
+                        @if ($lang == "th")
+                            @php
+                                $THMonth = array(
+                                    '1' => 'มกราคม',
+                                    '2' => 'กุมภาพันธ์' ,
+                                    '3' => 'มีนาคม' ,
+                                    '4' => 'เมษายน' ,
+                                    '5' => 'พฤษภาคม' ,
+                                    '6' => 'มิถุนายน' ,
+                                    '7' => 'กรกฎาคม' ,
+                                    '8' => 'สิงหาคม' ,
+                                    '9' => 'กันยายน' ,
+                                    '10' => 'ตุลาคม' ,
+                                    '11' => 'พฤศจิกายน' ,
+                                    '12' => 'ธันวาคม' ,
+                                );
+                            @endphp
+
+                            @for ($i = 0; $i < count($THMonth); $i++)
+                                @if ($i == date_format(date_create($wk["work_start_date"]) , 'n'))
+                                   {{ $THMonth[$i] }}
+                                   @break
+                                @endif
+                            @endfor
+
+                            {{ ' ' . (date_format(date_create($wk["work_start_date"]) , 'Y') + 543) . '-' }}
+
+                            @if ($wk["work_end_date"] != null)
+                                @for ($i = 0; $i < count($THMonth); $i++)
+                                    @if ($i == date_format(date_create($wk["work_end_date"]) , 'n'))
+                                        {{ $THMonth[$i] }}
+                                        @break
+                                    @endif
+                                @endfor
+                            @else
+                                {{ trans('profile.WorkEndDateRender') }}
+                            @endif
+                        @else
+                            {{ date_format(date_create($wk["work_start_date"]) , 'M Y') }} - {{ ($wk["work_end_date"] == null) ? trans('profile.WorkEndDateRender') : $wk["work_end_date"] }}
+                        @endif
+                    </span>
+                </div>
             </div>
         @endforeach
 
@@ -131,7 +174,7 @@
                             <div class="col-md-12">
                                 <label for="work_desc_th" class="col-md-12 col-form-label text-md-left">{{ trans('profile.label_ModalAboutTH') }}</label>
                                 {{-- <div class="container"> --}}
-                                    <textarea name="work_desc_th" id="work_desc_th_id" style="width: 100%;" rows="5" placeholder="{{ trans('profile.place_About') }}"></textarea>
+                                    <textarea name="work_desc_th" id="work_desc_th_id" style="width: 100%;" rows="5"></textarea>
                                 {{-- </div> --}}
                             </div>
                         </div>
@@ -139,7 +182,7 @@
                             <div class="col-md-12">
                                 <label for="work_desc_en" class="col-md-12 col-form-label text-md-left">{{ trans('profile.label_ModalAboutEN') }}</label>
                                 {{-- <div class="container"> --}}
-                                    <textarea name="work_desc_en" id="work_desc_en_id" style="width: 100%;" rows="5" placeholder="{{ trans('profile.place_About') }}"></textarea>
+                                    <textarea name="work_desc_en" id="work_desc_en_id" style="width: 100%;" rows="5"></textarea>
                                 {{-- </div> --}}
                             </div>
                         </div>
@@ -148,7 +191,7 @@
                             <div class="col-md-12">
                                 <label for="work_desc_th" class="col-md-12 col-form-label text-md-left">{{ trans('profile.label_ModalAboutTH') }}</label>
                                 {{-- <div class="container"> --}}
-                                    <textarea name="work_desc_th" id="work_desc_th_id" style="width: 100%;" rows="5" placeholder="{{ trans('profile.place_About') }}"></textarea>
+                                    <textarea name="work_desc_th" id="work_desc_th_id" style="width: 100%;" rows="5"></textarea>
                                 {{-- </div> --}}
                             </div>
                         </div>
@@ -157,7 +200,7 @@
                             <div class="col-md-12">
                                 <label for="work_desc_en" class="col-md-12 col-form-label text-md-left">{{ trans('profile.label_ModalAboutEN') }}</label>
                                 {{-- <div class="container"> --}}
-                                    <textarea name="work_desc_en" id="work_desc_en_id" style="width: 100%;" rows="5" placeholder="{{ trans('profile.place_About') }}"></textarea>
+                                    <textarea name="work_desc_en" id="work_desc_en_id" style="width: 100%;" rows="5"></textarea>
                                 {{-- </div> --}}
                             </div>
                         </div>

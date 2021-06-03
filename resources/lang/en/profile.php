@@ -123,9 +123,6 @@ return [
     "label_ModalAboutTH" => "Work description (thai) : " ,
     "label_ModalAboutEN" => "Work description (eng) : " ,
 
-    /*Place holder text*/
-    "place_About" => "Write for Job description" ,
-
     /*JsValidateText*/
     "Js_Workerror" => "An error occurred in the recording system. Please contact the administrator!",
     "Js_officeName_require" => "Please enter your office name" ,
