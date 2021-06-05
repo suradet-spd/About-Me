@@ -15,9 +15,10 @@ class ProfileTEducation extends Migration
             $table->string('learning_list_id' , 5)->nullable(false)->comment('รหัสระดับการศึกษา');
             $table->date('efft_date')->nullable(false)->comment('วันที่ศึกษา');
             $table->date('exp_date')->nullable(true)->comment('วันที่สิ้นสุด');
-            $table->string('college_name_th')->nullable(false)->comment('ชื่อสถานศึกษา (ไทย)');
-            $table->string('college_name_en')->nullable(false)->comment('ชื่อสถานศึกษา (อังกฤษ)');
-            $table->string('faculty')->nullable(false)->comment('คณะที่เรียน');
+            $table->string('college_name_th')->nullable(true)->comment('ชื่อสถานศึกษา (ไทย)');
+            $table->string('college_name_en')->nullable(true)->comment('ชื่อสถานศึกษา (อังกฤษ)');
+            $table->string('faculty_name_th')->nullable(true)->comment('คณะที่เรียน (ไทย)');
+            $table->string('faculty_name_en')->nullable(true)->comment('คณะที่เรียน (อังกฤษ)');
             $table->string('gpa')->nullable(false)->comment('เกรดเฉลี่ย');
             $table->dateTime('last_upd_date')->default(DB::raw('CURRENT_TIMESTAMP'))->comment('วันที่แก้ไขข้อมูลล่าสุด');
             $table->string('upd_user_id', 5)->nullable(false)->comment('ผู้แก้ไขข้อมูล');

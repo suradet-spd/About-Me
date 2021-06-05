@@ -132,4 +132,57 @@ return [
     "Js_Recheck_workDate" => "โปรดตรวจสอบวันที่เริ่มงาน - วันที่สิ้นสุดการทำงาน" ,
     "Js_position_require" => "โปรดระบุตำแหน่งงานของคุณให้ครบถ้วน" ,
     "Js_About_require" => "โปรดอธิบายขอบเขตของงานให้ครบถ้วน" ,
+
+    // Education page
+
+    // Render page
+    "GPALabel" => "GPA",
+
+    // modal label
+    "ModalEducateHeader" => "เพิ่มข้อมูลการศึกษา" ,
+    "ModalEducateLevel" => "ระดับการศึกษา" ,
+    "ModalEducateOption" => "เลือกระดับการศึกษา" ,
+    "ModalCollegeNameTH" => "ชื่อสถานศึกษา (ไทย)" ,
+    "ModalCollegeNameEN" => "ชื่อสถานศึกษา (อังกฤษ)" ,
+    "ModalFacultyNameTH" => "คณะ / หลักสูตร (ไทย)" ,
+    "ModalFacultyNameEN" => "คณะ / หลักสูตร (อังกฤษ)" ,
+    "ModalGpaValue" => "เกรดเฉลี่ย" ,
+    "ModalStartDate" => "วันที่เข้าศึกษา (ดด/วว/ปปปป)" ,
+    "ModalEndDate" => "วันที่สิ้นสุดการศึกษา (ดด/วว/ปปปป)" ,
+    "ModalCheckLeavingFlag" => "กำลังศึกษาอยู่" ,
+
+    // JsValidate
+    "Js_learning_type" => "โปรดเลือกระดับการศึกษา" ,
+    "Js_college_name" => "โปรดระบุชื่อสถานศึกษา" ,
+    "Js_faculty_name" => "โปรดระบุคณะ / หลักสูตร" ,
+    "Js_GpaValue" => "เกรดเฉลี่ยของคุณไม่ถูกต้อง. โปรดลองใหม่อีกครั้ง",
+    "Js_start_date" => "โปรดระบุวันที่เข้าศึกษา" ,
+    "Js_end_date" => "โปรดเลือกวันที่สิ้นสุดการศึกษา" ,
+    "Js_recheck_date" => "โปรดตรวจสอบวันที่เข้าศึกษา และวันที่สิ้นสุดการศึกษา" ,
+
+    // Controller return msg
+    "ctl_learning_list_req" => "โปรดเลือกระดับการศึกษา" ,
+
+    "ctl_college_name_th_req" => "โปรดระบุชื่อสถานศึกษา (ไทย)!",
+    "ctl_college_name_th_max" => "ชื่อสถานศึกษา (ไทย) ของคุณยาวเกินไป!",
+    "ctl_college_name_th_min" => "ชื่อสถานศึกษา (อังกฤษ) ของคุณสั้นเกินไป!",
+
+    "ctl_college_name_en_req" => "โปรดระบุชื่อสถานศึกษา (อังกฤษ)!",
+    "ctl_college_name_en_max" => "ชื่อสถานศึกษา (อังกฤษ) ของคุณยาวเกินไป!",
+    "ctl_college_name_en_min" => "ชื่อสถานศึกษา (อังกฤษ) ของคุณสั้นเกินไป!",
+
+    "ctl_faculty_name_th_req" => "โปรดระบุคณะ / หลักสูตร (ไทย)!",
+    "ctl_faculty_name_th_max" => "ชื่อคณะ / หลักสูตร (ไทย) ของคุณยาวเกินไป!",
+    "ctl_faculty_name_th_min" => "ชื่อคณะ / หลักสูตร (ไทย) ของคุณสั้นเกินไป!",
+
+    "ctl_faculty_name_en_req" => "โปรดระบุคณะ / หลักสูตร (อังกฤษ)!",
+    "ctl_faculty_name_en_max" => "ชื่อคณะ / หลักสูตร (อังกฤษ) ของคุณยาวเกินไป!",
+    "ctl_faculty_name_en_min" => "ชื่อคณะ / หลักสูตร (อังกฤษ) ของคุณสั้นเกินไป!",
+
+    "ctl_gpa_value_req" => "โปรดระบุเกรดเฉลี่ยของคุณ",
+
+    "ctl_str" => "อนุญาตให้ใช้เฉพาะตัวอักษรเท่านั้น!",
+    "msg_error_return" => "ไม่สามารถเพิ่มข้อมูลการศึกษาได้ โปรดลองใหม่อีกครั้ง!" ,
+    "msg_success_return" => "เพิ่มข้อมูลการศึกษาเรียบร้อยแล้ว!",
+
 ];

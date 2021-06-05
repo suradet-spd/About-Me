@@ -59,6 +59,8 @@
                                         @break
                                     @endif
                                 @endfor
+
+                                {{ ' ' . (date_format(date_create($edu["exp_date"]) , 'Y') + 543) }}
                             @else
                                 {{ trans('profile.WorkEndDateRender') }}
                             @endif
@@ -85,7 +87,7 @@
             </div>
             <!-- Modal body -->
             <div class="modal-body">
-                <form action="{{ route('ctl.set.work') }}" method="POST" id="SetSocialAccountForm">
+                <form action="{{ route('ctl.set.work') }}" method="POST" id="SetWorkExperienceForm">
                     @csrf
                     <input type="hidden" name="lang_flag" value="{{ $lang_flag }}">
                     {{-- Get Office Name --}}
@@ -232,7 +234,7 @@
         function ValidateFormWork(lang_flag) {
 
         // Declare variable
-            var formMast = document.getElementById("SetSocialAccountForm");
+            var formMast = document.getElementById("SetWorkExperienceForm");
             var validate_elements = {
                 "office_name_th" : null ,
                 "office_name_en" : null ,
@@ -274,7 +276,7 @@
             } else if ((validate_elements["work_desc_th"] == null || validate_elements["work_desc_th"] == "") && (validate_elements["work_desc_en"] == null || validate_elements["work_desc_en"] == "")) {
                 swal("{{ trans('profile.AlertError') }}" , "{{ trans('profile.Js_About_require') }}");
             } else{
-                document.getElementById("SetSocialAccountForm").submit();
+                document.getElementById("SetWorkExperienceForm").submit();
             }
         }
     </script>

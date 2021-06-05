@@ -278,6 +278,10 @@
                 @yield('OtherModal')
             <!-- Other Modal -->
 
+            {{-- error return --}}
+                @yield('GetError')
+            {{-- error return --}}
+
             <!-- Javascript -->
             <script>
             // Onload Function

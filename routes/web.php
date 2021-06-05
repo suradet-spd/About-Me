@@ -12,10 +12,13 @@
     use App\Http\Controllers\Profile_config\config_language;
     use App\Http\Controllers\Profile_info\set_about;
     use App\Http\Controllers\Profile_info\set_address;
-    use App\Http\Controllers\Profile_info\set_social;
+use App\Http\Controllers\Profile_info\set_education;
+use App\Http\Controllers\Profile_info\set_social;
 use App\Http\Controllers\Profile_info\set_work_experience;
 use App\Models\config_profile;
-    use App\Models\location;
+use App\Models\education;
+use App\Models\learning_list;
+use App\Models\location;
     use App\Models\social_list;
     use App\Models\User;
 use App\Models\work;
@@ -120,10 +123,15 @@ Route::middleware(['auth'])->group(function () {
                 'modifyFlag'
             ));
         } else if ($type == "education") {
+            $learning_list = learning_list::all()->where('active_flag' , 'Y')->toArray();
+            $education = education::all()->where('profile_id' , Auth::user()->profile_id)->toArray();
+
             return view('Profile.template.1.education' , compact(
                 'ConfigProfile' ,
                 'master' ,
-                'modifyFlag'
+                'modifyFlag' ,
+                'learning_list' ,
+                'education'
             ));
         } else if ($type == "experience") {
             $work = work::all()->where('profile_id' , $profile_id)->toArray();
@@ -168,6 +176,9 @@ Route::middleware(['auth'])->group(function () {
 
 // set profile work experience
     Route::post('SetProfileWork', [set_work_experience::class , 'SetWork'])->name('ctl.set.work');
+
+// set profile education
+    Route::post('SetEducation', [set_education::class , 'SetEducation'])->name('ctl.set.education');
 });
 
 

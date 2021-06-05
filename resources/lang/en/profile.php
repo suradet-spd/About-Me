@@ -123,10 +123,66 @@ return [
     "label_ModalAboutTH" => "Work description (thai) : " ,
     "label_ModalAboutEN" => "Work description (eng) : " ,
 
+    /*Place holder text*/
+    "place_About" => "Describe the work involved." ,
+
     /*JsValidateText*/
     "Js_Workerror" => "An error occurred in the recording system. Please contact the administrator!",
     "Js_officeName_require" => "Please enter your office name" ,
     "Js_Recheck_workDate" => "Please Re-check your work start date and Leaving date" ,
     "Js_position_require" => "Please enter your position!" ,
     "Js_About_require" => "Please enter your work description!" ,
+
+// Education page
+
+    // Render page
+    "GPALabel" => "GPA",
+
+    // modal label
+    "ModalEducateHeader" => "Add education" ,
+    "ModalEducateLevel" => "Education level" ,
+    "ModalEducateOption" => "Select education level" ,
+    "ModalCollegeNameTH" => "College name (thai)" ,
+    "ModalCollegeNameEN" => "College name (eng)" ,
+    "ModalFacultyNameTH" => "Faculty name (thai)" ,
+    "ModalFacultyNameEN" => "Faculty name (eng)" ,
+    "ModalGpaValue" => "GPA" ,
+    "ModalStartDate" => "Start date (MM/DD/YYYY)" ,
+    "ModalEndDate" => "Leaving date (MM/DD/YYYY)" ,
+    "ModalCheckLeavingFlag" => "Still educate" ,
+
+    // JsValidate
+    "Js_learning_type" => "Please select Education level" ,
+    "Js_college_name" => "Please enter college name" ,
+    "Js_faculty_name" => "Please enter faculty name" ,
+    "Js_GpaValue" => "Your GPA value is invalid. Please try again!",
+    "Js_start_date" => "Please enter start date" ,
+    "Js_end_date" => "Please enter Leave date" ,
+    "Js_recheck_date" => "Please Re-check start date and leave date" ,
+
+    // Controller return msg
+    "ctl_learning_list_req" => "Please select Education level" ,
+
+    "ctl_college_name_th_req" => "Please enter your college name (thai)!",
+    "ctl_college_name_th_max" => "Your college name (thai) is too long!",
+    "ctl_college_name_th_min" => "Your college name (thai) is too short!",
+
+    "ctl_college_name_en_req" => "Please enter your college name (eng)!",
+    "ctl_college_name_en_max" => "Your college name (eng) is too long!",
+    "ctl_college_name_en_min" => "Your college name (eng) is too short!",
+
+    "ctl_faculty_name_th_req" => "Please enter your faculty name (thai)!",
+    "ctl_faculty_name_th_max" => "Your faculty name (thai) is too long!",
+    "ctl_faculty_name_th_min" => "Your faculty name (thai) is too short!",
+
+    "ctl_faculty_name_en_req" => "Please enter your faculty name (eng)!",
+    "ctl_faculty_name_en_max" => "Your faculty name (eng) is too long!",
+    "ctl_faculty_name_en_min" => "Your faculty name (eng) is too short!",
+
+    "ctl_gpa_value_req" => "Please enter your gpa value",
+
+    "ctl_str" => "Only characters are allowed!",
+    "msg_error_return" => "Can't insert education hist. Please try again later!" ,
+    "msg_success_return" => "Insert education hist complete!",
+
 ];
