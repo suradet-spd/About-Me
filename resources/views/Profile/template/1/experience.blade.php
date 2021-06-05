@@ -50,7 +50,7 @@
                                 @endif
                             @endfor
 
-                            {{ ' ' . (date_format(date_create($wk["work_start_date"]) , 'Y') + 543) . '-' }}
+                            {{ ' ' . (date_format(date_create($wk["work_start_date"]) , 'Y') + 543) . ' -' }}
 
                             @if ($wk["work_end_date"] != null)
                                 @for ($i = 0; $i < count($THMonth); $i++)
@@ -60,12 +60,12 @@
                                     @endif
                                 @endfor
 
-                                {{ ' ' . (date_format(date_create($edu["exp_date"]) , 'Y') + 543) }}
+                                {{ ' ' . (date_format(date_create($wk["work_end_date"]) , 'Y') + 543) }}
                             @else
                                 {{ trans('profile.WorkEndDateRender') }}
                             @endif
                         @else
-                            {{ date_format(date_create($wk["work_start_date"]) , 'M Y') }} - {{ ($wk["work_end_date"] == null) ? trans('profile.WorkEndDateRender') : $wk["work_end_date"] }}
+                            {{ date_format(date_create($wk["work_start_date"]) , 'M Y') }} - {{ ($wk["work_end_date"] == null) ? trans('profile.WorkEndDateRender') : date_format(date_create($wk["work_end_date"]) , "M Y") }}
                         @endif
                     </span>
                 </div>

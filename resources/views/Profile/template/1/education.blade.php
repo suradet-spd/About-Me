@@ -61,7 +61,7 @@
                                 @endif
                             @endfor
 
-                            {{ ' ' . (date_format(date_create($edu["efft_date"]) , 'Y') + 543) . '-' }}
+                            {{ ' ' . (date_format(date_create($edu["efft_date"]) , 'Y') + 543) . ' -' }}
 
                             @if ($edu["exp_date"] != null)
                                 @for ($i = 0; $i < count($THMonth); $i++)
