@@ -12,20 +12,21 @@
     use App\Http\Controllers\Profile_config\config_language;
     use App\Http\Controllers\Profile_info\set_about;
     use App\Http\Controllers\Profile_info\set_address;
-use App\Http\Controllers\Profile_info\set_education;
-use App\Http\Controllers\Profile_info\set_social;
-use App\Http\Controllers\Profile_info\set_work_experience;
-use App\Models\config_profile;
-use App\Models\education;
-use App\Models\learning_list;
-use App\Models\location;
-    use App\Models\social_list;
-    use App\Models\User;
-use App\Models\work;
-use Illuminate\Support\Facades\DB;
+    use App\Http\Controllers\Profile_info\set_education;
+    use App\Http\Controllers\Profile_info\set_portfolio;
+    use App\Http\Controllers\Profile_info\set_social;
+    use App\Http\Controllers\Profile_info\set_work_experience;
+    use Illuminate\Support\Facades\DB;
 
 // Use Model file
-
+    use App\Models\config_profile;
+    use App\Models\education;
+    use App\Models\learning_list;
+    use App\Models\location;
+    use App\Models\portfolio;
+    use App\Models\social_list;
+    use App\Models\User;
+    use App\Models\work;
 
 // root route
 Route::get('/', function () {
@@ -63,6 +64,16 @@ Auth::routes([
         ];
         return response()->download($tmp_image, $ImageName, $headers);
     })->name('GetImage');
+
+    Route::get('get-port-image/{id}/{file_name}', function ($id , $file_name) {
+        $tmp_port_image = public_path("img/Portfolio/$id/$file_name");
+        $PortImageName = $file_name;
+
+        $headers = [
+            "file_type" => 'png'
+        ];
+        return response()->download($tmp_port_image, $PortImageName, $headers);
+    })->name('GetPortImage');
 
 // Backend route
 Route::middleware(['auth'])->group(function () {
@@ -143,10 +154,18 @@ Route::middleware(['auth'])->group(function () {
                 'work'
             ));
         } else if ($type == "portfolio") {
+            $portfolio = portfolio::all()->where('profile_id' , Auth::user()->profile_id)->toArray();
+
+            foreach ($portfolio as $pf) {
+                $files_name = json_decode(decrypt($pf["portfolio_images"]));
+            }
+
             return view('Profile.template.1.portfolio' , compact(
                 'ConfigProfile' ,
                 'master' ,
-                'modifyFlag'
+                'modifyFlag' ,
+                'portfolio' ,
+                'files_name'
             ));
         } else {
             return redirect()->route('MainPage')->with('error' , trans('route_error.create_profile_error'));
@@ -173,6 +192,9 @@ Route::middleware(['auth'])->group(function () {
 
 // set profile education
     Route::post('SetEducation', [set_education::class , 'SetEducation'])->name('ctl.set.education');
+
+// set profile portfolio
+    Route::post('SetPortfolio', [set_portfolio::class , 'SetPortfolio'])->name('ctl.set.portfolio');
 });
 
 
