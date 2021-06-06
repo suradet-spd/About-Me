@@ -117,7 +117,7 @@ Route::middleware(['auth'])->group(function () {
                 'tmp_social'
             ));
         } else if ($type == "awards") {
-            return view('Profile.template.1.awards' , config(
+            return view('Profile.template.1.awards' , compact(
                 'ConfigProfile' ,
                 'master' ,
                 'modifyFlag'
@@ -144,12 +144,6 @@ Route::middleware(['auth'])->group(function () {
             ));
         } else if ($type == "portfolio") {
             return view('Profile.template.1.portfolio' , compact(
-                'ConfigProfile' ,
-                'master' ,
-                'modifyFlag'
-            ));
-        } else if ($type == "skills") {
-            return view('Profile.template.1.skills' , compact(
                 'ConfigProfile' ,
                 'master' ,
                 'modifyFlag'

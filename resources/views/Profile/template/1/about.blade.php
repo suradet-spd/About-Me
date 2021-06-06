@@ -65,22 +65,44 @@
                             @endif
                         </p>
                     @endif
-
-                <div class="social-icons">
-                    <a class="social-icon" style="cursor: pointer" data-toggle="modal" data-target="#SetProfileSocial">
-                        <i class="fas fa-plus"></i>
-                    </a>
+                <div class="subheading mb-2">
+                    Social Contact
+                    <i class="fas fa-plus-circle" style="cursor: pointer" data-toggle="modal" data-target="#SetProfileSocial"></i>
+                </div>
+                <ul class="list-inline dev-icons">
                     @foreach ($tmp_social as $ts)
                         @foreach ($social_list as $tmp_si)
                             @if ($ts->social_list_id == $tmp_si["social_list_id"])
-                                <a class="social-icon" style="cursor: pointer" href="{{ $ts->social_account_link }}" target="_blank">
-                                    <i class="{{ $tmp_si["social_list_icon_name"] }}"></i>
-                                </a>
+                                <li class="list-inline-item">
+                                    <div class="social-icons mb-5">
+                                        <a class="social-icon" style="cursor: pointer" href="{{ $ts->social_account_link }}" target="_blank">
+                                            <i class="{{ $tmp_si["social_list_icon_name"] }}"></i>
+                                        </a>
+                                    </div>
+                                </li>
                             @endif
                         @endforeach
                     @endforeach
+                </ul>
 
+                {{-- <div class="subheading mb-2">
+                    Programming Languages & Tools
+                    <i class="fas fa-plus-circle" style="cursor: pointer" data-toggle="modal" data-target="#SetProgrammingSkill"></i>
                 </div>
+                    <ul class="list-inline dev-icons">
+                        <li class="list-inline-item"><i class="fab fa-html5"></i></li>
+                        <li class="list-inline-item"><i class="fab fa-css3-alt"></i></li>
+                        <li class="list-inline-item"><i class="fab fa-js-square"></i></li>
+                        <li class="list-inline-item"><i class="fab fa-angular"></i></li>
+                        <li class="list-inline-item"><i class="fab fa-react"></i></li>
+                        <li class="list-inline-item"><i class="fab fa-node-js"></i></li>
+                        <li class="list-inline-item"><i class="fab fa-sass"></i></li>
+                        <li class="list-inline-item"><i class="fab fa-less"></i></li>
+                        <li class="list-inline-item"><i class="fab fa-wordpress"></i></li>
+                        <li class="list-inline-item"><i class="fab fa-gulp"></i></li>
+                        <li class="list-inline-item"><i class="fab fa-grunt"></i></li>
+                        <li class="list-inline-item"><i class="fab fa-npm"></i></li>
+                    </ul> --}}
             </div>
         </section>
     @endsection
@@ -253,6 +275,42 @@
             </div>
         </div>
         <!-- The Modal [set Social list]-->
+
+        <!-- The Modal [set programming skill] -->
+        {{-- <div class="modal fade" id="SetProgrammingSkill">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h4 class="modal-title">Programming Skill</h4>
+                    </div>
+                <!-- Modal body -->
+                    <div class="modal-body">
+                        <form action="#" method="POST" id="SetProgrammingForm">
+                            @csrf
+                            <div class="form-group row">
+                                <div class="col-md-12">
+                                    <label for="social_select" class="col-md-12 col-form-label text-md-left">{{ trans('profile.ModalOptionSocial') }}</label>
+                                    <select class="form-control" name="social_select" id="social_select_id" style="width: 100%">
+                                        <option value="" selected disabled>Select social account type</option>
+                                        @foreach ($social_list as $si)
+                                            <option value="{{ $si["social_list_id"] }}">{{ $si["social_list_name"] }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+                <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-success" onclick="Javascript:ValidateFormProgrammingSkill();">{{ trans('profile.BtnSave') }}</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">{{ trans('profile.BtnClose') }}</button>
+                    </div>
+                </div>
+            </div>
+        </div> --}}
+        <!-- The Modal [set programming skill] -->
     @endsection
 @endforeach
 
@@ -376,6 +434,11 @@
             } else {
                 document.getElementById("SetSocialAccountForm").submit();
             }
+        }
+
+        function ValidateFormProgrammingSkill() {
+            var formMast = document.getElementById("SetProgrammingForm");
+            console.log(formMast);
         }
     </script>
 @endsection
