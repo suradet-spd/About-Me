@@ -185,4 +185,35 @@ return [
     "msg_error_return" => "ไม่สามารถเพิ่มข้อมูลการศึกษาได้ โปรดลองใหม่อีกครั้ง!" ,
     "msg_success_return" => "เพิ่มข้อมูลการศึกษาเรียบร้อยแล้ว!",
 
+// Portfolio page
+
+    // render page
+    "PortfolioViewImageLabel" => "ดูภาพ" ,
+
+    // modal form page
+    "md_PortfolioHeader" => "เพิ่มผลงาน" ,
+    "md_PortfolioNameTH" => "ชื่อผลงาน (ไทย) : ",
+    "md_PortfolioNameEN" => "ชื่อผลงาน (อังกฤษ) : ",
+    "md_PortfolioDescTH" => "ผลงานคำอธิบาย (ไทย) : ",
+    "md_PortfolioDescEN" => "ผลงานคำอธิบาย (อังกฤษ) : ",
+    "md_PortfolioTag" => "แท็กผลงาน : " ,
+    "md_PortfolioImages" => "รูปภาพผลงาน : " ,
+    "md_PortfolioImageList" => "รายการรูปภาพผลงาน",
+
+    "md_ph_port_name_th" => "Ex : ระบบสร้างโปรไฟล์" ,
+    "md_ph_port_name_en" => "Ex : Gen profile system " ,
+    "md_ph_port_desc_th" => "Ex : เป็นระบบที่จัดทำขึ้นเพื่อใช้ในการสร้างโปรไฟล์ของผู้ใช้งาน" ,
+    "md_ph_port_desc_en" => "Ex : The system prepared for use in creating user profiles.",
+    "md_ph_port_tag" => "Ex : #Programmer , #WebDev" ,
+
+    // Jsvalidate
+    "js_validate_port_name" => "กรุณาใส่ชื่อผลงาน" ,
+    "js_validate_port_desc" => "กรุณาใส่คำอธิบายผลงาน" ,
+    "js_validate_port_tag" => "กรุณาใส่แท็กผลงาน" ,
+    "js_validate_port_img_req" => "โปรดอัปโหลดรูปภาพผลงานของคุณ" ,
+    "js_validate_port_img_max" => "จำกัดภาพถ่ายสูงสุดที่ 5 ภาพถ่าย",
+    "js_file_count_true" => "ไฟล์ของคุณ : " ,
+    "js_file_text" => "ไฟล์" ,
+
+    // controller return msg
 ];

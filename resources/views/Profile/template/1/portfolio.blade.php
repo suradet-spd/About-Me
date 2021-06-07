@@ -28,7 +28,7 @@
                         <p style="text-align: center">
                             <i class="fas fa-search fa-2x"></i>
                             <br>
-                            <b>View Images</b>
+                            <b>{{ trans('profile.PortfolioViewImageLabel') }}</b>
                         </p>
                     </span>
                 </div>
@@ -45,7 +45,7 @@
         <div class="modal-content">
             <!-- Modal Header -->
             <div class="modal-header">
-                <h4 class="modal-title">ADD Port folio</h4>
+                <h4 class="modal-title">{{ trans('profile.md_PortfolioHeader') }}</h4>
             </div>
             <!-- Modal body -->
             <div class="modal-body">
@@ -53,34 +53,33 @@
                     @csrf
                     <input type="hidden" name="lang_flag" value="{{ $lang_flag }}">
 
-
                     @if ($lang_flag == "A")
 
                     {{-- Get portfolio name --}}
                         <div class="form-group row">
                             <div class="col-md-12">
-                                <label for="port_name_th" class="col-md-12 col-form-label text-md-left">port_name_th</label>
-                                <input type="text" name="port_name_th" id="port_name_th_id" class="form-control">
+                                <label for="port_name_th" class="col-md-12 col-form-label text-md-left">{{ trans('profile.md_PortfolioNameTH') }}</label>
+                                <input type="text" name="port_name_th" id="port_name_th_id" class="form-control" placeholder="{{ trans('profile.md_ph_port_name_th') }}">
                             </div>
                         </div>
                         <div class="form-group row">
                             <div class="col-md-12">
-                                <label for="port_name_en" class="col-md-12 col-form-label text-md-left">port_name_en</label>
-                                <input type="text" name="port_name_en" id="port_name_en_id" class="form-control">
+                                <label for="port_name_en" class="col-md-12 col-form-label text-md-left">{{ trans('profile.md_PortfolioNameEN') }}</label>
+                                <input type="text" name="port_name_en" id="port_name_en_id" class="form-control" placeholder="{{ trans('profile.md_ph_port_name_en') }}">
                             </div>
                         </div>
 
                     {{-- Get Description --}}
                         <div class="form-group row">
                             <div class="col-md-12">
-                                <label for="port_desc_th" class="col-md-12 col-form-label text-md-left">port_desc_th</label>
-                                <textarea name="port_desc_th" id="port_desc_th_id" style="width: 100%;" rows="5"></textarea>
+                                <label for="port_desc_th" class="col-md-12 col-form-label text-md-left">{{ trans('profile.md_PortfolioDescTH') }}</label>
+                                <textarea name="port_desc_th" id="port_desc_th_id" style="width: 100%;" rows="5" placeholder="{{ trans('profile.md_ph_port_desc_th') }}"></textarea>
                             </div>
                         </div>
                         <div class="form-group row">
                             <div class="col-md-12">
-                                <label for="port_desc_en" class="col-md-12 col-form-label text-md-left">port_desc_en</label>
-                                <textarea name="port_desc_en" id="port_desc_en_id" style="width: 100%;" rows="5"></textarea>
+                                <label for="port_desc_en" class="col-md-12 col-form-label text-md-left">{{ trans('profile.md_PortfolioDescEN') }}</label>
+                                <textarea name="port_desc_en" id="port_desc_en_id" style="width: 100%;" rows="5" placeholder="{{ trans('profile.md_ph_port_desc_en') }}"></textarea>
                             </div>
                         </div>
                     @elseif ($lang_flag == "T")
@@ -88,16 +87,16 @@
                     {{-- Get portfolio name --}}
                         <div class="form-group row">
                             <div class="col-md-12">
-                                <label for="port_name_th" class="col-md-12 col-form-label text-md-left">port_name_th</label>
-                                <input type="text" name="port_name_th" id="port_name_th_id" class="form-control">
+                                <label for="port_name_th" class="col-md-12 col-form-label text-md-left">{{ trans('profile.md_PortfolioNameTH') }}</label>
+                                <input type="text" name="port_name_th" id="port_name_th_id" class="form-control" placeholder="{{ trans('profile.md_ph_port_name_th') }}">
                             </div>
                         </div>
 
                     {{-- Get Description --}}
                         <div class="form-group row">
                             <div class="col-md-12">
-                                <label for="port_desc_th" class="col-md-12 col-form-label text-md-left">port_desc_th</label>
-                                <textarea name="port_desc_th" id="port_desc_th_id" style="width: 100%;" rows="5"></textarea>
+                                <label for="port_desc_th" class="col-md-12 col-form-label text-md-left">{{ trans('profile.md_PortfolioDescTH') }}</label>
+                                <textarea name="port_desc_th" id="port_desc_th_id" style="width: 100%;" rows="5" placeholder="{{ trans('profile.md_ph_port_desc_th') }}"></textarea>
                             </div>
                         </div>
                     @elseif ($lang_flag == "E")
@@ -105,16 +104,16 @@
                     {{-- Get portfolio name --}}
                         <div class="form-group row">
                             <div class="col-md-12">
-                                <label for="port_name_en" class="col-md-12 col-form-label text-md-left">port_name_en</label>
-                                <input type="text" name="port_name_en" id="port_name_en_id" class="form-control">
+                                <label for="port_name_en" class="col-md-12 col-form-label text-md-left">{{ trans('profile.md_PortfolioNameEN') }}</label>
+                                <input type="text" name="port_name_en" id="port_name_en_id" class="form-control" placeholder="{{ trans('profile.md_ph_port_name_en') }}">
                             </div>
                         </div>
 
                     {{-- Get Description --}}
                         <div class="form-group row">
                             <div class="col-md-12">
-                                <label for="port_desc_en" class="col-md-12 col-form-label text-md-left">port_desc_en</label>
-                                <textarea name="port_desc_en" id="port_desc_en_id" style="width: 100%;" rows="5"></textarea>
+                                <label for="port_desc_en" class="col-md-12 col-form-label text-md-left">{{ trans('profile.md_PortfolioDescEN') }}</label>
+                                <textarea name="port_desc_en" id="port_desc_en_id" style="width: 100%;" rows="5" placeholder="{{ trans('profile.md_ph_port_desc_en') }}"></textarea>
                             </div>
                         </div>
                     @endif
@@ -122,19 +121,19 @@
                 {{-- Get Port tag --}}
                     <div class="form-group row">
                         <div class="col-md-12">
-                            <label for="port_tag" class="col-md-12 col-form-label text-md-left">Port tag</label>
-                            <textarea name="port_tag" id="port_tag_id" style="width: 100%;" rows="3"></textarea>
+                            <label for="port_tag" class="col-md-12 col-form-label text-md-left">{{ trans('profile.md_PortfolioTag') }}</label>
+                            <textarea name="port_tag" id="port_tag_id" style="width: 100%;" rows="3" placeholder="{{ trans('profile.md_ph_port_tag') }}"></textarea>
                         </div>
                     </div>
 
                 {{-- Get images --}}
                     <div class="form-group row">
-                        <label for="profile_img" class="col-md-12 col-form-label text-md-left">Port images : </label>
+                        <label for="profile_img" class="col-md-12 col-form-label text-md-left">{{ trans('profile.md_PortfolioImages') }}</label>
 
                         <div class="col-md-12">
                             <div class="custom-file mb-3">
                                 <input type="file" class="custom-file-input" id="port_images_id" name="port_images[]" multiple>
-                                <label class="custom-file-label" for="port_images">Port Profile</label>
+                                <label class="custom-file-label" for="port_images">{{ trans('profile.md_PortfolioImageList') }}</label>
                             </div>
                             <div class="mb-2" id="RenderFilename"></div>
                         </div>
@@ -160,12 +159,12 @@
                 <div class="modal-content">
                     <!-- Modal Header -->
                     <div class="modal-header">
-                        <h4 class="modal-title">show {{ $md_port["portfolio_name_th"] }}</h4>
+                        <h4 class="modal-title">{{ trans('profile.md_PortfolioImageList') }}</h4>
                     </div>
                     <!-- Modal body -->
                     <div class="modal-body">
 
-                        <div id="demo" class="carousel slide" data-ride="carousel">
+                        <div id="img_list" class="carousel slide" data-ride="carousel">
 
                             @php
                                 $cnt = 0;
@@ -173,7 +172,7 @@
 
                             <ul class="carousel-indicators">
                                 @for ($i = 0; $i < count($files_name); $i++)
-                                    <li data-target="#demo" data-slide-to="{{ $i }}" {{ ($i == 0) ? 'class="active"' : "" }}></li>
+                                    <li data-target="#img_list" data-slide-to="{{ $i }}" {{ ($i == 0) ? 'class="active"' : "" }}></li>
                                 @endfor
                             </ul>
 
@@ -191,10 +190,10 @@
                             </div>
 
                             <!-- Left and right controls -->
-                            <a class="carousel-control-prev" href="#demo" data-slide="prev">
+                            <a class="carousel-control-prev" href="#img_list" data-slide="prev">
                               <span class="carousel-control-prev-icon"></span>
                             </a>
-                            <a class="carousel-control-next" href="#demo" data-slide="next">
+                            <a class="carousel-control-next" href="#img_list" data-slide="next">
                               <span class="carousel-control-next-icon"></span>
                             </a>
 
@@ -203,7 +202,6 @@
                     </div>
                     <!-- Modal footer -->
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-success" onclick="Javascript:ValidatePortFolio('{{ $lang_flag }}');">{{ trans('profile.BtnSave') }}</button>
                         <button type="button" class="btn btn-danger" data-dismiss="modal">{{ trans('profile.BtnClose') }}</button>
                     </div>
                 </div>
@@ -231,15 +229,15 @@
             };
 
             if ((validate_elements["port_name_th"] == null || validate_elements["port_name_th"] == "") || (validate_elements["port_name_en"] == null || validate_elements["port_name_en"] == "")) {
-                swal("error" , "pls enter port name" , "error");
+                swal("{{ trans('profile.AlertError') }}" , "{{ trans('profile.js_validate_port_name') }}" , "error");
             } else if ((validate_elements["port_desc_th"] == null || validate_elements["port_desc_th"] == "") || (validate_elements["port_desc_en"] == null || validate_elements["port_desc_en"] == "")) {
-                swal("error" , "pls enter port desc" , "error");
+                swal("{{ trans('profile.AlertError') }}" , "{{ trans('profile.js_validate_port_desc') }}" , "error");
             } else if (validate_elements["port_tag"] == null || validate_elements["port_tag"] == "") {
-                swal("error" , "pls enter port tag" , "error");
+                swal("{{ trans('profile.AlertError') }}" , "{{ trans('profile.js_validate_port_tag') }}" , "error");
             } else if (validate_elements["port_images"].length < 1) {
-                swal("error" , "pls upload your port photo" , "error");
+                swal("{{ trans('profile.AlertError') }}" , "{{ trans('profile.js_validate_port_img_req') }}" , "error");
             } else if (validate_elements["port_images"].length > 5) {
-                swal("error" , "maximum photo limit at 5 photo" , "error");
+                swal("{{ trans('profile.AlertError') }}" , "{{ trans('profile.js_validate_port_img_max') }}" , "error");
             } else {
                 formMast.submit();
             }
@@ -251,9 +249,9 @@
             var cnt_file = fileName.length;
 
             if (cnt_file > 5) {
-                var html = '<p style="color:red">Your files : ' + cnt_file + ' / 5 file</p>';
+                var html = '<p style="color:red">{{ trans("profile.js_file_count_true") }} ' + cnt_file + ' / 5 {{ trans("profile.js_file_text") }}</p>';
             } else {
-                var html = '<p style="color:green">Count files : ' + cnt_file + ' / 5 files</p>';
+                var html = '<p style="color:green">{{ trans("profile.js_file_count_true") }} ' + cnt_file + ' / 5 {{ trans("profile.js_file_text") }}</p>';
             }
 
             document.getElementById("RenderFilename").innerHTML = html;

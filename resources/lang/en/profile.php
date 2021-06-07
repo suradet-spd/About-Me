@@ -185,4 +185,36 @@ return [
     "msg_error_return" => "Can't insert education hist. Please try again later!" ,
     "msg_success_return" => "Insert education hist complete!",
 
+// Portfolio page
+
+    // render page
+    "PortfolioViewImageLabel" => "View images" ,
+
+    // modal form page
+    "md_PortfolioHeader" => "Add Portfolio" ,
+    "md_PortfolioNameTH" => "Portfolio name (thai) : ",
+    "md_PortfolioNameEN" => "Portfolio name (eng) : ",
+    "md_PortfolioDescTH" => "Portfolio description (thai) : ",
+    "md_PortfolioDescEN" => "Portfolio description (eng) : ",
+    "md_PortfolioTag" => "Portfolio Tag : " ,
+    "md_PortfolioImages" => "Portfolio Images : " ,
+    "md_PortfolioImageList" => "Portfolio Images list",
+
+    "md_ph_port_name_th" => "Ex : ระบบสร้างโปรไฟล์" ,
+    "md_ph_port_name_en" => "Ex : Gen profile system " ,
+    "md_ph_port_desc_th" => "Ex : เป็นระบบที่จัดทำขึ้นเพื่อใช้ในการสร้างโปรไฟล์ของผู้ใช้งาน" ,
+    "md_ph_port_desc_en" => "Ex : The system prepared for use in creating user profiles.",
+    "md_ph_port_tag" => "Ex : #Programmer , #WebDev" ,
+
+    // Jsvalidate
+    "js_validate_port_name" => "Please enter portfolio name" ,
+    "js_validate_port_desc" => "Please enter portfolio description" ,
+    "js_validate_port_tag" => "Please enter portfolio tag" ,
+    "js_validate_port_img_req" => "Please upload your portfolio photos" ,
+    "js_validate_port_img_max" => "Maximum photos limit at 5 photo",
+    "js_file_count_true" => "Your files : " ,
+    "js_file_text" => "file" ,
+
+    // controller return msg
+
 ];
