@@ -39,7 +39,7 @@
 @endsection
 
 @section('OtherModal')
-<!-- The Modal [set Social list]-->
+<!-- The Modal [set Portfolio]-->
 <div class="modal fade" id="SetPortfolioModal">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -149,11 +149,11 @@
         </div>
     </div>
 </div>
-<!-- The Modal [set Social list]-->
+<!-- The Modal [set Portfolio]-->
 
     @foreach ($portfolio as $md_port)
 
-        <!-- The Modal [set Social list]-->
+        <!-- The Modal [show portfolio image]-->
         <div class="modal fade" id="md_show_portfolio_{{ $md_port["portfolio_seq"] }}">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
@@ -207,12 +207,46 @@
                 </div>
             </div>
         </div>
-        <!-- The Modal [set Social list]-->
+        <!-- The Modal [show portfolio image]-->
     @endforeach
 @endsection
 
 @section('GetError')
+    @error('port_name_th')
+        <script>
+            swal("{{ trans('home.Error_msg_header') }}" , "{{ $message }}" , 'error');
+        </script>
+    @enderror
 
+    @error('port_name_en')
+        <script>
+            swal("{{ trans('home.Error_msg_header') }}" , "{{ $message }}" , 'error');
+        </script>
+    @enderror
+
+    @error('port_desc_th')
+        <script>
+            swal("{{ trans('home.Error_msg_header') }}" , "{{ $message }}" , 'error');
+        </script>
+    @enderror
+
+    @error('port_desc_en')
+        <script>
+            swal("{{ trans('home.Error_msg_header') }}" , "{{ $message }}" , 'error');
+        </script>
+    @enderror
+
+    @error('port_tag')
+        <script>
+            swal("{{ trans('home.Error_msg_header') }}" , "{{ $message }}" , 'error');
+        </script>
+    @enderror
+
+    @error('port_images')
+        <script>
+            swal("{{ trans('home.Error_msg_header') }}" , "{{ $message }}" , 'error');
+        </script>
+    @enderror
 @endsection
 
 @section('OtherJsFunction')
