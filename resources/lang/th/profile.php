@@ -25,7 +25,7 @@ return [
     "MenuEducation" => "การศึกษา",
     "MenuPortfolio" => "แฟ้มผลงาน",
     "MenuSkill" => "ความสามารถ",
-    "MenuAward" => "รางวัล",
+    "MenuAward" => "ประกาศนียบัตร",
 
 // modal zone
     /*[ Set language ]*/

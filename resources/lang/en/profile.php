@@ -25,7 +25,7 @@ return [
     "MenuEducation" => "Education",
     "MenuPortfolio" => "Portfolio",
     "MenuSkill" => "Skills",
-    "MenuAward" => "Awards",
+    "MenuAward" => "Certificate",
 
 // modal zone
     /*[ Set language ]*/
