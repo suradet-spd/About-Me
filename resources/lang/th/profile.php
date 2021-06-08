@@ -216,4 +216,15 @@ return [
     "js_file_text" => "ไฟล์" ,
 
     // controller return msg
+    "ctl_msg_port_name_th_req" => "กรุณาใส่ชื่อผลงาน (ไทย)" ,
+    "ctl_msg_port_name_en_req" => "กรุณาใส่ชื่อผลงาน (อังกฤษ)" ,
+    "ctl_msg_port_desc_th_req" => "กรุณาใส่รายละเอียดผลงาน (ไทย)" ,
+    "ctl_msg_port_desc_en_req" => "กรุณาใส่รายละเอียดผลงาน (อังกฤษ)",
+    "ctl_msg_port_tag_req" => "กรุณาใส่แท็กของผลงาน",
+    "ctl_msg_port_images_req" => "กรุณาอัพโหลดรูปภาพผลงาน",
+    "ctl_msg_image_type" => "รองรับเฉพาะไฟล์รูปเท่านั้น",
+    "ctl_msg_mimes" => "อนุญาตเฉพาะไฟล์นามสกุล [jpeg , png , jpg , svg] เท่านั้น",
+
+    "ctl_msg_port_success" => "บันทึกข้อมูลผลงานเรียบร้อยแล้ว",
+    "ctl_msg_port_fail" => "ไม่สามารถบันทึกข้อมูลผลงานได้โปรดลองใหม่อีกครั้ง",
 ];

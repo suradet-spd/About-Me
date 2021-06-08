@@ -23,14 +23,14 @@ class set_portfolio extends Controller
             "port_tag" => 'required',
             "port_images" => 'required|image|mimes:jpeg,png,jpg,svg'
         ] , $messages = [
-            'image' => "only access photo file",
-            'mimes' => "only access file type is jpeg , png , jpg , svg",
-            'port_name_th.required' => 'pls enter port name (thai)',
-            'port_name_en.required' => 'pls enter port name (eng)',
-            'port_desc_th.required' => 'pls enter port desc (thai)',
-            'port_desc_en.required' => 'pls enter port desc (eng)',
-            'port_tag.required' => 'pls enter port tag',
-            'port_images.required' => 'pls enter port images'
+            'image' => trans('profile.ctl_msg_image_type'),
+            'mimes' => trans('profile.ctl_msg_mimes'),
+            'port_name_th.required' => trans('profile.ctl_msg_port_name_th_req'),
+            'port_name_en.required' => trans('profile.ctl_msg_port_name_en_req'),
+            'port_desc_th.required' => trans('profile.ctl_msg_port_desc_th_req'),
+            'port_desc_en.required' => trans('profile.ctl_msg_port_desc_en_req'),
+            'port_tag.required' => trans('profile.ctl_msg_port_tag_req'),
+            'port_images.required' => trans('profile.ctl_msg_port_images_req')
         ])->validate();
     }
 
@@ -94,9 +94,9 @@ class set_portfolio extends Controller
             $chk_res = portfolio::all()->where('profile_id' , $profile_id)->where('portfolio_seq' , $port_seq)->count();
 
             if ($chk_res == 0) {
-                return redirect()->back()->with('error' , "Can't insert your portfolio!");
+                return redirect()->back()->with('error' , trans('profile.ctl_msg_port_fail'));
             } else {
-                return redirect()->back()->with('success' , "Insert portfolio complete!");
+                return redirect()->back()->with('success' , trans('profile.ctl_msg_port_success'));
             }
         }
     }

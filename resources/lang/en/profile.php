@@ -216,5 +216,16 @@ return [
     "js_file_text" => "file" ,
 
     // controller return msg
+    "ctl_msg_port_name_th_req" => "Please enter the portfolio name (Thai)" ,
+    "ctl_msg_port_name_en_req" => "Please enter the portfolio name (English)." ,
+    "ctl_msg_port_desc_th_req" => "Please enter the portfolio decription (Thai)" ,
+    "ctl_msg_port_desc_en_req" => "Please enter the portfolio decription (English).",
+    "ctl_msg_port_tag_req" => "Please enter the tag of the portfolio.",
+    "ctl_msg_port_images_req" => "Please upload pictures of portfolio",
+    "ctl_msg_image_type" => "Only support image files",
+    "ctl_msg_mimes" => "Just allow extension files [jpeg , png , jpg , svg] only",
+
+    "ctl_msg_port_success" => "Save the portfolio complete",
+    "ctl_msg_port_fail" => "Cannot save the portfolio. Please try again.",
 
 ];
