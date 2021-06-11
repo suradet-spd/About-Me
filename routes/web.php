@@ -12,11 +12,13 @@
     use App\Http\Controllers\Profile_config\config_language;
     use App\Http\Controllers\Profile_info\set_about;
     use App\Http\Controllers\Profile_info\set_address;
-    use App\Http\Controllers\Profile_info\set_education;
+use App\Http\Controllers\Profile_info\set_certificate;
+use App\Http\Controllers\Profile_info\set_education;
     use App\Http\Controllers\Profile_info\set_portfolio;
     use App\Http\Controllers\Profile_info\set_social;
     use App\Http\Controllers\Profile_info\set_work_experience;
-    use Illuminate\Support\Facades\DB;
+use App\Models\certificate;
+use Illuminate\Support\Facades\DB;
 
 // Use Model file
     use App\Models\config_profile;
@@ -65,15 +67,15 @@ Auth::routes([
         return response()->download($tmp_image, $ImageName, $headers);
     })->name('GetImage');
 
-    Route::get('get-port-image/{id}/{file_name}', function ($id , $file_name) {
-        $tmp_port_image = public_path("img/Portfolio/$id/$file_name");
+    Route::get('get-port-image/{id}/{file_name}/{img_type}', function ($id , $file_name , $img_type) {
+        $tmp_port_image = public_path("img/user-data/$id/$img_type/$file_name");
         $PortImageName = $file_name;
 
         $headers = [
             "file_type" => 'png'
         ];
         return response()->download($tmp_port_image, $PortImageName, $headers);
-    })->name('GetPortImage');
+    })->name('GetDataImage');
 
 // Backend route
 Route::middleware(['auth'])->group(function () {
@@ -127,11 +129,22 @@ Route::middleware(['auth'])->group(function () {
                 'social_list' ,
                 'tmp_social'
             ));
-        } else if ($type == "awards") {
-            return view('Profile.template.1.awards' , compact(
+        } else if ($type == "certificate") {
+
+        // Declare Variable
+            $certificate = certificate::all()->where('profile_id' , Auth::user()->profile_id)->toArray();
+
+            foreach ($certificate as $pf) {
+                $files_name = json_decode(decrypt($pf["cert_images"]));
+            }
+        // Return to view
+
+            return view('Profile.template.1.certificate' , compact(
                 'ConfigProfile' ,
                 'master' ,
-                'modifyFlag'
+                'modifyFlag' ,
+                'certificate' ,
+                'files_name'
             ));
         } else if ($type == "education") {
             $learning_list = learning_list::all()->where('active_flag' , 'Y')->toArray();
@@ -195,6 +208,9 @@ Route::middleware(['auth'])->group(function () {
 
 // set profile portfolio
     Route::post('SetPortfolio', [set_portfolio::class , 'SetPortfolio'])->name('ctl.set.portfolio');
+
+// set profile certificate
+    Route::post('SetCertificate', [set_certificate::class , 'SetCertificate'])->name('ctl.set.cert');
 });
 
 

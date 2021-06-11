@@ -141,7 +141,7 @@
                             <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{{ route('MyProfile' , 'experience') }}">{{ trans('profile.MenuExperience') }}</a></li>
                             <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{{ route('MyProfile' , 'education') }}">{{ trans('profile.MenuEducation') }}</a></li>
                             <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{{ route('MyProfile' , 'portfolio') }}">{{ trans('profile.MenuPortfolio') }}</a></li>
-                            <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{{ route('MyProfile' , 'awards') }}">{{ trans('profile.MenuAward') }}</a></li>
+                            <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{{ route('MyProfile' , 'certificate') }}">{{ trans('profile.MenuAward') }}</a></li>
 
                                 @if ($mast["language_flag"] == "A")
                                     <hr width="95%">

@@ -227,4 +227,41 @@ return [
 
     "ctl_msg_port_success" => "บันทึกข้อมูลผลงานเรียบร้อยแล้ว",
     "ctl_msg_port_fail" => "ไม่สามารถบันทึกข้อมูลผลงานได้โปรดลองใหม่อีกครั้ง",
+
+// Certificate page
+
+    // render page
+
+    // modal form page
+    "md_header_cert" => "เพิ่มใบประกาศและรางวัลความสำเร็จ" ,
+    "md_cert_name_th_label" => "ชื่อใบประกาศ (ไทย) : " ,
+    "md_cert_name_en_label" => "ชื่อใบประกาศ (อังกฤษ) : " ,
+    "md_cert_desc_th_label" => "คำอธิบายใบประกาศ (ไทย) : ",
+    "md_cert_desc_en_label" => "คำอธิบายใบประกาศ (อังกฤษ) : ",
+    "md_cert_get_date" => "วันที่ใบประกาศ : " ,
+    "md_cert_images" => "ภาพใบประกาศ : " ,
+    "md_cert_image_text" => "อัปโหลดรูปภาพของคุณ" ,
+    "md_cert_image_show" => "ภาพใบประกาศ" ,
+
+    // form input data placeholder
+    "md_ph_name_th" => "Ex : ใบประกาศการเป็นสมาชิกระบบสร้างโปรไฟล์",
+    "md_ph_name_en" => "Ex : Profile Creation Membership Certificate.",
+    "md_ph_desc_th" => "Ex : พูดเกี่ยวกับใบประกาศและรางวัลของคุณ" ,
+    "md_ph_desc_en" => "Ex : Say about your certificate and achievements." ,
+
+    // Jsvalidate
+    "js_cert_name_th" => "โปรดป้อนชื่อใบประกาศของคุณ (ไทย)!",
+    "js_cert_name_en" => "โปรดป้อนชื่อใบประกาศของคุณ (ENG)",
+    "js_cert_desc" => "กรุณากรอกคำอธิบายใบประกาศของคุณ" ,
+    "js_cert_images" => "กรุณากรอกภาพใบประกาศของคุณ",
+    "js_cert_max_image" => "จำกัดภาพถ่ายสูงสุดที่ 2 ภาพถ่าย",
+    "js_cert_date" => "โปรดเลือกวันที่ใบประกาศ" ,
+    "js_cert_max_date" => "วันที่ในใบประกาศไม่ถูกต้อง",
+
+    // controller return msg
+    "ctl_cert_max_valid" => "คำอธิบายของคุณยาวเกินไป",
+    "ctl_cert_desc_th" => "กรุณากรอกคำอธิบายใบประกาศของคุณ (ไทย)" ,
+    "ctl_cert_desc_en" => "กรุณากรอกคำอธิบายใบประกาศของคุณ (ENG)" ,
+    "ctl_msg_cert_fail" => "ไม่สามารถบันทึกใบประกาศได้กรุณาลองอีกครั้ง.",
+    "ctl_msg_cert_success" => "บันทึกใบประกาศให้สมบูรณ์",
 ];

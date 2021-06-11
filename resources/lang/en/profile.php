@@ -226,6 +226,42 @@ return [
     "ctl_msg_mimes" => "Just allow extension files [jpeg , png , jpg , svg] only",
 
     "ctl_msg_port_success" => "Save the portfolio complete",
-    "ctl_msg_port_fail" => "Cannot save the portfolio. Please try again.",
+    "ctl_msg_port_fail" => "Can't save the portfolio. Please try again.",
 
+// Certificate page
+
+    // render page
+
+    // modal form page
+    "md_header_cert" => "Add Certificate and achievements" ,
+    "md_cert_name_th_label" => "Certificate name (thai) : " ,
+    "md_cert_name_en_label" => "Certificate name (eng) : " ,
+    "md_cert_desc_th_label" => "Certificate description (thai) : ",
+    "md_cert_desc_en_label" => "Certificate description (eng) : ",
+    "md_cert_get_date" => "Certificate date : " ,
+    "md_cert_images" => "Certificate images : " ,
+    "md_cert_image_text" => "Upload your images" ,
+    "md_cert_image_show" => "Certificate image" ,
+
+    // form input data placeholder
+    "md_ph_name_th" => "Ex : ใบรับรองการเป็นสมาชิกระบบสร้างโปรไฟล์",
+    "md_ph_name_en" => "Ex : Profile Creation Membership Certificate.",
+    "md_ph_desc_th" => "Ex : พูดเกี่ยวกับใบรับรองและรางวัลของคุณ" ,
+    "md_ph_desc_en" => "Ex : Say about your certificate and achievements." ,
+
+    // Jsvalidate
+    "js_cert_name_th" => "Please enter your certificate name (thai)!",
+    "js_cert_name_en" => "Please enter your certificate name (eng)",
+    "js_cert_desc" => "Please enter your certificate description" ,
+    "js_cert_images" => "Please enter your certificate images",
+    "js_cert_max_image" => "Maximum photos limit at 2 photo",
+    "js_cert_date" => "Please select certificate date" ,
+    "js_cert_max_date" => "The date on the certificate is not valid",
+
+    // controller return msg
+    "ctl_cert_max_valid" => "Your description is too long",
+    "ctl_cert_desc_th" => "Please enter your certificate description (thai)" ,
+    "ctl_cert_desc_en" => "Please enter your certificate description (eng)" ,
+    "ctl_msg_cert_fail" => "Can't save the certificate. Please try again.",
+    "ctl_msg_cert_success" => "Save the certificate complete",
 ];

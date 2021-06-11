@@ -180,7 +180,7 @@
                             <div class="carousel-inner">
                                 @foreach ($files_name as $fn)
                                     <div class="carousel-item {{ ($cnt == 0) ? 'active' : '' }}">
-                                        <img class="img-fluid" style="width: 100%; height: 400px;" src="{{ route('GetPortImage' , ["id"=>$md_port["profile_id"] , "file_name"=> $fn]) }}">
+                                        <img class="img-fluid" style="width: 100%; height: 400px;" src="{{ route('GetDataImage' , ["id"=>$md_port["profile_id"] , "file_name"=> $fn , "img_type" => "Portfolio"]) }}">
                                     </div>
 
                                     @php
