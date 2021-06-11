@@ -60,7 +60,7 @@ class set_portfolio extends Controller
                 $img_cnt ++;
                 $file_type = explode("." , $files->getClientOriginalName());
                 $file_name = $profile_id . "_" . $port_seq . "_" . $img_cnt . "." . end($file_type);
-                $path = 'img/Portfolio/' . $profile_id;
+                $path = 'img/user-data/' . $profile_id . "/Portfolio";
                 $chk_path = $path . "/" . $file_name;
 
                 // check exists file
