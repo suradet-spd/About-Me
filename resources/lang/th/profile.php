@@ -14,8 +14,14 @@ return [
 
 // Set Lang Validate
     "AlertLangNull" => "โปรดเลือกภาษา !",
+
+//set token validate
     "ValidateToken" => "Token ไม่ถูกต้อง !" ,
     "LosingToken" => "ไม่พบ Token โปรดลองอีกครั้ง!" ,
+
+// set controller msg
+    "ValidatepublicMSGFail" => "เกิดข้ออย่างผิดพลาด กรุณาลองใหม่อีกครั้งในภายหลัง!",
+    "VliadatepublicMSGSuccess" => "เปิดเผยโปรไฟล์เรียบร้อยแล้ว",
 
 // Tab Menu
     "PublicProfile" => "เผยแพร่โปรไฟล์",

@@ -223,9 +223,9 @@ Route::middleware(['auth'])->group(function () {
                             "upd_user_id" => DB::raw("LPAD('" . Auth::user()->profile_id . "' , 5 , 0)")
                         ]);
             if ($profile == 0) {
-                return redirect()->back()->with('error' , 'Something went wrong. pls try again later!');
+                return redirect()->back()->with('error' , trans('profile.ValidatepublicMSGFail'));
             } else {
-                return redirect()->back()->with('success' , 'Public profile success');
+                return redirect()->back()->with('success' , trans('profile.VliadatepublicMSGSuccess'));
             }
 
         }

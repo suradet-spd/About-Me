@@ -14,8 +14,14 @@ return [
 
 // Set Lang Validate
     "AlertLangNull" => "Please select language!",
+
+//set token validate
     "ValidateToken" => "Token is invalid !" ,
     "LosingToken" => "Can't get token. Please try again" ,
+
+// set controller msg
+    "ValidatepublicMSGFail" => "Something went wrong. please try again later!",
+    "VliadatepublicMSGSuccess" => "Public profile success",
 
 // Tab Menu
     "PublicProfile" => "Public profile",
