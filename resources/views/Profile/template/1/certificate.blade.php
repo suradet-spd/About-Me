@@ -242,6 +242,47 @@
 @endsection
 
 @section('GetError')
+    @error('cert_name_th')
+        <script>
+            swal("{{ trans('home.Error_msg_header') }}" , "{{ $message }}" , 'error');
+        </script>
+    @enderror
+
+    @error('cert_name_en')
+        <script>
+            swal("{{ trans('home.Error_msg_header') }}" , "{{ $message }}" , 'error');
+        </script>
+    @enderror
+
+    @error('cert_desc_th')
+        <script>
+            swal("{{ trans('home.Error_msg_header') }}" , "{{ $message }}" , 'error');
+        </script>
+    @enderror
+
+    @error('cert_desc_en')
+        <script>
+            swal("{{ trans('home.Error_msg_header') }}" , "{{ $message }}" , 'error');
+        </script>
+    @enderror
+
+    @error('cert_desc_en')
+        <script>
+            swal("{{ trans('home.Error_msg_header') }}" , "{{ $message }}" , 'error');
+        </script>
+    @enderror
+
+    @error('cert_date')
+        <script>
+            swal("{{ trans('home.Error_msg_header') }}" , "{{ $message }}" , 'error');
+        </script>
+    @enderror
+
+    @error('cert_images[]')
+        <script>
+            swal("{{ trans('home.Error_msg_header') }}" , "{{ $message }}" , 'error');
+        </script>
+    @enderror
 
 @endsection
 
