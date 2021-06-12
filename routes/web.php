@@ -69,6 +69,7 @@ Auth::routes([
     })->name('GetImage');
 
     Route::get('get-port-image/{id}/{file_name}/{img_type}', function ($id , $file_name , $img_type) {
+
         $tmp_port_image = public_path("img/user-data/$id/$img_type/$file_name");
         $PortImageName = $file_name;
 
@@ -134,9 +135,9 @@ Route::middleware(['auth'])->group(function () {
 
         // Declare Variable
             $certificate = certificate::all()->where('profile_id' , Auth::user()->profile_id)->toArray();
-
-            foreach ($certificate as $pf) {
-                $files_name = json_decode(decrypt($pf["cert_images"]));
+            $files_name[] = null;
+            foreach ($certificate as $cc) {
+                array_push($files_name , (json_decode(decrypt($cc["cert_images"]))));
             }
         // Return to view
 
@@ -169,9 +170,9 @@ Route::middleware(['auth'])->group(function () {
             ));
         } else if ($type == "portfolio") {
             $portfolio = portfolio::all()->where('profile_id' , Auth::user()->profile_id)->toArray();
-
+            $files_name[] = null;
             foreach ($portfolio as $pf) {
-                $files_name = json_decode(decrypt($pf["portfolio_images"]));
+                array_push($files_name , (json_decode(decrypt($pf["portfolio_images"]))));
             }
 
             return view('Profile.template.1.portfolio' , compact(

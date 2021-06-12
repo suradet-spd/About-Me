@@ -51,6 +51,7 @@ return [
 // About page
     /* add Address */
     "MenuAddAddress" => "Add your address",
+    "SocialAccount" => "Social account" ,
 
     // Modal
     "ModaladdrHeader" => "Set your address",
