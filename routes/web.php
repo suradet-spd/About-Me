@@ -29,6 +29,7 @@
     use App\Models\User;
     use App\Models\work;
     use App\Models\certificate;
+use Illuminate\Support\Facades\Session;
 
 // root route
 Route::get('/', function () {
@@ -49,13 +50,6 @@ Route::get('change/{locale}', function ($locale) {
 
 // Frontend route
 Route::post('/register', [RegisterController::class , 'req_Register'])->name('submit-register');
-
-// Authen route
-Auth::routes([
-    'register' => false,
-    'reset' => false,
-    'verify' => false,
-]);
 
     /* call file in storage or call API */
     Route::get('get-image/{id}', function ($id) {
@@ -78,6 +72,13 @@ Auth::routes([
         ];
         return response()->download($tmp_port_image, $PortImageName, $headers);
     })->name('GetDataImage');
+
+// Authen route
+Auth::routes([
+    'register' => false,
+    'reset' => false,
+    'verify' => false,
+]);
 
 // Backend route
 Route::middleware(['auth'])->group(function () {
@@ -232,5 +233,122 @@ Route::middleware(['auth'])->group(function () {
         }
     })->name('public.profile');
 });
+
+// For another user view profile
+Route::get('{user_name}/{type}', function ($user_name , $type) {
+
+    // Set session
+    Session::put('search_name' , $user_name);
+
+    $tmp_name = explode("." , $user_name);
+    $tmp_id = User::all()->where('name_en' , (max($tmp_name) . " " . min($tmp_name)))->toArray();
+
+    foreach ($tmp_id as $ti) {
+        $search_id = str_pad($ti["profile_id"],5,"0",STR_PAD_LEFT);
+    }
+
+    $master = User::all()->where('profile_id' , strval($search_id))->toArray();
+    $modifyFlag = false;
+
+    foreach ($master as $pf) {
+        $profile_id = $pf["profile_id"];
+        $profile_location = $pf["location_id"];
+    }
+
+// set data
+    $tmp_config = config_profile::all()
+                        ->where('profile_id' , $profile_id)
+                        ->where('config_type' , 'BC')
+                        ->whereNull('exp_date')
+                        ->toArray();
+
+    if ($tmp_config != null) {
+        foreach ($tmp_config as $config) {
+            $tmp = decrypt($config["config_desc"]);
+            $ConfigProfile = json_decode($tmp);
+        }
+    } else {
+        $ConfigProfile = json_decode("");
+    }
+
+    if ($type == "about") {
+
+    // Declare Variable
+        $addr_province = DB::table('profile_t_location')->select('province_code', 'province_th' , 'province_en')->distinct()->get();
+        $addr_amphoe = DB::table('profile_t_location')->select('district_code', 'district_th', 'district_en' , 'province_code')->distinct()->get();
+        $addr_district = DB::table('profile_t_location')->select('sub_district_code', 'sub_district_th', 'sub_district_en', 'district_code' , 'province_code')->distinct()->get();
+        $addr_post_code = DB::table('profile_t_location')->select('zip_code', 'sub_district_code')->distinct()->get();
+        $location_det = location::all()->where('location_id' , $profile_location)->toArray();
+        $tmp_social = DB::table('profile_t_social')->where('profile_id' , $profile_id)->distinct()->get()->toArray();
+        $social_list = social_list::all()->where('active_flag' , 'Y')->toArray();
+
+    // Return to view
+        return view('Profile.template.1.about' , compact(
+            'ConfigProfile' ,
+            'master' ,
+            'modifyFlag' ,
+            'addr_province' ,
+            'addr_amphoe' ,
+            'addr_district' ,
+            'addr_post_code' ,
+            'location_det' ,
+            'social_list' ,
+            'tmp_social'
+        ));
+    } else if ($type == "certificate") {
+
+    // Declare Variable
+        $certificate = certificate::all()->where('profile_id' , strval($search_id))->toArray();
+        $files_name[] = null;
+        foreach ($certificate as $cc) {
+            array_push($files_name , (json_decode(decrypt($cc["cert_images"]))));
+        }
+    // Return to view
+
+        return view('Profile.template.1.certificate' , compact(
+            'ConfigProfile' ,
+            'master' ,
+            'modifyFlag' ,
+            'certificate' ,
+            'files_name'
+        ));
+    } else if ($type == "education") {
+        $learning_list = learning_list::all()->where('active_flag' , 'Y')->toArray();
+        $education = education::all()->where('profile_id' , strval($search_id))->toArray();
+
+        return view('Profile.template.1.education' , compact(
+            'ConfigProfile' ,
+            'master' ,
+            'modifyFlag' ,
+            'learning_list' ,
+            'education'
+        ));
+    } else if ($type == "experience") {
+        $work = work::all()->where('profile_id' , $profile_id)->toArray();
+
+        return view('Profile.template.1.experience' , compact(
+            'ConfigProfile' ,
+            'master' ,
+            'modifyFlag' ,
+            'work'
+        ));
+    } else if ($type == "portfolio") {
+        $portfolio = portfolio::all()->where('profile_id' , strval($search_id))->toArray();
+        $files_name[] = null;
+        foreach ($portfolio as $pf) {
+            array_push($files_name , (json_decode(decrypt($pf["portfolio_images"]))));
+        }
+
+        return view('Profile.template.1.portfolio' , compact(
+            'ConfigProfile' ,
+            'master' ,
+            'modifyFlag' ,
+            'portfolio' ,
+            'files_name'
+        ));
+    } else {
+        return redirect()->route('MainPage')->with('error' , trans('route_error.create_profile_error'));
+    }
+})->name('ViewProfile');
 
 

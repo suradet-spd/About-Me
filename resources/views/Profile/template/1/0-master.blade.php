@@ -141,11 +141,11 @@
                                     <li class="nav-item"><a class="nav-link js-scroll-trigger" style="cursor: pointer" id="BtnCustomBackground" data-toggle="modal" data-target="#SetBackground">{{ trans('profile.MenuCustomBG') }}</a></li>
                                 @endif
                             <hr width="95%">
-                            <li class="nav-item" disabled><a class="nav-link js-scroll-trigger" href="{{ route('MyProfile' , 'about') }}">{{ trans('profile.MenuAbout') }}</a></li>
-                            <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{{ route('MyProfile' , 'experience') }}">{{ trans('profile.MenuExperience') }}</a></li>
-                            <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{{ route('MyProfile' , 'education') }}">{{ trans('profile.MenuEducation') }}</a></li>
-                            <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{{ route('MyProfile' , 'portfolio') }}">{{ trans('profile.MenuPortfolio') }}</a></li>
-                            <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{{ route('MyProfile' , 'certificate') }}">{{ trans('profile.MenuAward') }}</a></li>
+                            <li class="nav-item" disabled><a class="nav-link js-scroll-trigger" href="{{ ($modifyFlag) ? route('MyProfile' , 'about') : route('ViewProfile' , ["type" => "about" , "user_name" => session()->get('search_name')]) }}">{{ trans('profile.MenuAbout') }}</a></li>
+                            <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{{ ($modifyFlag) ? route('MyProfile' , 'experience') : route('ViewProfile' , ["type" => "experience" , "user_name" => session()->get('search_name')]) }}">{{ trans('profile.MenuExperience') }}</a></li>
+                            <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{{ ($modifyFlag) ? route('MyProfile' , 'education') : route('ViewProfile' , ["type" => "education" , "user_name" => session()->get('search_name')]) }}">{{ trans('profile.MenuEducation') }}</a></li>
+                            <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{{ ($modifyFlag) ? route('MyProfile' , 'portfolio') : route('ViewProfile' , ["type" => "portfolio" , "user_name" => session()->get('search_name')]) }}">{{ trans('profile.MenuPortfolio') }}</a></li>
+                            <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{{ ($modifyFlag) ? route('MyProfile' , 'certificate') : route('ViewProfile' , ["type" => "certificate" , "user_name" => session()->get('search_name')]) }}">{{ trans('profile.MenuAward') }}</a></li>
 
                                 @if ($mast["language_flag"] == "A")
                                     <hr width="95%">

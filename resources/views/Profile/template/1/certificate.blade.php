@@ -326,7 +326,7 @@
                     swal("{{ trans('profile.AlertError') }}" , "{{ trans('profile.js_cert_max_image') }}" , "error");
                 } else if (tmp_data["cert_date"] == "" || tmp_data["cert_date"] == null) {
                     swal("{{ trans('profile.AlertError') }}" , "{{ trans('profile.js_cert_date') }}" , "error");
-                } else if (tmp_date["cert_date"] > chk_date) {
+                } else if (tmp_data["cert_date"] > chk_date) {
                     swal("{{ trans('profile.AlertError') }}" , "{{ trans('profile.js_cert_max_date') }}" , "error");
                 } else {
                     formMast.submit();
