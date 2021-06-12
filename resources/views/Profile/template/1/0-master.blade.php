@@ -132,7 +132,9 @@
 
                                 @if ($mast["profile_id"] == Auth::user()->profile_id)
                                     <hr width="95%">
-                                    <li class="nav-item"><a class="nav-link js-scroll-trigger" style="cursor: pointer" id="BtnCustomBackground">Public Profile</a></li>
+                                    <li class="nav-item">
+                                        <a class="nav-link js-scroll-trigger" style="cursor: pointer" id="BtnPublic" href="{{ route('public.profile' , str_pad($mast["profile_id"],5,"0",STR_PAD_LEFT)) }}">{{ trans('profile.PublicProfile') }}</a>
+                                    </li>
                                     <li class="nav-item"><a class="nav-link js-scroll-trigger" style="cursor: pointer" id="BtnCustomBackground" data-toggle="modal" data-target="#SetBackground">{{ trans('profile.MenuCustomBG') }}</a></li>
                                 @endif
                                 {{-- <li class="nav-item"><a class="nav-link js-scroll-trigger" style="cursor: pointer" id="BtnCustomBackground" data-toggle="modal" data-target="#SetBackground">font color</a></li> --}}

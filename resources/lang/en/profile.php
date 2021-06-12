@@ -18,6 +18,7 @@ return [
     "LosingToken" => "Can't get token. Please try again" ,
 
 // Tab Menu
+    "PublicProfile" => "Public profile",
     "MenuCustomBG" => "Custom Background",
     "MenuChangeLang" => "Change to thai",
     "MenuAbout" => "About",

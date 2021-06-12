@@ -212,6 +212,24 @@ Route::middleware(['auth'])->group(function () {
 
 // set profile certificate
     Route::post('SetCertificate', [set_certificate::class , 'SetCertificate'])->name('ctl.set.cert');
+// set public profile
+    Route::get('public-profile/{id}', function ($id) {
+
+        if (str_pad($id,5,"0",STR_PAD_LEFT) == str_pad(Auth::user()->profile_id,5,"0",STR_PAD_LEFT)) {
+            $profile = User::where('profile_id' , $id)
+                        ->update([
+                            "gen_profile_flag" => 'Y' ,
+                            "last_upd_date" => DB::raw('CURRENT_TIMESTAMP()'),
+                            "upd_user_id" => DB::raw("LPAD('" . Auth::user()->profile_id . "' , 5 , 0)")
+                        ]);
+            if ($profile == 0) {
+                return redirect()->back()->with('error' , 'Something went wrong. pls try again later!');
+            } else {
+                return redirect()->back()->with('success' , 'Public profile success');
+            }
+
+        }
+    })->name('public.profile');
 });
 
 

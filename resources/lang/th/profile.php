@@ -18,6 +18,7 @@ return [
     "LosingToken" => "ไม่พบ Token โปรดลองอีกครั้ง!" ,
 
 // Tab Menu
+    "PublicProfile" => "เผยแพร่โปรไฟล์",
     "MenuCustomBG" => "ตั่งค่าสีพื้นหลัง",
     "MenuChangeLang" => "สลับเป็นภาษาอังกฤษ",
     "MenuAbout" => "เกี่ยวกับคุณ",
