@@ -112,7 +112,7 @@
                     <a class="navbar-brand js-scroll-trigger" href="#page-top">
                         <span class="d-block d-lg-none">{{ $mast["name_en"] }}</span>
                         <span class="d-none d-lg-block">
-                            <img class="img-fluid img-profile rounded-circle mx-auto mb-2" src="{{ route('GetImage' , $mast["photo_name"]) }}" alt="" />
+                            <img class="img-fluid img-profile rounded-circle mx-auto mb-2" src="{{ route('GetDataImage' , ["id"=> str_pad($mast["profile_id"],5,"0",STR_PAD_LEFT) , "file_name"=> $mast["photo_name"] , "img_type" => "Profile"]) }}" />
                         </span>
                     </a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

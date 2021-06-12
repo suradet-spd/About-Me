@@ -12,13 +12,12 @@
     use App\Http\Controllers\Profile_config\config_language;
     use App\Http\Controllers\Profile_info\set_about;
     use App\Http\Controllers\Profile_info\set_address;
-use App\Http\Controllers\Profile_info\set_certificate;
-use App\Http\Controllers\Profile_info\set_education;
+    use App\Http\Controllers\Profile_info\set_certificate;
+    use App\Http\Controllers\Profile_info\set_education;
     use App\Http\Controllers\Profile_info\set_portfolio;
     use App\Http\Controllers\Profile_info\set_social;
     use App\Http\Controllers\Profile_info\set_work_experience;
-use App\Models\certificate;
-use Illuminate\Support\Facades\DB;
+    use Illuminate\Support\Facades\DB;
 
 // Use Model file
     use App\Models\config_profile;
@@ -29,12 +28,14 @@ use Illuminate\Support\Facades\DB;
     use App\Models\social_list;
     use App\Models\User;
     use App\Models\work;
+    use App\Models\certificate;
 
 // root route
 Route::get('/', function () {
 
     return view('home');
 })->name('MainPage');
+
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/test', function () {
     return view('Profile.template.1.profile_type1');

@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
@@ -112,7 +113,17 @@ class RegisterController extends Controller
         // Gen new id
             $file_type = explode("." , $request->regist_profile_img->getClientOriginalName());
             $file_name = $create_id . "." . end($file_type);
-            $filePath = $request->file('regist_profile_img')->storeAs('img/Profile', $file_name, 'public');
+            $path = 'img/user-data/' . strval($create_id) . "/Profile";
+            $chk_path = $path . "/" . $file_name;
+
+            // check exists file
+            if (File::exists(public_path($chk_path))) {
+                File::delete($chk_path);
+            }
+
+            // upload file
+            $filePath = $request->file('regist_profile_img')->storeAs($path , $file_name, 'public');
+
         // Store file to storage
             $regist_res = new User([
                 'profile_id' => strval($create_id),
