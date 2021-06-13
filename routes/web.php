@@ -58,15 +58,20 @@ Route::post('/', function (Request $req) {
         } else {
             $list_profile = DB::table('profile_t_master')
                             ->select('profile_id' , 'name_th' , 'name_en' , 'nickname')
-                            // ->where('gen_profile_flag' , 'Y')
+                            ->where('gen_profile_flag' , 'Y')
                             ->where('name_en' , 'like' , '%' . $req->get('SearchTXT') . '%')
                             ->orWhere('name_th' , 'like' , '%' . $req->get('SearchTXT') . '%')
                             ->get()->toArray();
 
             if (!isset($list_profile)) {
-                return redirect()->route('MainPage')->with('error' , 'profile name is not found');
+                return redirect()->route('MainPage')->with('error' , 'Some thing went wrong pls contact admin');
             } else{
-                return view('home' , compact('list_profile'));
+                if ($list_profile == null or $list_profile == "") {
+                    return redirect()->route('MainPage')->with('error' , 'profile name is not found');
+                } else {
+                    return view('home' , compact('list_profile'));
+                }
+
             }
         }
     }
