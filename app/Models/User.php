@@ -20,6 +20,7 @@ class User extends Authenticatable
         'name_en',
         'nickname',
         'photo_name',
+        'telephone' ,
         'email',
         'password',
         'upd_user_id',
