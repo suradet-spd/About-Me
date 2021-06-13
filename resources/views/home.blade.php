@@ -191,7 +191,7 @@
                         <div class="row">
                             <div class="col text-center">
                                 <button class="btn btn-primary" onclick="Javascript:submitSearchForm()">{{ trans('home.SearchButton') }}</button>
-                                <button class="btn btn-secondary">{{ trans('home.ResetButton') }}</button>
+                                <button class="btn btn-secondary" onclick="Javascript:ResetText()">{{ trans('home.ResetButton') }}</button>
                             </div>
                         </div>
                     </div>
@@ -520,6 +520,13 @@
         } else {
             formMast.submit();
         }
+    }
+
+    function ResetText() {
+        document.getElementById('SearchTXT_id').value = "";
+        document.getElementById('SearchTXT_id').focus();
+
+
     }
 
     $(".custom-file-input").on("change", function() {
