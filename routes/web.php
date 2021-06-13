@@ -319,7 +319,7 @@ Route::get('{user_name}/{type}', function ($user_name , $type) {
     Session::put('search_name' , $user_name);
 
     $tmp_name = str_replace("." , " " , $user_name);
-    $tmp_id = User::all()->where('name_en' , $tmp_name)->toArray();
+    $tmp_id = User::all()->where('name_en' , $tmp_name)->where('gen_profile_flag' , 'Y')->toArray();
 
     foreach ($tmp_id as $ti) {
         $search_id = str_pad($ti["profile_id"],5,"0",STR_PAD_LEFT);

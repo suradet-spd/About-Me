@@ -39,17 +39,15 @@
                     @endif
                 </div>
 
-                    @if ($data["about_th"] != null and $data["about_en"] != null)
                         <p class="lead mb-5">
                             @if ($modifyFlag)
-                                {{ (($data["about_th"] == null or $data["about_th"] == "") and ($data["about_en"] == null or $data["about_en"] == "")) }}
+                                {{-- {{ (($data["about_th"] == null or $data["about_th"] == "") and ($data["about_en"] == null or $data["about_en"] == "")) }} --}}
                                 <a class="social-icon" style="cursor: pointer" data-toggle="modal" data-target="#SetProfileAbout">
                                     <b><u>{{ trans('profile.EditLabel') }}</u></b>
                                 </a>
                             @endif
-                            {{ ($lang == "th") ? $data["about_th"] : $data["about_en"] }}
+                            {{ ($data["about_th"] == null and $data["about_en"] == null) ? trans('profile.NonAssignabout') : (($lang == "th") ? $data["about_th"] : $data["about_en"]) }}
                         </p>
-                    @endif
 
                 <div class="subheading mb-2">
                     {{ trans('profile.SocialAccount') }}

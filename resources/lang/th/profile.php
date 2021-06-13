@@ -55,6 +55,7 @@ return [
     /* add Address */
     "MenuAddAddress" => "เพิ่มที่อยู่ของคุณ",
     "SocialAccount" => "บัญชีโซเชี่ยล" ,
+    "NonAssignabout" => "ไม่ได้ตั้งค่าคำอธิบาย",
 
     // Modal
     "ModaladdrHeader" => "ตั้งค่าที่อยู่ของคุณ",

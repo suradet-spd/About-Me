@@ -113,7 +113,7 @@
                                 </li>
                             @else
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link text-white" style="cursor: pointer">
+                                    <a href="{{ route('MyProfile' , 'about') }}" class="nav-link text-white" style="cursor: pointer">
                                         <h5>
                                             <b>{{ trans('home.ViewMenu') }}</b>
                                         </h5>
