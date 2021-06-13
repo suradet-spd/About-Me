@@ -22,9 +22,12 @@ return [
 // set controller msg
     "ValidatepublicMSGFail" => "Something went wrong. please try again later!",
     "VliadatepublicMSGSuccess" => "Public profile success",
+    "ReturnResetComplete" => "Reset profile complete!!",
+    "ReturnResetFail" => "Can't reset data! Please try again",
 
 // Tab Menu
     "PublicProfile" => "Public profile",
+    "ResetProfile" => "Reset profile" ,
     "MenuCustomBG" => "Custom Background",
     "MenuChangeLang" => "Change to thai",
     "MenuAbout" => "About",
@@ -272,4 +275,12 @@ return [
     "ctl_cert_desc_en" => "Please enter your certificate description (eng)" ,
     "ctl_msg_cert_fail" => "Can't save the certificate. Please try again.",
     "ctl_msg_cert_success" => "Save the certificate complete",
+
+// Reset Profile Js Validate
+    "js_reset_header" => "Are you sure to reset profile?",
+    "js_reset_body" => "You can't cancel this process if you click button 'OK'",
+
+// Public pprofile Js validate
+    "js_public_header" => "Are you sure to public profile?",
+    "js_public_body" => "Another user can view your profile",
 ];

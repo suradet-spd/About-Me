@@ -22,9 +22,12 @@ return [
 // set controller msg
     "ValidatepublicMSGFail" => "เกิดข้ออย่างผิดพลาด กรุณาลองใหม่อีกครั้งในภายหลัง!",
     "VliadatepublicMSGSuccess" => "เปิดเผยโปรไฟล์เรียบร้อยแล้ว",
+    "ReturnResetComplete" => "รีเซ็ทโปรไฟล์เรียบร้อยแล้ว!",
+    "ReturnResetFail" => "ไม่สามารถรีเซ็ทโปรไฟล์ได้ โปรดลองใหม่อีกครั้ง",
 
 // Tab Menu
     "PublicProfile" => "เผยแพร่โปรไฟล์",
+    "ResetProfile" => "รีเซ็ทการตั้งค่า" ,
     "MenuCustomBG" => "ตั่งค่าสีพื้นหลัง",
     "MenuChangeLang" => "สลับเป็นภาษาอังกฤษ",
     "MenuAbout" => "เกี่ยวกับคุณ",
@@ -272,4 +275,12 @@ return [
     "ctl_cert_desc_en" => "กรุณากรอกคำอธิบายใบประกาศของคุณ (ENG)" ,
     "ctl_msg_cert_fail" => "ไม่สามารถบันทึกใบประกาศได้กรุณาลองอีกครั้ง.",
     "ctl_msg_cert_success" => "บันทึกใบประกาศให้สมบูรณ์",
+
+// Reset Profile Js Validate
+    "js_reset_header" => "คุณต้องการรีเซ็ทโปรไฟล์ใช่หรือไม่?",
+    "js_reset_body" => "คุณจะไม่สามารถยกเลิกคำสั่งนี้ได้หากคุณกดปุ่ม OK",
+
+// Public pprofile Js validate
+    "js_public_header" => "คุณต้องการเผยแพร่โปรไฟล์ใช่หรือไม่?",
+    "js_public_body" => "ผู้ใช้งานรายอื่นจะเห็นโปรไฟล์ของคุณ",
 ];

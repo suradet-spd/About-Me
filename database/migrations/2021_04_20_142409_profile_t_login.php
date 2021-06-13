@@ -31,12 +31,6 @@ class ProfileTLogin extends Migration
                 T = Thai only
                 A = English & Thai
             */
-            $table->string('account_status', 1)->default('A')->comment('สถานะบัญชี');
-            /*
-                A = Active
-                D = Delete
-                S = Stop // not delete but another people can't see this
-            */
             $table->string('gen_profile_flag' , 1)->default('N')->comment('สถานะการสร้างบัญชี');
             /*
                 Y = Yes (success Create)

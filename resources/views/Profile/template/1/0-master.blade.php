@@ -135,9 +135,10 @@
                                     <hr width="95%">
                                     @if (Auth::user()->gen_profile_flag == "N" or Auth::user()->gen_profile_flag == null)
                                         <li class="nav-item">
-                                            <a class="nav-link js-scroll-trigger" style="cursor: pointer" id="BtnPublic" href="{{ route('public.profile' , str_pad($mast["profile_id"],5,"0",STR_PAD_LEFT)) }}">{{ trans('profile.PublicProfile') }}</a>
+                                            <a class="nav-link js-scroll-trigger" style="cursor: pointer" id="BtnPublic" onclick="Javascript:PublicProfile('{{ str_pad($mast["profile_id"],5,"0",STR_PAD_LEFT) }}')">{{ trans('profile.PublicProfile') }}</a>
                                         </li>
                                     @endif
+                                    <li class="nav-item"><a class="nav-link js-scroll-trigger" style="cursor: pointer" id="BtnReset" onclick="Javascript:ResetProfile();" >{{ trans('profile.ResetProfile') }}</a></li>
                                     <li class="nav-item"><a class="nav-link js-scroll-trigger" style="cursor: pointer" id="BtnCustomBackground" data-toggle="modal" data-target="#SetBackground">{{ trans('profile.MenuCustomBG') }}</a></li>
                                 @endif
                             <hr width="95%">
@@ -326,6 +327,37 @@
                         } else {
                             document.getElementById('SetBackgroundForm').submit();
                         }
+                    }
+
+                    function PublicProfile(id) {
+
+                        swal({
+                            title: "{{ trans('profile.js_public_header') }}",
+                            text: "{{ trans('profile.js_public_body') }}",
+                            icon: "warning",
+                            buttons: true,
+                            dangerMode: true,
+                        }).then((willSubmit) => {
+                            if (willSubmit) {
+                                const tmp_url = "{{ route('public.profile' , 'id_send') }}".replace('id_send' , id);
+                                window.location = tmp_url;
+                            }
+                        });
+
+                    }
+
+                    function ResetProfile() {
+                        swal({
+                            title: "{{ trans('profile.js_reset_header') }}",
+                            text: "{{ trans('profile.js_reset_body') }}",
+                            icon: "warning",
+                            buttons: true,
+                            dangerMode: true,
+                        }).then((willSubmit) => {
+                            if (willSubmit) {
+                                window.location = "{{ route('reset.profile') }}";
+                            }
+                        });
                     }
                 </script>
             @endif

@@ -29,6 +29,8 @@
     use App\Models\User;
     use App\Models\work;
     use App\Models\certificate;
+use App\Models\social;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Session;
 
 // root route
@@ -232,6 +234,48 @@ Route::middleware(['auth'])->group(function () {
 
         }
     })->name('public.profile');
+
+// reset profile
+    Route::get('reset-profile', function () {
+
+        $acc_id = str_pad(Auth::user()->profile_id,5,"0",STR_PAD_LEFT);
+        $clear_data = array(
+            "certificate" => (certificate::where('profile_id' , strval($acc_id))->delete()) ? true : ((certificate::all()->where('profile_id' , strval($acc_id))->count() == 0) ? true : false) ,
+            "config" => (config_profile::where('profile_id' , strval($acc_id))->delete()) ? true : ((config_profile::all()->where('profile_id' , strval($acc_id))->count() == 0) ? true : false) ,
+            "education" => (education::where('profile_id' , strval($acc_id))->delete()) ? true : ((education::all()->where('profile_id' , strval($acc_id))->count() == 0) ? true : false) ,
+            "portfolio" => (portfolio::where('profile_id' , strval($acc_id))->delete()) ? true : ((portfolio::all()->where('profile_id' , strval($acc_id))->count() == 0) ? true : false) ,
+            "social" => (social::where('profile_id' , strval($acc_id))->delete()) ? true : ((social::all()->where('profile_id' , strval($acc_id))->count() == 0) ? true : false) ,
+            "work" => (work::where('profile_id' , strval($acc_id))->delete()) ? true : ((work::all()->where('profile_id' , strval($acc_id))->count() == 0) ? true : false) ,
+            "profile" => (User::where('profile_id' , strval($acc_id))->update([
+                "location_id" => "99999",
+                "language_flag" => "N",
+                "about_th" => null,
+                "about_en" => null,
+                "gen_profile_flag" => "N"
+            ])) ? true : ((User::all()
+                            ->where('profile_id' , strval($acc_id))
+                            ->where('language_flag' , 'N')
+                            ->where('gen_profile_flag' , 'N')->count() > 0) ? true : false),
+        // check exists folder Portfolio
+            "f_certificate" => (File::deleteDirectory(public_path('img/user-data/' . strval($acc_id) . '/Certificate'))) ? true : (!File::exists(public_path('img/user-data/' . strval($acc_id) . '/Certificate'))),
+            "f_portfolio" => (File::deleteDirectory(public_path('img/user-data/' . strval($acc_id) . '/Portfolio'))) ? true : (!File::exists(public_path('img/user-data/' . strval($acc_id) . '/Portfolio'))),
+        );
+
+        foreach ($clear_data as $cd) {
+            if (!$cd) {
+                $tmp_res = false;
+                break;
+            } else {
+                $tmp_res = true;
+            }
+        }
+
+        if ($tmp_res) {
+            return redirect()->route('MyProfile' , ['type'=> 'about'])->with('success' , trans('profile.ReturnResetComplete'));
+        } else {
+            return redirect()->route('MyProfile' , ['type'=> 'about'])->with('error' , trans('profile.ReturnResetFail'));
+        }
+    })->name('reset.profile');
 });
 
 // For another user view profile
