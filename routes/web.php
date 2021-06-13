@@ -5,6 +5,10 @@
     use Illuminate\Support\Facades\Route;
     use Illuminate\Support\Facades\App;
     use Illuminate\Support\Facades\Config;
+    use Illuminate\Support\Facades\File;
+    use Illuminate\Http\Request;
+    use Illuminate\Support\Facades\Session;
+    use Illuminate\Support\Facades\DB;
 
 // Use Controller file
     use App\Http\Controllers\Auth\RegisterController;
@@ -17,7 +21,6 @@
     use App\Http\Controllers\Profile_info\set_portfolio;
     use App\Http\Controllers\Profile_info\set_social;
     use App\Http\Controllers\Profile_info\set_work_experience;
-    use Illuminate\Support\Facades\DB;
 
 // Use Model file
     use App\Models\config_profile;
@@ -29,9 +32,8 @@
     use App\Models\User;
     use App\Models\work;
     use App\Models\certificate;
-use App\Models\social;
-use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Session;
+    use App\Models\social;
+use GuzzleHttp\RetryMiddleware;
 
 // root route
 Route::get('/', function () {
@@ -39,16 +41,37 @@ Route::get('/', function () {
     return view('home');
 })->name('MainPage');
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/test', function () {
     return view('Profile.template.1.profile_type1');
 });
 
-// Language route
-Route::get('change/{locale}', function ($locale) {
-    session()->put('locale', $locale);
-    return redirect()->back();
-});
+Route::post('/', function (Request $req) {
+
+    if (!$req->exists('_token')) {
+        return redirect()->route('MainPage')->with('error' , trans('profile.LosingToken'));
+    } else {
+        if (!$req->exists('SearchTXT')) {
+            return redirect()->route('MainPage')->with('error' , "pls enter some profile name");
+        } else if(strlen($req->get('SearchTXT')) < 5) {
+            return redirect()->route('MainPage')->with('error' , "Minimum profile name is 5 charecter");
+        } else {
+            $list_profile = DB::table('profile_t_master')
+                            ->select('profile_id' , 'name_th' , 'name_en' , 'nickname')
+                            // ->where('gen_profile_flag' , 'Y')
+                            ->where('name_en' , 'like' , '%' . $req->get('SearchTXT') . '%')
+                            ->orWhere('name_th' , 'like' , '%' . $req->get('SearchTXT') . '%')
+                            ->get()->toArray();
+
+            if (!isset($list_profile)) {
+                return redirect()->route('MainPage')->with('error' , 'profile name is not found');
+            } else{
+                return view('home' , compact('list_profile'));
+            }
+        }
+    }
+
+})->name('search.profile');
 
 // Frontend route
 Route::post('/register', [RegisterController::class , 'req_Register'])->name('submit-register');
@@ -74,6 +97,12 @@ Route::post('/register', [RegisterController::class , 'req_Register'])->name('su
         ];
         return response()->download($tmp_port_image, $PortImageName, $headers);
     })->name('GetDataImage');
+
+// Language route
+Route::get('change/{locale}', function ($locale) {
+    session()->put('locale', $locale);
+    return redirect()->back();
+});
 
 // Authen route
 Auth::routes([

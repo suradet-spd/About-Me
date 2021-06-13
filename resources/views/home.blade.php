@@ -2,6 +2,7 @@
     // Define variable
     $show_register = true;
     $show_login = true;
+    $lang = Config::get('app.locale');;
 @endphp
 @extends('layouts.main-master')
 
@@ -15,14 +16,14 @@
 @endsection
 
 @section('GetStyle')
-    <!-- Scripts -->
+    {{-- Scripts --}}
     <script src="{{ asset('js/app.js') }}" defer></script>
 
-    <!-- Fonts -->
+    {{-- Fonts --}}
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
-    <!-- Styles -->
+    {{-- Styles --}}
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
     <style>
@@ -75,14 +76,14 @@
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
+                    {{-- Left Side Of Navbar --}}
                     <ul class="navbar-nav mr-auto">
 
                     </ul>
 
-                    <!-- Right Side Of Navbar -->
+                    {{-- Right Side Of Navbar --}}
                     <ul class="navbar-nav ml-auto">
-                        <!-- Authentication Links -->
+                        {{-- Authentication Links --}}
                         @guest
                             @if (Route::has('login'))
                                 <li class="nav-item">
@@ -123,11 +124,7 @@
                                 <h5>
                                     <a id="navbarDropdown" class="nav-link dropdown-toggle text-white" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                         <b>
-                                            @if (Config::get('app.locale') == "th")
-                                                {{ Auth::user()->name_th }}
-                                            @else
-                                                {{ Auth::user()->name_en }}
-                                            @endif
+                                            {{ ($lang == "th") ? Auth::user()->name_th : Auth::user()->name_en }}
                                         </b>
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
@@ -151,16 +148,12 @@
                             <h5>
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle text-white" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     <b>
-                                        @if (Config::get('app.locale') == "th")
-                                            ไทย
-                                        @else
-                                            {{ strtoupper(Config::get('app.locale')) }}
-                                        @endif
+                                        {{ ($lang == "th") ? "ไทย" : "eng" }}
                                     </b>
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    @if (Config::get('app.locale') == "en")
+                                    @if ($lang == "en")
                                         <a class="dropdown-item" href="{{ url('change' , 'th') }}">
                                             ไทย
                                         </a>
@@ -185,16 +178,19 @@
                     <div class="container mx-auto text-white text-center">
                         <p><h1 class="display-4">{{ trans('home.PromoteTextHead') }}</h1></p>
                     </div>
-                    <form action="">
+
+                    <form action="{{ route('search.profile') }}" id="SerchNameId" method="POST">
+                        @csrf
                         <div class="form-group">
                             <input class="form-control input-lg" id="SearchTXT_id" name="SearchTXT" type="text" placeholder="{{ trans('home.PlaceHolderText') }}">
                             <span class="glyphicon glyphicon-search form-control-feedback"></span>
                         </div>
                     </form>
+
                     <div class="container">
                         <div class="row">
                             <div class="col text-center">
-                                <button class="btn btn-secondary">{{ trans('home.SearchButton') }}</button>
+                                <button class="btn btn-primary" onclick="Javascript:submitSearchForm()">{{ trans('home.SearchButton') }}</button>
                                 <button class="btn btn-secondary">{{ trans('home.ResetButton') }}</button>
                             </div>
                         </div>
@@ -205,19 +201,73 @@
     </div>
 @endsection
 
+@if (isset($list_profile))
+    @section('OtherModal')
+        {{-- Search profile Modal --}}
+        <div class="modal fade" id="Md_SearchProfile">
+            <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+
+                {{-- Modal Header --}}
+                <div class="modal-header">
+                <h4 class="modal-title">Profile Listing</h4>
+                </div>
+
+                {{-- Modal body --}}
+                <div class="modal-body">
+                    <div class="table table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr class="text-center">
+                                    <th>
+                                        <h5><b>Name</b></h5>
+                                    </th>
+                                    <th>
+                                        <h5><b>Action</b></h5>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($list_profile as $lp)
+                                    <tr>
+                                        <td>
+                                            <h5>{{ ($lang == "th") ? $lp->name_th : $lp->name_en }} ({{ $lp->nickname }})</h5>
+                                        </td>
+                                        <td class="text-center">
+                                            <a href="{{ route('ViewProfile' , ["user_name" => $lp->name_en , "type" => "about"]) }}"><i class="fas fa-search fa-2x" style="color: rgb(16, 32, 119);cursor: pointer;"></i></a>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                {{-- Modal footer --}}
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+
+            </div>
+            </div>
+        </div>
+    @endsection
+
+@endif
+
 @section('LoginModal')
-<!-- The Modal -->
+{{-- The Modal --}}
 <div class="modal fade" id="md_login">
     <div class="modal-dialog">
     <div class="modal-content">
 
-        <!-- Modal Header -->
+        {{-- Modal Header --}}
         <div class="modal-header">
         <h4 class="modal-title">{{ trans('login.LoginModalHeader') }}</h4>
         <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
 
-        <!-- Modal body -->
+        {{-- Modal body --}}
         <div class="modal-body">
             <form method="POST" action="{{ route('login') }}" id="Login_Form">
                 @csrf
@@ -264,7 +314,7 @@
             </form>
         </div>
 
-        <!-- Modal footer -->
+        {{-- Modal footer --}}
         <div class="modal-footer">
         <button type="button" class="btn btn-primary" onclick="SubmitForm('login' , 'Login_Form');">{{ trans('login.LoginButton') }}</button>
         <button type="button" class="btn btn-danger" data-dismiss="modal">{{ trans('login.CloseLoginButton') }}</button>
@@ -276,18 +326,18 @@
 @endsection
 
 @section('RegisterModal')
-<!-- The Modal -->
+{{-- The Modal --}}
 <div class="modal fade" id="md_register">
     <div class="modal-dialog">
     <div class="modal-content">
 
-        <!-- Modal Header -->
+        {{-- Modal Header --}}
         <div class="modal-header">
         <h4 class="modal-title">{{ trans('register.RegisterModalHeader') }}</h4>
         <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
 
-        <!-- Modal body -->
+        {{-- Modal body --}}
         <div class="modal-body">
         <form action="{{ route('submit-register') }}" id="Regist_Form" method="POST" enctype="multipart/form-data">
             @csrf
@@ -403,7 +453,7 @@
         </form>
         </div>
 
-        <!-- Modal footer -->
+        {{-- Modal footer --}}
         <div class="modal-footer">
         <button type="button" class="btn btn-primary" onclick="SubmitForm('register' , 'Regist_Form');">{{ trans('register.RegisterButton') }}</button>
         <button type="button" class="btn btn-danger" data-dismiss="modal">{{ trans('register.CancelButton') }}</button>
@@ -432,6 +482,14 @@
                 backdrop: "static"
             }, 'show');
         });
+
+
+        var chk_list = "{{ isset($list_profile) }}";
+        if (chk_list == 1) {
+            $("#Md_SearchProfile").modal({
+                backdrop: "static"
+            }, 'show');
+        }
     });
 
     function SubmitForm(FunctionType , FormID) {
@@ -449,6 +507,18 @@
                     document.getElementById(FormID).submit();
                 }
             });
+        }
+    }
+
+    function submitSearchForm() {
+        var formMast = document.getElementById('SerchNameId');
+        const text_chk = formMast.elements["SearchTXT"].value;
+        if (text_chk == null || text_chk == "") {
+            swal("{{ trans('home.Error_msg_header') }}" , "Please input some profile name" , 'error');
+        } else if (text_chk.length < 5) {
+            swal("{{ trans('home.Error_msg_header') }}" , "Minimum character is 5 character!" , 'error');
+        } else {
+            formMast.submit();
         }
     }
 

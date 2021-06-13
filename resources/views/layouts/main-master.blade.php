@@ -8,6 +8,8 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>@yield('GetTitleName')</title>
+    {{-- Font Awesome icons (free version)--}}
+    <script src="https://use.fontawesome.com/releases/v5.15.1/js/all.js" crossorigin="anonymous"></script>
     {{-- Using Sweet alert --}}
     <script src="{{ asset('js/sweetalert.min.js') }}"></script>
     {{-- Using Jquery --}}
@@ -53,6 +55,8 @@
         @if ($show_login)
             @yield('LoginModal')
         @endif
+
+        @yield('OtherModal')
 
         @yield('FunctionJs')
 
