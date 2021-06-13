@@ -261,16 +261,6 @@
                         </div>
                     </div>
                 </div>
-
-                {{-- <div class="form-group row mb-0">
-                    <div class="col-md-8 offset-md-4">
-                        @if (Route::has('password.request'))
-                            <a class="btn btn-link" href="{{ route('password.request') }}">
-                                {{ __('Forgot Your Password?') }}
-                            </a>
-                        @endif
-                    </div>
-                </div> --}}
             </form>
         </div>
 
@@ -389,21 +379,6 @@
                     @enderror
                 </div>
             </div>
-
-            {{-- <div class="form-group row">
-                <label for="regist_address" class="col-md-4 col-form-label text-md-right">{{ trans('register.Address') }}</label>
-
-                <div class="col-md-6">
-                    <input id="regist_address" type="text" class="form-control @error('regist_address') is-invalid @enderror" name="regist_address" value="{{ old('regist_address') }}" require autocomplete="regist_address">
-
-                    @error('regist_address')
-                        <script>
-                            swal("{{ trans('home.Error_msg_header') }}" , "{{ $message }}" , 'error');
-                        </script>
-                    @enderror
-                </div>
-            </div> --}}
-
 
             <div class="form-group row">
                 <label for="regist_password" class="col-md-4 col-form-label text-md-right">{{ trans('register.UserPassword') }}</label>
