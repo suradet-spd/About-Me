@@ -30,6 +30,7 @@ return [
     "ResetProfile" => "รีเซ็ทการตั้งค่า" ,
     "MenuCustomBG" => "ตั่งค่าสีพื้นหลัง",
     "MenuChangeLang" => "สลับเป็นภาษาอังกฤษ",
+    "MenuBackToHome" => "หน้าหลัก",
     "MenuAbout" => "เกี่ยวกับคุณ",
     "MenuExperience" => "ความชำนาญ",
     "MenuEducation" => "การศึกษา",

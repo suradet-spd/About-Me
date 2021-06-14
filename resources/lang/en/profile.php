@@ -30,6 +30,7 @@ return [
     "ResetProfile" => "Reset profile" ,
     "MenuCustomBG" => "Custom Background",
     "MenuChangeLang" => "Change to thai",
+    "MenuBackToHome" => "Back to home",
     "MenuAbout" => "About",
     "MenuExperience" => "Experience",
     "MenuEducation" => "Education",

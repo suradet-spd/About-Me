@@ -148,15 +148,16 @@
                             <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{{ ($modifyFlag) ? route('MyProfile' , 'portfolio') : route('ViewProfile' , ["type" => "portfolio" , "user_name" => session()->get('search_name')]) }}">{{ trans('profile.MenuPortfolio') }}</a></li>
                             <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{{ ($modifyFlag) ? route('MyProfile' , 'certificate') : route('ViewProfile' , ["type" => "certificate" , "user_name" => session()->get('search_name')]) }}">{{ trans('profile.MenuAward') }}</a></li>
 
+                                <hr width="95%">
+                                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{{ route('MainPage') }}">{{ trans('profile.MenuBackToHome') }}</a></li>
                                 @if ($mast["language_flag"] == "A")
-                                    <hr width="95%">
-                                        @if (Config::get('app.locale') == "en")
-                                            <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{{ url('change' , 'th') }}">{{ trans('profile.MenuChangeLang') }}</a></li>
-                                        @else
-                                            <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{{ url('change' , 'en') }}">{{ trans('profile.MenuChangeLang') }}</a></li>
-                                        @endif
-                                    <hr width="95%">
+                                    @if (Config::get('app.locale') == "en")
+                                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{{ url('change' , 'th') }}">{{ trans('profile.MenuChangeLang') }}</a></li>
+                                    @else
+                                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{{ url('change' , 'en') }}">{{ trans('profile.MenuChangeLang') }}</a></li>
+                                    @endif
                                 @endif
+                                <hr width="95%">
                             @endif
                         </ul>
                     </div>
