@@ -21,9 +21,9 @@
         @foreach ($work as $wk)
             <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
                 <div class="flex-grow-1">
-                    <h3 class="mb-0">{{ ($lang == "th") ? $wk["work_name_th"] : $wk["work_name_en"] }}</h3>
-                    <div class="subheading mb-3">{{ ($lang == "th") ? $wk["work_office_th"] : $wk["work_office_en"] }}</div>
-                    <p>{{ ($lang == "th") ? $wk["work_desc_th"] : $wk["work_desc_en"] }}</p>
+                    <h3 class="mb-0">{{ ($lang == "th") ? $wk->work_name_th : $wk->work_name_en }}</h3>
+                    <div class="subheading mb-3">{{ ($lang == "th") ? $wk->work_office_th : $wk->work_office_en }}</div>
+                    <p>{{ ($lang == "th") ? $wk->work_desc_th : $wk->work_desc_en }}</p>
                 </div>
                 <div class="flex-shrink-0">
                     <span class="text-primary">
@@ -46,28 +46,28 @@
                             @endphp
 
                             @for ($i = 0; $i < count($THMonth); $i++)
-                                @if ($i == date_format(date_create($wk["work_start_date"]) , 'n'))
+                                @if ($i == date_format(date_create($wk->work_start_date) , 'n'))
                                    {{ $THMonth[$i] }}
                                    @break
                                 @endif
                             @endfor
 
-                            {{ ' ' . (date_format(date_create($wk["work_start_date"]) , 'Y') + 543) . ' -' }}
+                            {{ ' ' . (date_format(date_create($wk->work_start_date) , 'Y') + 543) . ' -' }}
 
-                            @if ($wk["work_end_date"] != null)
+                            @if ($wk->work_end_date != null)
                                 @for ($i = 0; $i < count($THMonth); $i++)
-                                    @if ($i == date_format(date_create($wk["work_end_date"]) , 'n'))
+                                    @if ($i == date_format(date_create($wk->work_end_date) , 'n'))
                                         {{ $THMonth[$i] }}
                                         @break
                                     @endif
                                 @endfor
 
-                                {{ ' ' . (date_format(date_create($wk["work_end_date"]) , 'Y') + 543) }}
+                                {{ ' ' . (date_format(date_create($wk->work_end_date) , 'Y') + 543) }}
                             @else
                                 {{ trans('profile.WorkEndDateRender') }}
                             @endif
                         @else
-                            {{ date_format(date_create($wk["work_start_date"]) , 'F Y') }} - {{ ($wk["work_end_date"] == null) ? trans('profile.WorkEndDateRender') : date_format(date_create($wk["work_end_date"]) , "F Y") }}
+                            {{ date_format(date_create($wk->work_start_date) , 'F Y') }} - {{ ($wk->work_end_date == null) ? trans('profile.WorkEndDateRender') : date_format(date_create($wk->work_end_date) , "F Y") }}
                         @endif
                     </span>
                 </div>

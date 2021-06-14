@@ -22,7 +22,7 @@
         @foreach ($certificate as $cc)
             <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
                 <div class="flex-grow-1">
-                    <h3 class="mb-0">{{ ($lang == "th") ? $cc["cert_name_th"] : $cc["cert_name_en"] }}</h3>
+                    <h3 class="mb-0">{{ ($lang == "th") ? $cc->cert_name_th : $cc->cert_name_en }}</h3>
                     <div class="subheading mb-3">
                         @php
                             $THMonth = array(
@@ -42,19 +42,19 @@
 
                             if ($lang == "th") {
                                 for ($i=0; $i < count($THMonth); $i++) {
-                                    if ($i == date_format(date_create($cc["cert_get_date"]) , 'n')) {
-                                        echo date_format(date_create($cc["cert_get_date"]), 'd') . " " . $THMonth[$i] . " " . (intval(date_format(date_create($cc["cert_get_date"]) , 'Y')) + 543);
+                                    if ($i == date_format(date_create($cc->cert_get_date) , 'n')) {
+                                        echo date_format(date_create($cc->cert_get_date), 'd') . " " . $THMonth[$i] . " " . (intval(date_format(date_create($cc->cert_get_date) , 'Y')) + 543);
                                     }
                                 }
                             } else {
-                                echo date_format(date_create($cc["cert_get_date"]) , 'd F Y');
+                                echo date_format(date_create($cc->cert_get_date) , 'd F Y');
                             }
                         @endphp
                     </div>
-                    <p>{{ ($lang == "th") ? $cc["cert_desc_th"] : $cc["cert_desc_en"] }}</p>
+                    <p>{{ ($lang == "th") ? $cc->cert_desc_th : $cc->cert_desc_en }}</p>
                 </div>
                 <div class="flex-shrink-0">
-                    <span class="text-primary" style="cursor: pointer" data-toggle="modal" data-target="#md_show_cert_{{ $cc["cert_seq"] }}">
+                    <span class="text-primary" style="cursor: pointer" data-toggle="modal" data-target="#md_show_cert_{{ $cc->cert_seq }}">
                         <p style="text-align: center">
                             <i class="fas fa-search fa-2x"></i>
                             <br>
@@ -189,7 +189,7 @@
     @foreach ($certificate as $md_cert)
 
         {{-- The Modal [show certificate image]--}}
-        <div class="modal fade" id="md_show_cert_{{ $md_cert["cert_seq"] }}">
+        <div class="modal fade" id="md_show_cert_{{ $md_cert->cert_seq }}">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     {{-- Modal Header --}}
@@ -199,15 +199,15 @@
                     {{-- Modal body --}}
                     <div class="modal-body">
 
-                        <div id="img_list_{{ $md_cert["cert_seq"] }}" class="carousel slide" data-ride="carousel">
+                        <div id="img_list_{{ $md_cert->cert_seq }}" class="carousel slide" data-ride="carousel">
 
                             @php
-                                $cnt = $md_cert["cert_seq"];
+                                $cnt = $md_cert->cert_seq;
                             @endphp
 
                             <ul class="carousel-indicators">
                                 @for ($i = 0; $i < count($files_name[$cnt]); $i++)
-                                    <li data-target="#img_list_{{ $md_cert["cert_seq"] }}" data-slide-to="{{ $i }}" {{ ($i == 0) ? 'class="active"' : "" }}></li>
+                                    <li data-target="#img_list_{{ $md_cert->cert_seq }}" data-slide-to="{{ $i }}" {{ ($i == 0) ? 'class="active"' : "" }}></li>
                                 @endfor
                             </ul>
 
@@ -218,7 +218,7 @@
                                 @endphp
                                 @foreach ($files_name[$cnt] as $fn)
                                     <div class="carousel-item {{ ($seq == 0) ? 'active' : '' }}">
-                                        <img class="img-fluid" style="width: 100%; height: 400px;" src="{{ route('GetDataImage' , ["id"=>$md_cert["profile_id"] , "file_name"=> $fn , "img_type" => "Certificate"]) }}">
+                                        <img class="img-fluid" style="width: 100%; height: 400px;" src="{{ route('GetDataImage' , ["id"=>$md_cert->profile_id , "file_name"=> $fn , "img_type" => "Certificate"]) }}">
                                     </div>
                                     @php
                                         $cnt ++;
@@ -228,10 +228,10 @@
                             </div>
 
                             <!-- Left and right controls -->
-                            <a class="carousel-control-prev" href="#img_list_{{ $md_cert["cert_seq"] }}" data-slide="prev">
+                            <a class="carousel-control-prev" href="#img_list_{{ $md_cert->cert_seq }}" data-slide="prev">
                               <span class="carousel-control-prev-icon"></span>
                             </a>
-                            <a class="carousel-control-next" href="#img_list_{{ $md_cert["cert_seq"] }}" data-slide="next">
+                            <a class="carousel-control-next" href="#img_list_{{ $md_cert->cert_seq }}" data-slide="next">
                               <span class="carousel-control-next-icon"></span>
                             </a>
 

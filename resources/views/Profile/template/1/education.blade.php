@@ -23,18 +23,18 @@
                 <div class="flex-grow-1">
                     <h3 class="mb-0">
                         @foreach ($learning_list as $ll)
-                            @if ($edu["learning_list_id"] == $ll["learning_list_id"])
+                            @if ($edu->learning_list_id == $ll["learning_list_id"])
                                 {{ ($lang == "th") ? $ll["learning_desc_th"] : $ll["learning_desc_en"] }}
                             @endif
                         @endforeach
                     </h3>
                     <div class="subheading mb-3">
-                        {{ ($lang == "th") ? $edu["college_name_th"] : $edu["college_name_en"] }}
+                        {{ ($lang == "th") ? $edu->college_name_th : $edu->college_name_en }}
                     </div>
                     <div>
-                        {{ ($lang == "th") ? $edu["faculty_name_th"] : $edu["faculty_name_en"] }}
+                        {{ ($lang == "th") ? $edu->faculty_name_th : $edu->faculty_name_en }}
                     </div>
-                    <p>{{ trans('profile.GPALabel') }} : {{ $edu["gpa"] }}</p>
+                    <p>{{ trans('profile.GPALabel') }} : {{ $edu->gpa }}</p>
                 </div>
                 <div class="flex-shrink-0">
                     <span class="text-primary">
@@ -57,28 +57,28 @@
                             @endphp
 
                             @for ($i = 0; $i < count($THMonth); $i++)
-                                @if ($i == date_format(date_create($edu["efft_date"]) , 'n'))
+                                @if ($i == date_format(date_create($edu->efft_date) , 'n'))
                                    {{ $THMonth[$i] }}
                                    @break
                                 @endif
                             @endfor
 
-                            {{ ' ' . (date_format(date_create($edu["efft_date"]) , 'Y') + 543) . ' -' }}
+                            {{ ' ' . (date_format(date_create($edu->efft_date) , 'Y') + 543) . ' -' }}
 
-                            @if ($edu["exp_date"] != null)
+                            @if ($edu->exp_date != null)
                                 @for ($i = 0; $i < count($THMonth); $i++)
-                                    @if ($i == date_format(date_create($edu["exp_date"]) , 'n'))
+                                    @if ($i == date_format(date_create($edu->exp_date) , 'n'))
                                         {{ $THMonth[$i] }}
                                         @break
                                     @endif
                                 @endfor
 
-                                {{ ' ' . (date_format(date_create($edu["exp_date"]) , 'Y') + 543) }}
+                                {{ ' ' . (date_format(date_create($edu->exp_date) , 'Y') + 543) }}
                             @else
                                 {{ trans('profile.WorkEndDateRender') }}
                             @endif
                         @else
-                            {{ date_format(date_create($edu["efft_date"]) , 'F Y') }} - {{ ($edu["exp_date"] == null) ? trans('profile.WorkEndDateRender') : date_format(date_create($edu["exp_date"]) , "F Y") }}
+                            {{ date_format(date_create($edu->efft_date) , 'F Y') }} - {{ ($edu->exp_date == null) ? trans('profile.WorkEndDateRender') : date_format(date_create($edu->exp_date) , "F Y") }}
                         @endif
                     </span>
                 </div>

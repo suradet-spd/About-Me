@@ -171,10 +171,10 @@ Route::middleware(['auth'])->group(function () {
         } else if ($type == "certificate") {
 
         // Declare Variable
-            $certificate = certificate::all()->where('profile_id' , Auth::user()->profile_id)->toArray();
+            $certificate = DB::table('profile_t_certificate')->where('profile_id' , Auth::user()->profile_id)->orderByDesc('cert_get_date')->get()->toArray();
             $files_name[] = null;
             foreach ($certificate as $cc) {
-                array_push($files_name , (json_decode(decrypt($cc["cert_images"]))));
+                array_push($files_name , (json_decode(decrypt($cc->cert_images))));
             }
         // Return to view
 
@@ -187,7 +187,7 @@ Route::middleware(['auth'])->group(function () {
             ));
         } else if ($type == "education") {
             $learning_list = learning_list::all()->where('active_flag' , 'Y')->toArray();
-            $education = education::all()->where('profile_id' , Auth::user()->profile_id)->toArray();
+            $education = DB::table('profile_t_education')->where('profile_id' , Auth::user()->profile_id)->orderByDesc('efft_date')->get()->toArray();
 
             return view('Profile.template.1.education' , compact(
                 'ConfigProfile' ,
@@ -197,7 +197,7 @@ Route::middleware(['auth'])->group(function () {
                 'education'
             ));
         } else if ($type == "experience") {
-            $work = work::all()->where('profile_id' , $profile_id)->toArray();
+            $work = DB::table('profile_t_work')->where('profile_id' , $profile_id)->orderByDesc('work_start_date')->get()->toArray();
 
             return view('Profile.template.1.experience' , compact(
                 'ConfigProfile' ,
@@ -380,10 +380,10 @@ Route::get('{user_name}/{type}', function ($user_name , $type) {
         } else if ($type == "certificate") {
 
         // Declare Variable
-            $certificate = certificate::all()->where('profile_id' , strval($search_id))->toArray();
+            $certificate = DB::table('profile_t_certificate')->where('profile_id' , strval($search_id))->orderByDesc('cert_get_date')->get()->toArray();
             $files_name[] = null;
             foreach ($certificate as $cc) {
-                array_push($files_name , (json_decode(decrypt($cc["cert_images"]))));
+                array_push($files_name , (json_decode(decrypt($cc->cert_images))));
             }
         // Return to view
 
@@ -396,7 +396,7 @@ Route::get('{user_name}/{type}', function ($user_name , $type) {
             ));
         } else if ($type == "education") {
             $learning_list = learning_list::all()->where('active_flag' , 'Y')->toArray();
-            $education = education::all()->where('profile_id' , strval($search_id))->toArray();
+            $education = DB::table('profile_t_education')->where('profile_id' , strval($search_id))->orderByDesc('efft_date')->get()->toArray();
 
             return view('Profile.template.1.education' , compact(
                 'ConfigProfile' ,
@@ -406,7 +406,7 @@ Route::get('{user_name}/{type}', function ($user_name , $type) {
                 'education'
             ));
         } else if ($type == "experience") {
-            $work = work::all()->where('profile_id' , $profile_id)->toArray();
+            $work = DB::table('profile_t_work')->where('profile_id' , $profile_id)->orderByDesc('work_start_date')->get()->toArray();
 
             return view('Profile.template.1.experience' , compact(
                 'ConfigProfile' ,
