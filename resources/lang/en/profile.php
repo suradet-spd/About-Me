@@ -17,13 +17,13 @@ return [
 
 //set token validate
     "ValidateToken" => "Token is invalid !" ,
-    "LosingToken" => "Can't get token. Please try again" ,
+    "LosingToken" => "cannot get token. Please try again" ,
 
 // set controller msg
     "ValidatepublicMSGFail" => "Something went wrong. please try again later!",
     "VliadatepublicMSGSuccess" => "Public profile success",
     "ReturnResetComplete" => "Reset profile complete!!",
-    "ReturnResetFail" => "Can't reset data! Please try again",
+    "ReturnResetFail" => "cannot reset data! Please try again",
 
 // Tab Menu
     "PublicProfile" => "Public profile",
@@ -76,7 +76,7 @@ return [
     "ValidSubDistrict" => "Please select Sub-District",
 
     // Message from controller
-    "MsgReturnError" => "Can't update your address!",
+    "MsgReturnError" => "cannot update your address!",
     "MsgReturnSuccess" => "Update your address complete!",
 
     /* Add about menu */
@@ -99,7 +99,7 @@ return [
     // Controller return msg
     "ErrControllerMsg" => "Please Enter data in form!",
     "MsgCompleteAbout" => "Update your description complete" ,
-    "MsgErrorAbout" => "Can't update your about!" ,
+    "MsgErrorAbout" => "cannot update your about!" ,
 
     /* Add Social list */
 
@@ -117,7 +117,7 @@ return [
     // Controller return msg
     "MsgDuplicateSocial" => "This social account is already exist!",
     "MsgCompleteSocial" => "Add your Social account complete" ,
-    "MsgErrorSocial" => "Can't update your social account!" ,
+    "MsgErrorSocial" => "cannot update your social account!" ,
 
 // Work Experience Page
 
@@ -195,7 +195,7 @@ return [
     "ctl_gpa_value_req" => "Please enter your gpa value",
 
     "ctl_str" => "Only characters are allowed!",
-    "msg_error_return" => "Can't insert education hist. Please try again later!" ,
+    "msg_error_return" => "cannot insert education hist. Please try again later!" ,
     "msg_success_return" => "Insert education hist complete!",
 
 // Portfolio page
@@ -239,7 +239,7 @@ return [
     "ctl_msg_mimes" => "Just allow extension files [jpeg , png , jpg , svg] only",
 
     "ctl_msg_port_success" => "Save the portfolio complete",
-    "ctl_msg_port_fail" => "Can't save the portfolio. Please try again.",
+    "ctl_msg_port_fail" => "cannot save the portfolio. Please try again.",
 
 // Certificate page
 
@@ -275,12 +275,12 @@ return [
     "ctl_cert_max_valid" => "Your description is too long",
     "ctl_cert_desc_th" => "Please enter your certificate description (thai)" ,
     "ctl_cert_desc_en" => "Please enter your certificate description (eng)" ,
-    "ctl_msg_cert_fail" => "Can't save the certificate. Please try again.",
+    "ctl_msg_cert_fail" => "cannot save the certificate. Please try again.",
     "ctl_msg_cert_success" => "Save the certificate complete",
 
 // Reset Profile Js Validate
     "js_reset_header" => "Are you sure to reset profile?",
-    "js_reset_body" => "You can't cancel this process if you click button 'OK'",
+    "js_reset_body" => "You cannot cancel this process if you click button OK",
 
 // Public pprofile Js validate
     "js_public_header" => "Are you sure to public profile?",

@@ -277,9 +277,9 @@
                     "port_images" : formMast.elements["port_images[]"].files,
                 };
 
-                if ((validate_elements["port_name_th"] == null || validate_elements["port_name_th"] == "") || (validate_elements["port_name_en"] == null || validate_elements["port_name_en"] == "")) {
+                if ((validate_elements["port_name_th"] == null || validate_elements["port_name_th"] == "") && (validate_elements["port_name_en"] == null || validate_elements["port_name_en"] == "")) {
                     swal("{{ trans('profile.AlertError') }}" , "{{ trans('profile.js_validate_port_name') }}" , "error");
-                } else if ((validate_elements["port_desc_th"] == null || validate_elements["port_desc_th"] == "") || (validate_elements["port_desc_en"] == null || validate_elements["port_desc_en"] == "")) {
+                } else if ((validate_elements["port_desc_th"] == null || validate_elements["port_desc_th"] == "") && (validate_elements["port_desc_en"] == null || validate_elements["port_desc_en"] == "")) {
                     swal("{{ trans('profile.AlertError') }}" , "{{ trans('profile.js_validate_port_desc') }}" , "error");
                 } else if (validate_elements["port_tag"] == null || validate_elements["port_tag"] == "") {
                     swal("{{ trans('profile.AlertError') }}" , "{{ trans('profile.js_validate_port_tag') }}" , "error");
