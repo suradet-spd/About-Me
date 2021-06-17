@@ -14,7 +14,7 @@
         <h2 class="mb-5">
             {{ trans('profile.MenuAward') }}
             @if ($modifyFlag)
-                <i class="fas fa-plus-circle" style="cursor: pointer" data-toggle="modal" data-target="#SetCertificateModal"></i>
+                <i class="fas fa-plus-circle" id="SetCertificateModalID" style="cursor: pointer" data-toggle="modal" data-target="#SetCertificateModal"></i>
             @endif
         </h2>
 
@@ -54,7 +54,7 @@
                     <p>{{ ($lang == "th") ? $cc->cert_desc_th : $cc->cert_desc_en }}</p>
                 </div>
                 <div class="flex-shrink-0">
-                    <span class="text-primary" style="cursor: pointer" data-toggle="modal" data-target="#md_show_cert_{{ $cc->cert_seq }}">
+                    <span class="text-primary" style="cursor: pointer" id="md_show_cert_{{ $cc->cert_seq }}ID" data-toggle="modal" data-target="#md_show_cert_{{ $cc->cert_seq }}">
                         <p style="text-align: center">
                             <i class="fas fa-search fa-2x"></i>
                             <br>
@@ -246,6 +246,20 @@
             </div>
         </div>
         {{-- The Modal [show portfolio image]--}}
+
+        @section('LockModal-view')
+            <script>
+                // Onload Function
+                $(document).ready(function() {
+                    $("#md_show_cert_{{ $md_cert->cert_seq }}ID").click(function() {
+                        $("#md_show_cert_{{ $md_cert->cert_seq }}").modal({
+                            backdrop: "static"
+                        }, 'show');
+                    });
+                });
+            </script>
+        @endsection
+
     @endforeach
 @endsection
 
@@ -293,6 +307,19 @@
             </script>
         @enderror
 
+    @endsection
+
+    @section('LockModal-modify')
+        <script>
+            // Onload Function
+            $(document).ready(function() {
+                $("#SetCertificateModalID").click(function() {
+                    $("#SetCertificateModal").modal({
+                        backdrop: "static"
+                    }, 'show');
+                });
+            });
+        </script>
     @endsection
 @endif
 

@@ -25,7 +25,7 @@
                 <div class="subheading mb-2">
                     @if ($modifyFlag)
                         {{ ($data["location_id"] == null) ? (($lang == "th") ? "ที่อยู่ : " : "Address : ") : null }}
-                        <a class="social-icon" style="cursor: pointer" data-toggle="modal" data-target="#SetProfileLocation">
+                        <a class="social-icon" id="SetProfileLocationID" style="cursor: pointer" data-toggle="modal" data-target="#SetProfileLocation">
                             <b><u>{{ trans('profile.EditLabel') }}</u></b>
                         </a>
                     @endif
@@ -42,7 +42,7 @@
                         <p class="lead mb-5">
                             @if ($modifyFlag)
                                 {{-- {{ (($data["about_th"] == null or $data["about_th"] == "") and ($data["about_en"] == null or $data["about_en"] == "")) }} --}}
-                                <a class="social-icon" style="cursor: pointer" data-toggle="modal" data-target="#SetProfileAbout">
+                                <a class="social-icon" id="SetProfileAboutID" style="cursor: pointer" data-toggle="modal" data-target="#SetProfileAbout">
                                     <b><u>{{ trans('profile.EditLabel') }}</u></b>
                                 </a>
                             @endif
@@ -52,7 +52,7 @@
                 <div class="subheading mb-2">
                     {{ trans('profile.SocialAccount') }}
                     @if ($modifyFlag)
-                        <i class="fas fa-plus-circle" style="cursor: pointer" data-toggle="modal" data-target="#SetProfileSocial"></i>
+                        <i class="fas fa-plus-circle" id="SetProfileSocialID" style="cursor: pointer" data-toggle="modal" data-target="#SetProfileSocial"></i>
                     @endif
                 </div>
                 <ul class="list-inline dev-icons">
@@ -245,6 +245,30 @@
 @endforeach
 
 @if ($modifyFlag)
+    @section('LockModal-modify')
+        <script>
+            // Onload Function
+            $(document).ready(function() {
+                $("#SetProfileLocationID").click(function() {
+                    $("#SetProfileLocation").modal({
+                        backdrop: "static"
+                    }, 'show');
+                });
+
+                $("#SetProfileAboutID").click(function() {
+                    $("#SetProfileAbout").modal({
+                        backdrop: "static"
+                    }, 'show');
+                });
+
+                $("#SetProfileSocialID").click(function() {
+                    $("#SetProfileSocial").modal({
+                        backdrop: "static"
+                    }, 'show');
+                });
+            });
+        </script>
+    @endsection
     @section('OtherJsFunction')
         <script>
 

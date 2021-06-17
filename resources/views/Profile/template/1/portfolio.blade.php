@@ -14,7 +14,7 @@
         <h2 class="mb-5">
             {{ trans('profile.MenuPortfolio') }}
             @if ($modifyFlag)
-                <i class="fas fa-plus-circle" style="cursor: pointer" data-toggle="modal" data-target="#SetPortfolioModal"></i>
+                <i class="fas fa-plus-circle" id="SetPortfolioModalID" style="cursor: pointer" data-toggle="modal" data-target="#SetPortfolioModal"></i>
             @endif
         </h2>
 
@@ -26,7 +26,7 @@
                     <p>{{ ($lang == "th") ? $pf["portfolio_desc_th"] : $pf["portfolio_desc_en"] }}</p>
                 </div>
                 <div class="flex-shrink-0">
-                    <span class="text-primary" style="cursor: pointer" data-toggle="modal" data-target="#md_show_portfolio_{{ $pf["portfolio_seq"] }}">
+                    <span class="text-primary" id="md_show_portfolio_{{ $pf["portfolio_seq"] }}ID" style="cursor: pointer" data-toggle="modal" data-target="#md_show_portfolio_{{ $pf["portfolio_seq"] }}">
                         <p style="text-align: center">
                             <i class="fas fa-search fa-2x"></i>
                             <br>
@@ -154,6 +154,19 @@
         </div>
     </div>
     {{-- The Modal [set Portfolio]--}}
+
+    @section('LockModal-modify')
+        <script>
+            // Onload Function
+            $(document).ready(function() {
+                $("#SetPortfolioModalID").click(function() {
+                    $("#SetPortfolioModal").modal({
+                        backdrop: "static"
+                    }, 'show');
+                });
+            });
+        </script>
+    @endsection
 @endif
 
     @foreach ($portfolio as $md_port)
@@ -217,6 +230,19 @@
             </div>
         </div>
         {{-- The Modal [show portfolio image]--}}
+
+        @section('LockModal-view')
+            <script>
+                // Onload Function
+                $(document).ready(function() {
+                    $("#md_show_portfolio_{{ $md_port["portfolio_seq"] }}ID").click(function() {
+                        $("#md_show_portfolio_{{ $md_port["portfolio_seq"] }}").modal({
+                            backdrop: "static"
+                        }, 'show');
+                    });
+                });
+            </script>
+        @endsection
     @endforeach
 @endsection
 

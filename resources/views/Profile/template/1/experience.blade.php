@@ -14,7 +14,7 @@
         <h2 class="mb-5">
             {{ trans('profile.MenuExperience') }}
             @if ($modifyFlag)
-                <i class="fas fa-plus-circle" style="cursor: pointer" data-toggle="modal" data-target="#SetExperienceModal"></i>
+                <i class="fas fa-plus-circle" id="SetExperienceModalID" style="cursor: pointer" data-toggle="modal" data-target="#SetExperienceModal"></i>
             @endif
         </h2>
 
@@ -223,6 +223,18 @@
     <!-- The Modal [set Social list]-->
     @endsection
 
+    @section('LockModal-modify')
+        <script>
+            // Onload Function
+            $(document).ready(function() {
+                $("#SetExperienceModalID").click(function() {
+                    $("#SetExperienceModal").modal({
+                        backdrop: "static"
+                    }, 'show');
+                });
+            });
+        </script>
+    @endsection
 @endif
 
 @section('OtherJsFunction')

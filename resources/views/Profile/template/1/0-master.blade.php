@@ -290,8 +290,10 @@
             {{-- error return --}}
 
             {{-- Javascript --}}
+                @yield('LockModal-view')
 
             @if ($modifyFlag)
+                @yield('LockModal-modify')
                 <script>
                 // Onload Function
                     $(document).ready(function() {

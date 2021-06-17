@@ -14,7 +14,7 @@
         <h2 class="mb-5">
             {{ trans('profile.MenuEducation') }}
             @if ($modifyFlag)
-                <i class="fas fa-plus-circle" style="cursor: pointer" data-toggle="modal" data-target="#SetEducateModal"></i>
+                <i class="fas fa-plus-circle" id="SetEducateModalID" style="cursor: pointer" data-toggle="modal" data-target="#SetEducateModal"></i>
             @endif
         </h2>
 
@@ -218,6 +218,19 @@
         </div>
     </div>
     <!-- The Modal [set Social list]-->
+    @endsection
+
+    @section('LockModal-modify')
+        <script>
+            // Onload Function
+            $(document).ready(function() {
+                $("#SetEducateModalID").click(function() {
+                    $("#SetEducateModal").modal({
+                        backdrop: "static"
+                    }, 'show');
+                });
+            });
+        </script>
     @endsection
 @endif
 
