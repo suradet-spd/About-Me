@@ -92,6 +92,14 @@
                         .social-icons .social-icon:hover{
                             background-color: {{ $ConfigProfile->menu_color }};
                         }
+
+                        .footer {
+                            position: absolute;
+                            left: 0;
+                            bottom: 0;
+                            width: 100%;
+                            text-align: center;
+                        }
                     </style>
                 @endif
 
@@ -368,6 +376,7 @@
                 {{-- Other Function Js --}}
                 @yield('OtherJsFunction')
             {{-- Javascript --}}
+
             </body>
         </html>
     @endif
