@@ -38,6 +38,18 @@
             animation: gradient 20s ease infinite;
         }
 
+        .footer {
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            background: linear-gradient( -500deg, rgb(34, 36, 70), rgb(38,40,92), rgb(77,80,152), rgb(117,120,205) );
+            background-size: 800% 800%;
+            animation: gradient 20s ease infinite;
+            color: white;
+            text-align: center;
+        }
+
         .set-center {
             margin: 0;
             position: absolute;
@@ -462,6 +474,26 @@
     </div>
     </div>
 </div>
+@endsection
+
+@section('class-footer')
+    <br>
+    <div class="container">
+        <div class="col-md-12">
+            <h5>ABOUT US</h5>
+            <hr width="20%">
+            <h6>if you need profile or portfolio. Let's create your profile and add your information</h6>
+            <h6>
+                <i class="fas fa-envelope-open-text fa-2x"></i> : <a href="mailto:yubanarchy@gmail.com">yubanarchy@gmail.com </a>
+                <i class="fab fa-line fa-2x"></i> : @bigfatdev
+            </h6>
+            <hr width="20%">
+            <h6>
+                <p>Copyright © {{ date('Y') }}<a href="{{ route('ViewProfile' , ['type'=> 'about' , 'user_name' => 'suradet.sripradit']) }}" target="_blank"> Bigfat-Dev </a>All rights reserved.</p>
+            </h6>
+        </div>
+    </div>
+    <br>
 @endsection
 
 @section('AnotherLink')

@@ -18,18 +18,6 @@
     @yield('AnotherLink')
 
     @yield('GetStyle')
-
-    <style>
-        .footer {
-            position: absolute;
-            left: 0;
-            bottom: 0;
-            width: 100%;
-            background-color: red;
-            color: white;
-            text-align: center;
-        }
-    </style>
 </head>
     <body>
         {{-- check Error Log and show --}}
@@ -60,10 +48,8 @@
 
         @yield('FunctionJs')
 
-    </body>
-    <footer>
-        <div class="container-fluid">
-
+        <div class="footer">
+            @yield('class-footer')
         </div>
-    </footer>
+    </body>
 </html>
