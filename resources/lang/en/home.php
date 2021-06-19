@@ -20,6 +20,11 @@ return [
     "btn_usermanual" => "Usermanual" ,
     "btn_reportbug" => "Report bug" ,
 
+    //search
+    "ctl_return_req-name-profile" => "Please enter a profile name" ,
+    "ctl_return_valid-minimum" => "Minimum number of characters 5 characters" ,
+    "ctl_profile_not_found" => "profile was not found!",
+
     // Menu zone
     "CreateMenu" => "Create Profile",
     "ViewMenu" => "Your Profile" ,

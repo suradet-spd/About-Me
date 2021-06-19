@@ -20,6 +20,11 @@ return [
     "btn_usermanual" => "คู่มือการใช้งาน" ,
     "btn_reportbug" => "รายงานข้อผิดพลาด" ,
 
+    //search
+    "ctl_return_req-name-profile" => "โปรดระบุชื่อโปรไฟล์" ,
+    "ctl_return_valid-minimum" => "จำนวนอักขระขั้นต่ำ 5 อักขระ" ,
+    "ctl_profile_not_found" => "ไม่พบโปรไฟล์ที่ค้นหา!",
+
     // Menu zone
     "CreateMenu" => "สร้างโปรไฟล์",
     "ViewMenu" => "ดูข้อมูลโปรไฟล์" ,

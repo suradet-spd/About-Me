@@ -246,7 +246,7 @@
                                             <h5>{{ ($lang == "th") ? $lp->name_th : $lp->name_en }} ({{ $lp->nickname }})</h5>
                                         </td>
                                         <td class="text-center">
-                                            <a href="{{ route('ViewProfile' , ["user_name" => $lp->name_en , "type" => "about"]) }}"><i class="fas fa-search fa-2x" style="color: rgb(16, 32, 119);cursor: pointer;"></i></a>
+                                            <a href="{{ route('ViewProfile' , ["user_name" => str_replace(' ' , '.' , $lp->name_en) , "type" => "about"]) }}"><i class="fas fa-search fa-2x" style="color: rgb(16, 32, 119);cursor: pointer;"></i></a>
                                         </td>
                                     </tr>
                                 @endforeach

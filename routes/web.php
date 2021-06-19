@@ -52,9 +52,9 @@ Route::post('/', function (Request $req) {
         return redirect()->route('MainPage')->with('error' , trans('profile.LosingToken'));
     } else {
         if (!$req->exists('SearchTXT')) {
-            return redirect()->route('MainPage')->with('error' , "pls enter some profile name");
+            return redirect()->route('MainPage')->with('error' , trans('home.ctl_return_req-name-profile'));
         } else if(strlen($req->get('SearchTXT')) < 5) {
-            return redirect()->route('MainPage')->with('error' , "Minimum profile name is 5 charecter");
+            return redirect()->route('MainPage')->with('error' , trans('home.ctl_return_valid-minimum'));
         } else {
             $list_profile = DB::table('profile_t_master')
                             ->select('profile_id' , 'name_th' , 'name_en' , 'nickname')
@@ -64,10 +64,10 @@ Route::post('/', function (Request $req) {
                             ->get()->toArray();
 
             if (!isset($list_profile)) {
-                return redirect()->route('MainPage')->with('error' , 'Some thing went wrong pls contact admin');
+                return redirect()->route('MainPage')->with('error' , trans('profile.ErrJsOther'));
             } else{
                 if ($list_profile == null or $list_profile == "") {
-                    return redirect()->route('MainPage')->with('error' , 'profile name is not found');
+                    return redirect()->route('MainPage')->with('error' , trans('home.ctl_profile_not_found'));
                 } else {
                     return view('home' , compact('list_profile'));
                 }
