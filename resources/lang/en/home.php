@@ -15,6 +15,11 @@ return [
     "SearchButton" => "Search",
     "ResetButton" => "Reset",
 
+    // credit zone
+    "credit-text" => "if you need profile or portfolio. Let's create your profile and add your information",
+    "btn_usermanual" => "Usermanual" ,
+    "btn_reportbug" => "Report bug" ,
+
     // Menu zone
     "CreateMenu" => "Create Profile",
     "ViewMenu" => "Your Profile" ,

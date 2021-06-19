@@ -15,6 +15,11 @@ return [
     "SearchButton" => "ค้นหา",
     "ResetButton" => "ล้างค่า",
 
+    // credit zone
+    "credit-text" => "หากคุณต้องการโปรไฟล์หรือแฟ้มสะสมผลงาน มาสร้างโปรไฟล์และเพิ่มข้อมูลของคุณกันเถอะ",
+    "btn_usermanual" => "คู่มือการใช้งาน" ,
+    "btn_reportbug" => "รายงานข้อผิดพลาด" ,
+
     // Menu zone
     "CreateMenu" => "สร้างโปรไฟล์",
     "ViewMenu" => "ดูข้อมูลโปรไฟล์" ,
@@ -26,4 +31,5 @@ return [
 
     // Error Register
     "Error_msg_header" => "เกิดข้อผิดพลาดในระบบ!",
+
 ];

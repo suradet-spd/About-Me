@@ -479,18 +479,26 @@
 @section('class-footer')
     <br>
     <div class="container">
-        <div class="col-md-12">
-            <h5>ABOUT US</h5>
-            <hr width="20%">
-            <h6>if you need profile or portfolio. Let's create your profile and add your information</h6>
-            <h6>
-                <i class="fas fa-envelope-open-text fa-2x"></i> : <a href="mailto:yubanarchy@gmail.com">yubanarchy@gmail.com </a>
-                <i class="fab fa-line fa-2x"></i> : @bigfatdev
-            </h6>
-            <hr width="20%">
-            <h6>
-                <p>Copyright © {{ date('Y') }}<a href="{{ route('ViewProfile' , ['type'=> 'about' , 'user_name' => 'suradet.sripradit']) }}" target="_blank"> Bigfat-Dev </a>All rights reserved.</p>
-            </h6>
+        <div class="col-md-12 align-items-center">
+            <center>
+                <div class="col-md-8">
+                    <h5>ABOUT US</h5>
+                    <div class="col-sm-12">
+                        <button class="btn btn-outline-primary">{{ trans('home.btn_usermanual') }}</button>
+                        <button class="btn btn-outline-warning">{{ trans('home.btn_reportbug') }}</button>
+                    </div>
+                    <hr width="50%">
+                    <h6>{{ trans('home.credit-text') }}</h6>
+                    <h6>
+                        <i class="fas fa-envelope-open-text fa-2x"></i> : <a href="mailto:yubanarchy@gmail.com">yubanarchy@gmail.com </a>
+                        <i class="fab fa-line fa-2x"></i> : @bigfatdev
+                    </h6>
+                    <hr width="20%">
+                    <h6>
+                        <p>Copyright © {{ date('Y') }}<a href="{{ route('ViewProfile' , ['type'=> 'about' , 'user_name' => 'suradet.sripradit']) }}" target="_blank"> Bigfat-Dev </a>All rights reserved.</p>
+                    </h6>
+                </div>
+            </center>
         </div>
     </div>
     <br>
