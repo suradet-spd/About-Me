@@ -395,6 +395,7 @@ h6,
     font-weight: 700;
     line-height: 1.2;
     color: #343a40;
+
 }
 
 h1,
@@ -9892,12 +9893,12 @@ button.bg-dark:focus {
 }
 
 .text-primary {
-    color: #bd5d38 !important;
+    color: #bd5d38;
 }
 
 a.text-primary:hover,
 a.text-primary:focus {
-    color: #824027 !important;
+    color: #824027 ;
 }
 
 .text-secondary {

@@ -131,17 +131,26 @@ Route::middleware(['auth'])->group(function () {
     // set data
         $tmp_config = config_profile::all()
                             ->where('profile_id' , $profile_id)
-                            ->where('config_type' , 'BC')
+                            ->whereIn('config_type' , ['BC','FC'])
                             ->whereNull('exp_date')
                             ->toArray();
 
         if ($tmp_config != null) {
+
+            $ConfigProfile = array('background' => null , 'font' => null);
+
             foreach ($tmp_config as $config) {
-                $tmp = decrypt($config["config_desc"]);
-                $ConfigProfile = json_decode($tmp);
+                if ($config["config_type"] == "BC") {
+                    $ConfigProfile["background"] = json_decode(decrypt($config["config_desc"]));
+                } else if ($config["config_type"] == "FC") {
+                    $ConfigProfile["font"] = json_decode(decrypt($config["config_desc"]));
+                } else {
+                    $ConfigProfile = null;
+                }
             }
+
         } else {
-            $ConfigProfile = json_decode("");
+            $ConfigProfile = null;
         }
 
         if ($type == "about") {
@@ -382,20 +391,29 @@ Route::get('{user_name}/{type}', function ($user_name , $type) {
             $profile_location = $pf["location_id"];
         }
 
-    // set data
+// set data
         $tmp_config = config_profile::all()
                             ->where('profile_id' , $profile_id)
-                            ->where('config_type' , 'BC')
+                            ->whereIn('config_type' , ['BC','FC'])
                             ->whereNull('exp_date')
                             ->toArray();
 
         if ($tmp_config != null) {
+
+            $ConfigProfile = array('background' => null , 'font' => null);
+
             foreach ($tmp_config as $config) {
-                $tmp = decrypt($config["config_desc"]);
-                $ConfigProfile = json_decode($tmp);
+                if ($config["config_type"] == "BC") {
+                    $ConfigProfile["background"] = json_decode(decrypt($config["config_desc"]));
+                } else if ($config["config_type"] == "FC") {
+                    $ConfigProfile["font"] = json_decode(decrypt($config["config_desc"]));
+                } else {
+                    $ConfigProfile = null;
+                }
             }
+
         } else {
-            $ConfigProfile = json_decode("");
+            $ConfigProfile = null;
         }
 
         if ($type == "about") {

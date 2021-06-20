@@ -15,11 +15,15 @@ class config_background extends Controller
         return Validator::make($get_data , [
             "SetBackgroundType" => 'required',
             "BackgroundColor" => 'required',
-            "MenuColor" => 'required'
+            "MenuColor" => 'required' ,
+            "TextMainColor" => 'required',
+            "TextSubColor" => 'required'
         ] , $messages = [
             'SetBackgroundType.required' => trans('background.color_type'),
             'BackgroundColor.required' => trans('background.background_color'),
             'MenuColor.required' => trans('background.menu_color'),
+            'TextMainColor.required' => trans('background.main_font'),
+            'TextSubColor.required' => trans('background.sub_font')
         ])->validate();
     }
 
@@ -29,50 +33,63 @@ class config_background extends Controller
             $this->ValidateBackground($req->all());
 
         // Declare array
-            $config_data = array(
+            $background_color = array(
                 'color_type' => $req->get('SetBackgroundType'),
                 'background_color' => $req->get('BackgroundColor'),
                 'menu_color' => $req->get('MenuColor'),
             );
 
-        // Json Encode
-            $Json_data = json_encode($config_data);
+            $font_color = array(
+                'main_color' => $req->get('TextMainColor'),
+                'sub_color' => $req->get('TextSubColor'),
+            );
 
-        // Encrypt data
-            $tmp_encrypt = encrypt($Json_data);
+        // Json Encode / encrypt
+            $tmp_encrypt = array(
+                'background' => encrypt(json_encode($background_color)),
+                'font' => encrypt(json_encode($font_color)),
+            );
 
         // Check duplicate data before insert data
             $chk_data = config_profile::all()
                         ->where('profile_id' , Auth::user()->profile_id)
-                        ->where('config_type' , 'BC')
+                        ->whereIn('config_type' , ['BC','FC'])
                         ->whereNull('exp_date')
                         ->count();
 
         // conditions before insert
             if ($chk_data >= 1) {
                 $update_res = config_profile::where('profile_id' , Auth::user()->profile_id)
-                                ->where('config_type' , 'BC')
+                                ->whereIn('config_type' , ['BC','FC'])
                                 ->whereNull('exp_date')
                                 ->delete();
             }
 
         // Insert Data
-            $config = new config_profile([
+            $config_bc = new config_profile([
                 'profile_id' => DB::raw("LPAD(". Auth::user()->profile_id . " , 5 , '0')") ,
                 'config_type' => "BC" ,
-                'config_desc' => $tmp_encrypt,
+                'config_desc' => $tmp_encrypt["background"],
                 'upd_user_id' => DB::raw("LPAD(". Auth::user()->profile_id . " , 5 , '0')"),
             ]);
-            $config->save();
+            $config_bc->save();
+
+            $config_fc = new config_profile([
+                'profile_id' => DB::raw("LPAD(". Auth::user()->profile_id . " , 5 , '0')") ,
+                'config_type' => "FC",
+                'config_desc' => $tmp_encrypt["font"],
+                'upd_user_id' => DB::raw("LPAD(". Auth::user()->profile_id . " , 5 , '0')"),
+            ]);
+            $config_fc->save();
 
         // check result
             $chk_res = config_profile::all()
                         ->where('profile_id' , Auth::user()->profile_id)
-                        ->where('config_type' , 'BC')
-                        ->where('config_desc' , $tmp_encrypt)
+                        ->whereIn('config_type' , ['BC' , 'FC'])
+                        ->whereIn('config_desc' , [$tmp_encrypt["background"] , $tmp_encrypt['font']])
                         ->whereNull('exp_date')
                         ->count();
-            if ($chk_res == 1) {
+            if ($chk_res == 2) {
 
                 return redirect()->back()->with('success' , trans('background.SuccessMSG'));
 
@@ -80,8 +97,8 @@ class config_background extends Controller
 
             // delete data when insert not complete
                 $del_res = config_profile::where('profile_id' , Auth::user()->profile_id)
-                        ->where('config_type' , 'BC')
-                        ->where('config_desc' , $tmp_encrypt)
+                        ->whereIn('config_type' , ['BC' , 'FC'])
+                        ->whereIn('config_desc' , [$tmp_encrypt["background"] , $tmp_encrypt['font']])
                         ->whereNull('exp_date')
                         ->delete();
                 return redirect()->back()->with('error' , trans('background.ErrorMSG'));

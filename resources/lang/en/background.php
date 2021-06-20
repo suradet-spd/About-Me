@@ -5,6 +5,8 @@ return [
         "color_type" => "Please select color type!",
         "background_color" => "Please select background color!",
         "menu_color" => "Please select Menu color!",
+        "main_font" => "Please select the main font color!",
+        "sub_font" => "Please select the sub font color!",
 
     // Header error label
         "header_error" => "Something went wrong!",
@@ -17,6 +19,8 @@ return [
         "LabelColorType" => "color type : ",
         "LabelBackgroundColor" => "Background color : " ,
         "LabelMenuColor" => "Menu color : ",
+        "LabelFontMain" => "Main font color : ",
+        "LabelFontSub" => "Sub font color : ",
 
     // Message return controller
         "SuccessMSG" => "Save data complete !",

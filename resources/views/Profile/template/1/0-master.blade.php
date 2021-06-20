@@ -51,26 +51,27 @@
                 {{-- Another script link --}}
 
                 @if ($ConfigProfile != null)
-                    @if ($ConfigProfile->color_type == "C")
+{{-- {{ dd($ConfigProfile) }} --}}
+                    @if ($ConfigProfile["background"]->color_type == "C")
                         <style>
                             body{
-                                background-color: {{ $ConfigProfile->background_color }};
+                                background-color: {{ $ConfigProfile["background"]->background_color }};
                             }
 
                             .bg-primary{
-                                background-color:{{ $ConfigProfile->menu_color }};
+                                background-color:{{ $ConfigProfile["background"]->menu_color }};
                             }
                         </style>
                     @else
                         <style>
                             body{
-                                background: linear-gradient( -500deg, {{ $ConfigProfile->background_color }} , rgb(255, 255, 255) , {{ $ConfigProfile->background_color }});
+                                background: linear-gradient( -500deg, {{ $ConfigProfile["background"]->background_color }} , rgb(255, 255, 255) , {{ $ConfigProfile["background"]->background_color }});
                                 background-size: 800% 800%;
                                 animation: gradient 20s ease infinite;
                             }
 
                             .bg-primary{
-                                background: linear-gradient( -500deg,rgb(255, 255, 255) , {{ $ConfigProfile->menu_color }} , rgb(255, 255, 255));
+                                background: linear-gradient( -500deg,rgb(255, 255, 255) , {{ $ConfigProfile["background"]->menu_color }} , rgb(255, 255, 255));
                                 background-size: 800% 800%;
                                 animation: gradient 20s ease infinite;
                             }
@@ -89,8 +90,15 @@
                         </style>
                     @endif
                     <style>
+                        body ,.text-primary , .text-secondary , a , a:link{
+                            color: {{ $ConfigProfile["font"]->main_color }};
+                        }
+                        h1,h2,h3,h4,h5,h6, .h1,.h2,.h3,.h4,.h5,.h6 , a:hover{
+                            /* font-family: "Saira Extra Condensed", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"; */
+                            color: {{ $ConfigProfile["font"]->sub_color }};
+                        }
                         .social-icons .social-icon:hover{
-                            background-color: {{ $ConfigProfile->menu_color }};
+                            background-color: {{ $ConfigProfile["background"]->menu_color }};
                         }
 
                         .footer {
@@ -100,6 +108,7 @@
                             width: 100%;
                             text-align: center;
                         }
+
                     </style>
                 @endif
 
@@ -220,18 +229,10 @@
                                     @csrf
                                     @php
 
-                                        if ($ConfigProfile != null) {
-                                            if ($ConfigProfile->background_color == "" && $ConfigProfile->menu_color == "") {
-                                                $bg_color = "#ffffff";
-                                                $mn_color = "#bd5d38";
-                                            } else {
-                                                $bg_color = $ConfigProfile->background_color;
-                                                $mn_color = $ConfigProfile->menu_color;
-                                            }
-                                        } else {
-                                            $bg_color = "#ffffff";
-                                            $mn_color = "#bd5d38";
-                                        }
+                                        $bg_color = ($ConfigProfile["background"]->background_color != null) ? $ConfigProfile["background"]->background_color : "#ffffff";
+                                        $mn_color = ($ConfigProfile["background"]->menu_color != null) ? $ConfigProfile["background"]->menu_color : "#bd5d38";
+                                        $f_m_color = ($ConfigProfile["font"]->main_color != null) ? $ConfigProfile["font"]->main_color : "#bd5d38";
+                                        $f_s_color = ($ConfigProfile["font"]->sub_color != null) ? $ConfigProfile["font"]->sub_color : "#6c757d";
 
                                     @endphp
 
@@ -277,6 +278,33 @@
                                             @enderror
                                         </div>
                                     </div>
+
+                                    <hr width="90%">
+
+                                    <div class="form-group row">
+                                        <label for="TextMainColor" class="col-md-4 col-form-label text-md-right">{{ trans('background.LabelFontMain') }}</label>
+                                        <div class="col-md-6">
+                                            <input type="color" name="TextMainColor" id="TextMainColorID" class="form-control @error('TextMaincolor') is-invalid @enderror" value="{{ $f_m_color }}" required autocomplete="TextMainColor" autofocus>
+                                            @error('TextMainColor')
+                                                <script>
+                                                    swal("{{ trans('background.header_error') }}" , "{{ $message }}" , 'error');
+                                                </script>
+                                            @enderror
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label for="TextSubColor" class="col-md-4 col-form-label text-md-right">{{ trans('background.LabelFontSub') }}</label>
+                                        <div class="col-md-6">
+                                            <input type="color" name="TextSubColor" id="TextSubColorID" class="form-control @error('TextSubColor') is-invalid @enderror" value="{{ $f_s_color }}" required autocomplete="TextSubColor" autofocus>
+                                            @error('TextSubColor')
+                                                <script>
+                                                    swal("{{ trans('background.header_error') }}" , "{{ $message }}" , 'error');
+                                                </script>
+                                            @enderror
+                                        </div>
+                                    </div>
+
                                 </form>
                             </div>
                             <div class="modal-footer">

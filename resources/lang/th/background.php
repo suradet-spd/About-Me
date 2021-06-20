@@ -5,6 +5,9 @@ return [
         "color_type" => "โปรดเลือกประเภทสี !",
         "background_color" => "โปรดเลือกสีพื้นหลัง !",
         "menu_color" => "โปรดเลือกสีเมนู!",
+        "main_font" => "โปรดเลือกสีตัวอักษรหลัก!",
+        "sub_font" => "โปรดเลือกสีตัวอักษรรอง!",
+
 
     // Header error label
         "header_error" => "เกิดข้อผิดพลาดในระบบ",
@@ -17,6 +20,8 @@ return [
         "LabelColorType" => "ประเภทสีพื้นหลัง : ",
         "LabelBackgroundColor" => "สีพื้นหลัง : " ,
         "LabelMenuColor" => "สีเมนู : ",
+        "LabelFontMain" => "สีตัวอักษรหลัก : ",
+        "LabelFontSub" => "สีตัวอักษรรอง : ",
 
     // Message return controller
         "SuccessMSG" => "บันทึกข้อมูลเรียบร้อย !",
