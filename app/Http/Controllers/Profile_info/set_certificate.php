@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\certificate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Validator;
 
@@ -48,7 +49,7 @@ class set_certificate extends Controller
             $this->CertificateValidate($req->all());
 
             // Declare data
-            $cert_seq = intval(certificate::all()->where('profile_id' , Auth::user()->profile_id)->count()) + 1;
+            $cert_seq = intval(certificate::all()->where('profile_id' , Auth::user()->profile_id)->max('cert_seq')) + 1;
             $profile_id = str_pad(Auth::user()->profile_id,5,"0",STR_PAD_LEFT);
             $tmp_file_name = [];
             $img_cnt = 0;

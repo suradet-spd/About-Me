@@ -21,7 +21,12 @@
         @foreach ($portfolio as $pf)
             <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
                 <div class="flex-grow-1">
-                    <h3 class="mb-0">{{ ($lang == "th") ? $pf["portfolio_name_th"] : $pf["portfolio_name_en"] }}</h3>
+                    <h3 class="mb-0">
+                        {{ ($lang == "th") ? $pf["portfolio_name_th"] : $pf["portfolio_name_en"] }}
+                        @if ($modifyFlag)
+                            <i class="far fa-trash-alt text-primary" style="cursor: pointer" onclick="ConfirmDeletedata('{{ $pf['profile_id'] }}' , '{{ $pf['portfolio_seq'] }}')"></i>
+                        @endif
+                    </h3>
                     <div class="subheading mb-3">{{ $pf["portfolio_tag"] }}</div>
                     <p>{{ ($lang == "th") ? $pf["portfolio_desc_th"] : $pf["portfolio_desc_en"] }}</p>
                 </div>
@@ -185,13 +190,13 @@
                         <div id="img_list_{{ $md_port["portfolio_seq"] }}" class="carousel slide" data-ride="carousel">
 
                             @php
-                                $cnt = $md_port["portfolio_seq"];
+                                $tmp_file = json_decode(decrypt($md_port["portfolio_images"]));
+                                $cnt_file = count($tmp_file);
                             @endphp
 
                             <ul class="carousel-indicators">
-                                @for ($i = 0; $i < count($files_name[$cnt]); $i++)
+                                @for ($i = 0; $i < $cnt_file; $i++)
                                     <li data-target="#img_list_{{ $md_port["portfolio_seq"] }}" data-slide-to="{{ $i }}" ></li>
-                                    {{-- {{ ($i == 0) ? 'class="active"' : "" }} --}}
                                 @endfor
                             </ul>
 
@@ -200,12 +205,11 @@
                                 @php
                                     $seq = 0;
                                 @endphp
-                                @foreach ($files_name[$cnt] as $fn)
+                                @foreach ($tmp_file as $tmp_f)
                                     <div class="carousel-item {{ ($seq == 0) ? 'active' : '' }}">
-                                        <img class="img-fluid" style="width: 100%; height: 400px;" src="{{ route('GetDataImage' , ["id"=>$md_port["profile_id"] , "file_name"=> $fn , "img_type" => "Portfolio"]) }}">
+                                        <img class="img-fluid" style="width: 100%; height: 400px;" src="{{ route('GetDataImage' , ["id"=>$md_port["profile_id"] , "file_name"=> $tmp_f , "img_type" => "Portfolio"]) }}">
                                     </div>
                                     @php
-                                        $cnt ++;
                                         $seq ++;
                                     @endphp
                                 @endforeach
@@ -332,6 +336,21 @@
                 document.getElementById("RenderFilename").innerHTML = html;
             });
             // Show image name
+
+            function ConfirmDeletedata(getID , getseq) {
+                swal({
+                    title: "{{ trans('profile.JsconfirmDelete_head') }}",
+                    text: "{{ trans('profile.JsconfirmDelete_label') }}",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                }).then((willSubmit) => {
+                    if (willSubmit) {
+                        const tmp_url = "{{ route('ctl.delete.data' , ['type' => 'portfolio' , 'id' => 'id_send' , 'seq' => 'seq_send']) }}".replace('id_send' , getID).replace('seq_send' , getseq);
+                        window.location = tmp_url;
+                    }
+                });
+            }
         </script>
     @endsection
 @endif

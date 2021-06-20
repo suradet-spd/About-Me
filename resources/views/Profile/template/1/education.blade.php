@@ -27,6 +27,9 @@
                                 {{ ($lang == "th") ? $ll["learning_desc_th"] : $ll["learning_desc_en"] }}
                             @endif
                         @endforeach
+                        @if ($modifyFlag)
+                            <i class="far fa-trash-alt text-primary" style="cursor: pointer" onclick="ConfirmDeletedata('{{ $edu->profile_id }}' , '{{ $edu->learning_list_id }}')"></i>
+                        @endif
                     </h3>
                     <div class="subheading mb-3">
                         {{ ($lang == "th") ? $edu->college_name_th : $edu->college_name_en }}
@@ -277,6 +280,21 @@
                 } else {
                     document.getElementById("SetEducationForm").submit();
                 }
+            }
+
+            function ConfirmDeletedata(getID , getseq) {
+                swal({
+                    title: "{{ trans('profile.JsconfirmDelete_head') }}",
+                    text: "{{ trans('profile.JsconfirmDelete_label') }}",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                }).then((willSubmit) => {
+                    if (willSubmit) {
+                        const tmp_url = "{{ route('ctl.delete.data' , ['type' => 'education' , 'id' => 'id_send' , 'seq' => 'seq_send']) }}".replace('id_send' , getID).replace('seq_send' , getseq);
+                        window.location = tmp_url;
+                    }
+                });
             }
         </script>
     @endif

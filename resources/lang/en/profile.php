@@ -38,6 +38,10 @@ return [
     "MenuSkill" => "Skills",
     "MenuAward" => "Certificate",
 
+// Js Alert
+    "JsconfirmDelete_head" => "Confirm delete!",
+    "JsconfirmDelete_label" => "Are you sure to delete data?",
+
 // modal zone
     /*[ Set language ]*/
     "SetLangHeader" => "Set profile language",

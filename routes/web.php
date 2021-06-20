@@ -172,18 +172,13 @@ Route::middleware(['auth'])->group(function () {
 
         // Declare Variable
             $certificate = DB::table('profile_t_certificate')->where('profile_id' , Auth::user()->profile_id)->orderByDesc('cert_get_date')->get()->toArray();
-            $files_name[] = null;
-            foreach ($certificate as $cc) {
-                array_push($files_name , (json_decode(decrypt($cc->cert_images))));
-            }
         // Return to view
 
             return view('Profile.template.1.certificate' , compact(
                 'ConfigProfile' ,
                 'master' ,
                 'modifyFlag' ,
-                'certificate' ,
-                'files_name'
+                'certificate'
             ));
         } else if ($type == "education") {
             $learning_list = learning_list::all()->where('active_flag' , 'Y')->toArray();
@@ -207,17 +202,12 @@ Route::middleware(['auth'])->group(function () {
             ));
         } else if ($type == "portfolio") {
             $portfolio = portfolio::all()->where('profile_id' , Auth::user()->profile_id)->toArray();
-            $files_name[] = null;
-            foreach ($portfolio as $pf) {
-                array_push($files_name , (json_decode(decrypt($pf["portfolio_images"]))));
-            }
 
             return view('Profile.template.1.portfolio' , compact(
                 'ConfigProfile' ,
                 'master' ,
                 'modifyFlag' ,
-                'portfolio' ,
-                'files_name'
+                'portfolio'
             ));
         } else {
             return redirect()->route('MainPage')->with('error' , trans('route_error.create_profile_error'));
@@ -250,6 +240,7 @@ Route::middleware(['auth'])->group(function () {
 
 // set profile certificate
     Route::post('SetCertificate', [set_certificate::class , 'SetCertificate'])->name('ctl.set.cert');
+
 // set public profile
     Route::get('public-profile/{id}', function ($id) {
 
@@ -268,6 +259,60 @@ Route::middleware(['auth'])->group(function () {
 
         }
     })->name('public.profile');
+
+// delete data
+    Route::get('delete/{type}/{id}/{seq}', function ($type , $id , $seq) {
+
+        // validate id
+        if ($id != str_pad(Auth::user()->profile_id , 5 , "0" , STR_PAD_LEFT)) {
+            return redirect()->back()->with('error' , 'your id is invalid pls try again later!');
+        } else {
+
+        // Assign value [set table name]
+            $table_name = ($type != null or $type != "") ? (($type == "work") ? "profile_t_work" : (($type == "education") ? "profile_t_education" : (($type == "portfolio") ? "profile_t_portfolio" : (($type == "certificate") ? "profile_t_certificate" : false)))) : false;
+
+            if($table_name){
+
+            // Assign tmp data
+                $field_name = ($type == "work") ? "work_seq" : (($type == "education") ? "learning_list_id" : (($type == "portfolio") ? "portfolio_seq" : (($type == "certificate") ? "cert_seq" : false)));
+                $tmp_file_name = ($type == "portfolio" or $type == "certificate") ? DB::table($table_name)->where('profile_id' , strval($id))->where($field_name , $seq)->select(($type == "portfolio") ? 'portfolio_images' : 'cert_images')->get()->toArray() : false;
+
+                $delete_data = array(
+                    "clear_data" => (DB::table($table_name)->where('profile_id' , $id)->where($field_name , $seq)->delete()) ? true : ((DB::table($table_name)->where('profile_id' , $id)->where($field_name , $seq)->count() == 0) ? true : false),
+                    "clear_file" => false,
+                );
+
+                if ($tmp_file_name) {
+
+                    foreach ($tmp_file_name as $tfn) {
+                        $get_file_name = ($type == "portfolio") ? json_decode(decrypt($tfn->portfolio_images)) : json_decode(decrypt($tfn->cert_images));
+                    }
+
+                    foreach ($get_file_name as $gn) {
+                        $delete_res = (File::delete(public_path('img/user-data/' . strval($id) . (($type == "portfolio") ? "/Portfolio/" : "/Certificate/") . $gn))) ? true : (!File::exists(public_path('img/user-data/' . strval($id) . (($type == "portfolio") ? "/Portfolio/" : "/Certificate/") . $gn)));
+
+                        if (!$delete_res) {
+                            $delete_data["clear_file"] = false;
+                            break;
+                        } else {
+                            $delete_data["clear_file"] = true;
+                        }
+                    }
+                } else {
+                    $delete_data["clear_file"] = true;
+                }
+
+                if ($delete_data["clear_data"] == true and $delete_data["clear_file"] == true) {
+                    return redirect()->back()->with('success' , 'Delete data complete');
+                } else {
+                    return redirect()->back()->with('error' , 'Can not delete data pls try again');
+                }
+            } else {
+                return redirect()->back()->with('error' , 'some thing went wrong pls contact admin!');
+            }
+        }
+
+    })->name('ctl.delete.data');
 
 // reset profile
     Route::get('reset-profile', function () {
@@ -381,18 +426,13 @@ Route::get('{user_name}/{type}', function ($user_name , $type) {
 
         // Declare Variable
             $certificate = DB::table('profile_t_certificate')->where('profile_id' , strval($search_id))->orderByDesc('cert_get_date')->get()->toArray();
-            $files_name[] = null;
-            foreach ($certificate as $cc) {
-                array_push($files_name , (json_decode(decrypt($cc->cert_images))));
-            }
-        // Return to view
 
+        // Return to view
             return view('Profile.template.1.certificate' , compact(
                 'ConfigProfile' ,
                 'master' ,
                 'modifyFlag' ,
-                'certificate' ,
-                'files_name'
+                'certificate'
             ));
         } else if ($type == "education") {
             $learning_list = learning_list::all()->where('active_flag' , 'Y')->toArray();
@@ -416,17 +456,12 @@ Route::get('{user_name}/{type}', function ($user_name , $type) {
             ));
         } else if ($type == "portfolio") {
             $portfolio = portfolio::all()->where('profile_id' , strval($search_id))->toArray();
-            $files_name[] = null;
-            foreach ($portfolio as $pf) {
-                array_push($files_name , (json_decode(decrypt($pf["portfolio_images"]))));
-            }
 
             return view('Profile.template.1.portfolio' , compact(
                 'ConfigProfile' ,
                 'master' ,
                 'modifyFlag' ,
-                'portfolio' ,
-                'files_name'
+                'portfolio'
             ));
         } else {
             return redirect()->route('MainPage')->with('error' , trans('route_error.create_profile_error'));

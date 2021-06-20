@@ -21,7 +21,12 @@
         @foreach ($work as $wk)
             <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
                 <div class="flex-grow-1">
-                    <h3 class="mb-0">{{ ($lang == "th") ? $wk->work_name_th : $wk->work_name_en }}</h3>
+                    <h3 class="mb-0">
+                        {{ ($lang == "th") ? $wk->work_name_th : $wk->work_name_en }}
+                        @if ($modifyFlag)
+                            <i class="far fa-trash-alt text-primary" style="cursor: pointer" onclick="ConfirmDeletedata('{{ $wk->profile_id }}' , '{{ $wk->work_seq }}')"></i>
+                        @endif
+                    </h3>
                     <div class="subheading mb-3">{{ ($lang == "th") ? $wk->work_office_th : $wk->work_office_en }}</div>
                     <p>{{ ($lang == "th") ? $wk->work_desc_th : $wk->work_desc_en }}</p>
                 </div>
@@ -297,6 +302,21 @@
                 } else{
                     document.getElementById("SetWorkExperienceForm").submit();
                 }
+            }
+
+            function ConfirmDeletedata(getID , getseq) {
+                swal({
+                    title: "{{ trans('profile.JsconfirmDelete_head') }}",
+                    text: "{{ trans('profile.JsconfirmDelete_label') }}",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                }).then((willSubmit) => {
+                    if (willSubmit) {
+                        const tmp_url = "{{ route('ctl.delete.data' , ['type' => 'work' , 'id' => 'id_send' , 'seq' => 'seq_send']) }}".replace('id_send' , getID).replace('seq_send' , getseq);
+                        window.location = tmp_url;
+                    }
+                });
             }
         </script>
     @endif

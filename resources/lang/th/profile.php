@@ -38,6 +38,10 @@ return [
     "MenuSkill" => "ความสามารถ",
     "MenuAward" => "ประกาศนียบัตร",
 
+// Js Alert
+    "JsconfirmDelete_head" => "ยืนยันการลบข้อมูล!",
+    "JsconfirmDelete_label" => "คุณแน่ใจที่จะลบข้อมูลนี้?",
+
 // modal zone
     /*[ Set language ]*/
     "SetLangHeader" => "ตั้งค่าภาษาสำหรับโปรไฟล์",

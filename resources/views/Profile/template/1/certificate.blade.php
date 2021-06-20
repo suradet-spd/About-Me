@@ -22,7 +22,12 @@
         @foreach ($certificate as $cc)
             <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
                 <div class="flex-grow-1">
-                    <h3 class="mb-0">{{ ($lang == "th") ? $cc->cert_name_th : $cc->cert_name_en }}</h3>
+                    <h3 class="mb-0">
+                        {{ ($lang == "th") ? $cc->cert_name_th : $cc->cert_name_en }}
+                        @if ($modifyFlag)
+                            <i class="far fa-trash-alt text-primary" style="cursor: pointer" onclick="ConfirmDeletedata('{{ $cc->profile_id }}' , '{{ $cc->cert_seq }}')"></i>
+                        @endif
+                    </h3>
                     <div class="subheading mb-3">
                         @php
                             $THMonth = array(
@@ -202,11 +207,12 @@
                         <div id="img_list_{{ $md_cert->cert_seq }}" class="carousel slide" data-ride="carousel">
 
                             @php
-                                $cnt = $md_cert->cert_seq;
+                                $tmp_file = json_decode(decrypt($md_cert->cert_images));
+                                $cnt_file = count($tmp_file);
                             @endphp
 
                             <ul class="carousel-indicators">
-                                @for ($i = 0; $i < count($files_name[$cnt]); $i++)
+                                @for ($i = 0; $i < $cnt_file; $i++)
                                     <li data-target="#img_list_{{ $md_cert->cert_seq }}" data-slide-to="{{ $i }}" {{ ($i == 0) ? 'class="active"' : "" }}></li>
                                 @endfor
                             </ul>
@@ -216,13 +222,12 @@
                                 @php
                                     $seq = 0;
                                 @endphp
-                                @foreach ($files_name[$cnt] as $fn)
+                                @foreach ($tmp_file as $tmp_f)
                                     <div class="carousel-item {{ ($seq == 0) ? 'active' : '' }}">
-                                        <img class="img-fluid" style="width: 100%; height: 400px;" src="{{ route('GetDataImage' , ["id"=>$md_cert->profile_id , "file_name"=> $fn , "img_type" => "Certificate"]) }}">
+                                        <img class="img-fluid" style="width: 100%; height: 400px;" src="{{ route('GetDataImage' , ["id"=>$md_cert->profile_id , "file_name"=> $tmp_f , "img_type" => "Certificate"]) }}">
                                     </div>
                                     @php
-                                        $cnt ++;
-                                        $seq ++;
+                                        $seq++;
                                     @endphp
                                 @endforeach
                             </div>
@@ -373,6 +378,21 @@
                 document.getElementById("RenderFilename").innerHTML = html;
             });
             // Show image count
+
+            function ConfirmDeletedata(getID , getseq) {
+                swal({
+                    title: "{{ trans('profile.JsconfirmDelete_head') }}",
+                    text: "{{ trans('profile.JsconfirmDelete_label') }}",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                }).then((willSubmit) => {
+                    if (willSubmit) {
+                        const tmp_url = "{{ route('ctl.delete.data' , ['type' => 'certificate' , 'id' => 'id_send' , 'seq' => 'seq_send']) }}".replace('id_send' , getID).replace('seq_send' , getseq);
+                        window.location = tmp_url;
+                    }
+                });
+            }
         </script>
     @endif
 @endsection
