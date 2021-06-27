@@ -224,15 +224,16 @@
                             <div class="modal-header">
                                 <h4 class="modal-title">{{ trans('background.ModalHeader') }}</h4>
                             </div>
+
                             <div class="modal-body">
                                 <form action="{{ route('ctl.set.background') }}" method="POST" id="SetBackgroundForm">
                                     @csrf
                                     @php
 
-                                        $bg_color = ($ConfigProfile["background"]->background_color != null) ? $ConfigProfile["background"]->background_color : "#ffffff";
-                                        $mn_color = ($ConfigProfile["background"]->menu_color != null) ? $ConfigProfile["background"]->menu_color : "#bd5d38";
-                                        $f_m_color = ($ConfigProfile["font"]->main_color != null) ? $ConfigProfile["font"]->main_color : "#bd5d38";
-                                        $f_s_color = ($ConfigProfile["font"]->sub_color != null) ? $ConfigProfile["font"]->sub_color : "#6c757d";
+                                        $bg_color = (isset($ConfigProfile["background"]->background_color)) ? $ConfigProfile["background"]->background_color : "#ffffff";
+                                        $mn_color = (isset($ConfigProfile["background"]->menu_color)) ? $ConfigProfile["background"]->menu_color : "#bd5d38";
+                                        $f_m_color = (isset($ConfigProfile["font"]->main_color)) ? $ConfigProfile["font"]->main_color : "#bd5d38";
+                                        $f_s_color = (isset($ConfigProfile["font"]->sub_color)) ? $ConfigProfile["font"]->sub_color : "#6c757d";
 
                                     @endphp
 

@@ -21,6 +21,7 @@ class ProfileTLocation extends Migration
             $table->string('sub_district_code')->comment('รหัสตำบล');
             $table->string('sub_district_th')->comment('ตำบล (ไทย)');
             $table->string('sub_district_en')->comment('ตำบล (อังกฤษ)');
+            $table->string('zip_code' , 5)->comment('รหัสไปรษณีย์');
             $table->dateTime('last_upd_date')->default(DB::raw('CURRENT_TIMESTAMP()'))->comment('วันที่แก้ไขข้อมูลล่าสุด');
             $table->string('upd_user_id' , 5)->nullable(false)->comment('ผู้แก้ไขข้อมูล');
         });

@@ -17,7 +17,6 @@ class ProfileTLogin extends Migration
             $table->string('nickname')->nullable(false)->comment('ชื่อเล่น');
             $table->string('photo_name')->nullable(false)->comment('ชื่อรูปโปรไฟล์ผู้ใช้งาน');
             $table->string('location_id' , 5)->nullable(true)->comment('รหัสที่อยู่');
-            $table->string('telephone' , 15)->nullable(true)->comment('เบอร์โทรศัพท์');
             $table->string('about_th' , 2000)->nullable(true)->comment('อธิบายตัวตน (ไทย)');
             $table->string('about_en' , 2000)->nullable(true)->comment('อธิบายตัวตน (อังกฤษ)');
             $table->string('email')->unique()->comment('บัญชีอีเมล์');
