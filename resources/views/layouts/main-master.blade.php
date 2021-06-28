@@ -23,12 +23,12 @@
         {{-- check Error Log and show --}}
         @if (\Session::has('success'))
             <script>
-                swal("สำเร็จ!", "{{ \Session::get('success') }}", "success");
+                swal("{{ trans('profile.AlertSuccess') }}", "{{ Session::get('success') }}", "success");
 
             </script>
         @elseif (\Session::has('error'))
             <script>
-                swal("ล้มเหลว!", "{{ \Session::get('error') }}", "error");
+                swal("{{ trans('profile.AlertError') }}", "{{ Session::get('error') }}", "error");
 
             </script>
         @endif
