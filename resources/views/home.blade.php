@@ -87,96 +87,105 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
+                @php
+                    $str = "light";
+                @endphp
+
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     {{-- Left Side Of Navbar --}}
-                    <ul class="navbar-nav mr-auto">
-
-                    </ul>
+                    {{-- <ul class="navbar-nav mr-auto">
+                    </ul> --}}
 
                     {{-- Right Side Of Navbar --}}
                     <ul class="navbar-nav ml-auto">
                         {{-- Authentication Links --}}
+
                         @guest
                             @if (Route::has('login'))
+
                                 <li class="nav-item">
-                                    {{-- <a class="nav-link text-white" href="{{ route('login') }}"><h5>{{ __('Login') }}</h5></a> --}}
+
                                     <a id="LoginBTN" class="nav-link text-white" style="cursor: pointer" data-toggle="modal" data-target="#md_login">
-                                        <h5>
-                                            <b>{{ trans('home.LoginMenu') }}</b>
-                                        </h5>
+                                        <button class="btn btn-outline-{{ $str }}">
+                                            <i class="fas fa-sign-in-alt"></i> {{ trans('home.LoginMenu') }}
+                                        </button>
                                     </a>
+
                                 </li>
+
                             @endif
                             <li class="nav-item">
                                 <a id="RegisterBTN" class="nav-link text-white" style="cursor: pointer" data-toggle="modal" data-target="#md_register">
-                                    <h5>
-                                        <b>{{ trans('home.RegisterMenu') }}</b>
-                                    </h5>
+                                    <button class="btn btn-outline-{{ $str }}">
+                                        <i class="fas fa-user-plus"></i> {{ trans('home.RegisterMenu') }}
+                                    </button>
                                 </a>
                             </li>
                         @else
+                            @if (Auth::user()->admin_flag == "Y")
+                                <li class="nav-item dropdown">
+                                    <h5>
+                                        <a id="navbarDropdown" class="nav-link text-white" href="#">
+                                            <button class="btn btn-outline-{{ $str }}">
+                                                <i class="fas fa-tools"></i> {{ trans('home.AdminMenu') }}
+                                            </button>
+                                        </a>
+                                    </h5>
+                                </li>
+                                {{-- <a href="#" class="nav-link text-white"><b><h3>|</h3></b></a> --}}
+                            @endif
+
                             @if (Auth::user()->gen_profile_flag == "N")
                                 <li class="nav-item">
                                     <a href="{{ route('MyProfile' , 'about') }}" target="_blank" class="nav-link text-white" style="cursor: pointer">
-                                        <h5>
-                                            <b>{{ trans('home.CreateMenu') }}</b>
-                                        </h5>
+                                        <button class="btn btn-outline-{{ $str }}">
+                                            <i class="fas fa-plus-square"></i> {{ trans('home.CreateMenu') }}
+                                        </button>
                                     </a>
                                 </li>
                             @else
                                 <li class="nav-item">
                                     <a href="{{ route('MyProfile' , 'about') }}" class="nav-link text-white" style="cursor: pointer">
-                                        <h5>
-                                            <b>{{ trans('home.ViewMenu') }}</b>
-                                        </h5>
+                                        <button class="btn btn-outline-{{ $str }}">
+                                            <i class="far fa-user"></i> {{ trans('home.ViewMenu') }}
+                                        </button>
                                     </a>
                                 </li>
                             @endif
-                            <li class="nav-item dropdown">
+                            <li class="nav-item">
                                 <h5>
-                                    <a id="navbarDropdown" class="nav-link dropdown-toggle text-white" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                        <b>
-                                            {{ ($lang == "th") ? Auth::user()->name_th : Auth::user()->name_en }}
-                                        </b>
+                                    <a class="nav-link text-white" href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
+                                        <button class="btn btn-outline-{{ $str }}">
+                                            <i class="fas fa-sign-out-alt"></i> {{ trans('home.LogoutMenu') }}
+                                        </button>
                                     </a>
-                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                        <a class="dropdown-item" href="{{ route('logout') }}"
-                                           onclick="event.preventDefault();
-                                                         document.getElementById('logout-form').submit();">
-                                            {{ trans('home.LogoutMenu') }}
-                                        </a>
 
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                            @csrf
-                                        </form>
-                                    </div>
-
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                        @csrf
+                                    </form>
                                 </h5>
-
                             </li>
                         @endguest
 
-                        <li class="nav-item dropdown">
-                            <h5>
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle text-white" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    <b>
-                                        {{ ($lang == "th") ? "ไทย" : "eng" }}
-                                    </b>
+                        <li class="nav-item">
+
+                            @if ($lang == "en")
+                                <a href="{{ url('change' , 'th') }}" class="nav-link text-white" style="cursor: pointer">
+                                    <button class="btn btn-outline-{{ $str }}">
+                                        <i class="fas fa-globe-asia"></i> TH
+                                    </button>
+                                </a>
+                            @else
+                                <a href="{{ url('change' , 'en') }}" class="nav-link text-white" style="cursor: pointer">
+                                    <button class="btn btn-outline-{{ $str }}">
+                                        <i class="fas fa-globe-americas"></i> EN
+                                    </button>
                                 </a>
 
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    @if ($lang == "en")
-                                        <a class="dropdown-item" href="{{ url('change' , 'th') }}">
-                                            ไทย
-                                        </a>
-                                    @else
-                                        <a class="dropdown-item" href="{{ url('change' , 'en') }}">
-                                            EN
-                                        </a>
-                                    @endif
-                                </div>
-                            </h5>
+                            @endif
+
                         </li>
+
                     </ul>
                 </div>
             </div>
@@ -202,8 +211,12 @@
                     <div class="container">
                         <div class="row">
                             <div class="col text-center">
-                                <button class="btn btn-primary" onclick="Javascript:submitSearchForm()">{{ trans('home.SearchButton') }}</button>
-                                <button class="btn btn-secondary" onclick="Javascript:ResetText()">{{ trans('home.ResetButton') }}</button>
+                                <button class="btn btn-outline-{{ $str }}" onclick="Javascript:submitSearchForm()">
+                                    <i class="fas fa-search"></i> {{ trans('home.SearchButton') }}
+                                </button>
+                                <button class="btn btn-danger" onclick="Javascript:ResetText()">
+                                    <i class="fas fa-trash"></i> {{ trans('home.ResetButton') }}
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -484,8 +497,8 @@
                 <div class="col-md-8">
                     <h5>ABOUT US</h5>
                     <div class="col-sm-12">
-                        <button class="btn btn-outline-primary">{{ trans('home.btn_usermanual') }}</button>
-                        <button class="btn btn-outline-warning">{{ trans('home.btn_reportbug') }}</button>
+                        <button class="btn btn-outline-{{ $str }}"><i class="fas fa-book"></i> {{ trans('home.btn_usermanual') }}</button>
+                        <button class="btn btn-outline-warning"><i class="fas fa-bug"></i> {{ trans('home.btn_reportbug') }}</button>
                     </div>
                     <hr width="50%">
                     <h6>{{ trans('home.credit-text') }}</h6>
