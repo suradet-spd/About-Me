@@ -8,6 +8,7 @@ return [
     "LogoName" => "สร้างตัวตนของคุณ",
     "LoginMenu" => "เข้าสู่ระบบ",
     "RegisterMenu" => "สมัครสมาชิก",
+    "AdminMenu" => "กำหนดค่าระบบ",
 
     // Promote zone
     "PromoteTextHead" => "บัญชีบุคคลอื่น ๆ ",

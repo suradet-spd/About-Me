@@ -88,7 +88,7 @@
                 </button>
 
                 @php
-                    $str = "light";
+                    $str = "btn-outline-light";
                 @endphp
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -106,7 +106,7 @@
                                 <li class="nav-item">
 
                                     <a id="LoginBTN" class="nav-link text-white" style="cursor: pointer" data-toggle="modal" data-target="#md_login">
-                                        <button class="btn btn-outline-{{ $str }}">
+                                        <button class="btn {{ $str }}">
                                             <i class="fas fa-sign-in-alt"></i> {{ trans('home.LoginMenu') }}
                                         </button>
                                     </a>
@@ -116,7 +116,7 @@
                             @endif
                             <li class="nav-item">
                                 <a id="RegisterBTN" class="nav-link text-white" style="cursor: pointer" data-toggle="modal" data-target="#md_register">
-                                    <button class="btn btn-outline-{{ $str }}">
+                                    <button class="btn {{ $str }}">
                                         <i class="fas fa-user-plus"></i> {{ trans('home.RegisterMenu') }}
                                     </button>
                                 </a>
@@ -125,8 +125,8 @@
                             @if (Auth::user()->admin_flag == "Y")
                                 <li class="nav-item dropdown">
                                     <h5>
-                                        <a id="navbarDropdown" class="nav-link text-white" href="#">
-                                            <button class="btn btn-outline-{{ $str }}">
+                                        <a id="AdminMenuID" class="nav-link text-white" style="cursor: pointer" data-toggle="modal" data-target="#md_adminmenu">
+                                            <button class="btn {{ $str }}">
                                                 <i class="fas fa-tools"></i> {{ trans('home.AdminMenu') }}
                                             </button>
                                         </a>
@@ -138,7 +138,7 @@
                             @if (Auth::user()->gen_profile_flag == "N")
                                 <li class="nav-item">
                                     <a href="{{ route('MyProfile' , 'about') }}" target="_blank" class="nav-link text-white" style="cursor: pointer">
-                                        <button class="btn btn-outline-{{ $str }}">
+                                        <button class="btn {{ $str }}">
                                             <i class="fas fa-plus-square"></i> {{ trans('home.CreateMenu') }}
                                         </button>
                                     </a>
@@ -146,7 +146,7 @@
                             @else
                                 <li class="nav-item">
                                     <a href="{{ route('MyProfile' , 'about') }}" class="nav-link text-white" style="cursor: pointer">
-                                        <button class="btn btn-outline-{{ $str }}">
+                                        <button class="btn {{ $str }}">
                                             <i class="far fa-user"></i> {{ trans('home.ViewMenu') }}
                                         </button>
                                     </a>
@@ -155,7 +155,7 @@
                             <li class="nav-item">
                                 <h5>
                                     <a class="nav-link text-white" href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
-                                        <button class="btn btn-outline-{{ $str }}">
+                                        <button class="btn {{ $str }}">
                                             <i class="fas fa-sign-out-alt"></i> {{ trans('home.LogoutMenu') }}
                                         </button>
                                     </a>
@@ -171,13 +171,13 @@
 
                             @if ($lang == "en")
                                 <a href="{{ url('change' , 'th') }}" class="nav-link text-white" style="cursor: pointer">
-                                    <button class="btn btn-outline-{{ $str }}">
+                                    <button class="btn {{ $str }}">
                                         <i class="fas fa-globe-asia"></i> TH
                                     </button>
                                 </a>
                             @else
                                 <a href="{{ url('change' , 'en') }}" class="nav-link text-white" style="cursor: pointer">
-                                    <button class="btn btn-outline-{{ $str }}">
+                                    <button class="btn {{ $str }}">
                                         <i class="fas fa-globe-americas"></i> EN
                                     </button>
                                 </a>
@@ -211,11 +211,11 @@
                     <div class="container">
                         <div class="row">
                             <div class="col text-center">
-                                <button class="btn btn-outline-{{ $str }}" onclick="Javascript:submitSearchForm()">
+                                <button class="btn {{ $str }}" onclick="Javascript:submitSearchForm()">
                                     <i class="fas fa-search"></i> {{ trans('home.SearchButton') }}
                                 </button>
                                 <button class="btn btn-danger" onclick="Javascript:ResetText()">
-                                    <i class="fas fa-trash"></i> {{ trans('home.ResetButton') }}
+                                    <i class="fas fa-eraser"></i> {{ trans('home.ResetButton') }}
                                 </button>
                             </div>
                         </div>
@@ -226,8 +226,8 @@
     </div>
 @endsection
 
-@if (isset($list_profile))
-    @section('OtherModal')
+@section('OtherModal')
+    @if (isset($list_profile))
         {{-- Search profile Modal --}}
         <div class="modal fade" id="Md_SearchProfile">
             <div class="modal-dialog modal-lg">
@@ -276,9 +276,122 @@
             </div>
             </div>
         </div>
-    @endsection
+    @endif
 
-@endif
+    @auth
+        @if (Auth::user()->admin_flag == "Y")
+            <!-- The Modal -->
+            <div class="modal fade" id="md_adminmenu">
+                <div class="modal-dialog">
+                <div class="modal-content">
+
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                    <h4 class="modal-title">System Config</h4>
+                    {{-- <button type="button" class="close" data-dismiss="modal">&times;</button> --}}
+                    </div>
+
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        <div class="container">
+                            <div class="col col-sm-12">
+                                <form id="AdminConfig" action="#" method="POST">
+                                    @csrf
+                                    <label for="modify" class="col-form-label">Customize type : </label>
+                                    <select name="modify" id="modifyID" class="custom-select mb-3" onchange="SwitchRender();">
+                                        <option value="" selected="" disabled="">-- select config type --</option>
+                                        <option value="BG">Background color</option>
+                                        <option value="FC">Font color</option>
+                                        <option value="BC">Button color</option>
+                                        <option value="AD">Account Detail</option>
+                                    </select>
+
+                                    <hr width="95%">
+
+                                    <div id="RenderBackgroundColorID" hidden>
+                                        <div class="form-group">
+                                            <label for="SetBackgroundType" class="col-form-label text-md-left">{{ trans('background.LabelColorType') }}</label>
+                                                <select name="SetBackgroundType" id="SetBackgroundTypeID" class="custom-select" onchange="fnc_setbackground()">
+                                                    <option value="" selected="" disabled>{{ trans('background.SelectLabelDefault') }}</option>
+                                                    <option value="G">{{ trans('background.GardientLabel') }}</option>
+                                                    <option value="C">{{ trans('background.CommonLabel') }}</option>
+                                                </select>
+
+                                                @error('SetBackgroundType')
+                                                    <script>
+                                                        swal("{{ trans('background.header_error') }}" , "{{ $message }}" , 'error');
+                                                    </script>
+                                                @enderror
+                                        </div>
+
+                                        <div id="backgroundColorDet"></div>
+                                    </div>
+
+                                    <div id="RenderFontColorID" hidden>
+                                        <div class="form-group">
+                                            <label for="SetFontColor" class="col-form-label text-md-left">Font Color : </label>
+                                            <input type="color" class="form-control" name="SetFontColor" id="SetFontColorID">
+                                        </div>
+                                    </div>
+
+                                    <div id="RenderButtonColor" hidden>
+                                        <div class="form-group">
+                                            <label for="SetButtonColor" class="col-form-label text-md-left">Button Color type : </label>
+                                            <select name="SetButtonColor" id="SetButtonColorID" class="custom-select" onchange="SetButtonColorExam()">
+                                                <option value="" selected disabled>Select Button type color</option>
+                                                <option value="btn-primary">Primary Button</option>
+                                                <option value="btn-secondary">Secondary Button</option>
+                                                <option value="btn-success">Success Button</option>
+                                                <option value="btn-info">Info Button</option>
+                                                <option value="btn-warning">Warning Button</option>
+                                                <option value="btn-danger">Danger Button</option>
+                                                <option value="btn-dark">Dark Button</option>
+                                                <option value="btn-light">Light Button</option>
+
+                                                <option value="btn-outline-primary">Primary Outline Button</option>
+                                                <option value="btn-outline-secondary">Secondary Outline Button</option>
+                                                <option value="btn-outline-success">Success Outline Button</option>
+                                                <option value="btn-outline-info">Info Outline Button</option>
+                                                <option value="btn-outline-warning">Warning Outline Button</option>
+                                                <option value="btn-outline-danger">Danger Outline Button</option>
+                                                <option value="btn-outline-dark">Dark Outline Button</option>
+                                                <option value="btn-outline-light">Light Outline Button</option>
+                                            </select>
+                                        </div>
+                                        <div id="ExampleButton"></div>
+                                    </div>
+
+                                    <div id="RenderAccountDetail" hidden>
+                                        <div class="form-group">
+                                            <label for="SetLineAccount" class="col-form-label text-md-left">Line Account : </label>
+                                            <input type="text" class="form-control" name="SetLineAccount" id="SetLineAccountID" placeholder="Ex : @bigfat">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="SetMailAccount" class="col-form-label text-md-left">Mail Account : </label>
+                                            <input type="email" class="form-control" name="SetMailAccount" id="SetMailAccountID" placeholder="Ex : bigfat@loocal.com">
+                                        </div>
+                                    </div>
+
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-success">Submit</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    </div>
+
+                </div>
+                </div>
+            </div>
+        @endif
+    @endauth
+@endsection
+
+
 
 @section('LoginModal')
 {{-- The Modal --}}
@@ -497,7 +610,7 @@
                 <div class="col-md-8">
                     <h5>ABOUT US</h5>
                     <div class="col-sm-12">
-                        <button class="btn btn-outline-{{ $str }}"><i class="fas fa-book"></i> {{ trans('home.btn_usermanual') }}</button>
+                        <button class="btn {{ $str }}"><i class="fas fa-book"></i> {{ trans('home.btn_usermanual') }}</button>
                         <button class="btn btn-outline-warning"><i class="fas fa-bug"></i> {{ trans('home.btn_reportbug') }}</button>
                     </div>
                     <hr width="50%">
@@ -534,6 +647,12 @@
             $("#md_login").modal({
                 backdrop: "static"
             }, 'show');
+        });
+
+        $("#AdminMenuID").click(function(){
+            $("#md_adminmenu").modal({
+                backdrop: "static"
+            } , 'show');
         });
 
 
@@ -587,5 +706,36 @@
         $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
     });
     // Show image name
+
+    function fnc_setbackground() {
+        const tmpHtml = '<div class="form-group">||</div>';
+        const mast = document.getElementById("SetBackgroundTypeID").value;
+        const color = {
+            "Primary": (mast == "" || mast == null) ? null : '<label for="PrimaryColor" class="col-form-label text-md-left">Primary Color : </label><input type="color" class="form-control" name="PrimaryColor" id="PrimaryColorID">',
+            "Secondary": (mast == "C" || mast == "" || mast == null) ? null : '<label for="SecondaryColor" class="col-form-label text-md-left">Secondary Color : </label><input type="color" class="form-control" name="SecondaryColor" id="SecondaryColorID">',
+        }
+        document.getElementById("backgroundColorDet").innerHTML = "".concat((color["Primary"] == null) ? "" : tmpHtml.replace("||" , color["Primary"]) , (color["Secondary"] == null) ? "" : tmpHtml.replace("||" , color["Secondary"]));
+    }
+
+    function SwitchRender() {
+        const Master = document.getElementById("modifyID").value;
+        console.log(Master);
+
+    }
+
+    function chkTest(divID) {
+        const a = document.getElementById(divID).hidden;
+        console.log(a);
+    }
+
+    function SetButtonColorExam() {
+        const tmpData = document.getElementById('SetButtonColorID').value;
+
+        if (tmpData != "" && tmpData != null) {
+            const tmpHtml = '<label class="col-form-label text-md-left"><b>Example Button : </b><a class="btn ButtonCode">Example</a></label>';
+
+            document.getElementById("ExampleButton").innerHTML = tmpHtml.replace("ButtonCode",tmpData);
+        }
+    }
 </script>
 @endsection

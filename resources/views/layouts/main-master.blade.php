@@ -24,12 +24,10 @@
         @if (\Session::has('success'))
             <script>
                 swal("{{ trans('profile.AlertSuccess') }}", "{{ Session::get('success') }}", "success");
-
             </script>
         @elseif (\Session::has('error'))
             <script>
                 swal("{{ trans('profile.AlertError') }}", "{{ Session::get('error') }}", "error");
-
             </script>
         @endif
         {{-- Check success return --}}

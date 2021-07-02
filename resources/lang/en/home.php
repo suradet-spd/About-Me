@@ -8,6 +8,7 @@ return [
     "LogoName" => "Generate Your Profile",
     "LoginMenu" => "Login",
     "RegisterMenu" => "Register",
+    "AdminMenu" => "System config",
 
     // Promote zone
     "PromoteTextHead" => "Another Profile",
