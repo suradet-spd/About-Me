@@ -334,7 +334,7 @@
                                         </div>
                                     </div>
 
-                                    <div id="RenderButtonColor" hidden>
+                                    <div id="RenderButtonColorID" hidden>
                                         <div class="form-group">
                                             <label for="SetButtonColor" class="col-form-label text-md-left">Button Color type : </label>
                                             <select name="SetButtonColor" id="SetButtonColorID" class="custom-select" onchange="SetButtonColorExam()">
@@ -361,7 +361,7 @@
                                         <div id="ExampleButton"></div>
                                     </div>
 
-                                    <div id="RenderAccountDetail" hidden>
+                                    <div id="RenderAccountDetailID" hidden>
                                         <div class="form-group">
                                             <label for="SetLineAccount" class="col-form-label text-md-left">Line Account : </label>
                                             <input type="text" class="form-control" name="SetLineAccount" id="SetLineAccountID" placeholder="Ex : @bigfat">
@@ -380,7 +380,7 @@
 
                     <!-- Modal footer -->
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-success">Submit</button>
+                        <button type="button" class="btn btn-success" onclick="submitConfig()">Submit</button>
                         <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                     </div>
 
@@ -717,15 +717,86 @@
         document.getElementById("backgroundColorDet").innerHTML = "".concat((color["Primary"] == null) ? "" : tmpHtml.replace("||" , color["Primary"]) , (color["Secondary"] == null) ? "" : tmpHtml.replace("||" , color["Secondary"]));
     }
 
-    function SwitchRender() {
-        const Master = document.getElementById("modifyID").value;
-        console.log(Master);
+    function DivHiddenID(DivValue , returnType) {
+        // returnType ["code" , "id" , "prop"]
 
+        var ConfigCode = ["BG","FC","BC","AD"];
+
+        var ConfigDivID = {
+            "BG" : "RenderBackgroundColorID",
+            "FC" : "RenderFontColorID",
+            "BC" : "RenderButtonColorID",
+            "AD" : "RenderAccountDetailID"
+        };
+
+        const tmp = document.getElementById("SetBackgroundTypeID").value;
+        var ConfigDivProp = {
+            "BG" : [((tmp == "" || tmp == null) ? null : "SetBackgroundTypeID") , ((tmp == 'G' || tmp == 'C') ? "PrimaryColorID" : null) , ((tmp == 'G') ? "SecondaryColorID" : null)],
+            "FC" : ["SetFontColorID"],
+            "BC" : ["SetButtonColorID"],
+            "AD" : ["SetLineAccountID" , "SetMailAccountID"]
+        }
+        return (returnType == "code") ? ConfigCode : ((returnType == "id" && (DivValue != null || DivValue != "")) ? ConfigDivID[DivValue] : ((returnType == "prop" && (DivValue != null || DivValue != "")) ? ConfigDivProp[DivValue] : null))};
+
+    function SwitchRender() {
+
+        const Master = document.getElementById("modifyID").value;
+        var tmpArr = DivHiddenID(null , 'code');
+
+        if (Master != "" || Master != null) {
+            tmpArr.forEach(element => {
+                if (element == Master) {
+                    document.getElementById(DivHiddenID(element , 'id')).hidden = false;
+                } else {
+                    document.getElementById(DivHiddenID(element , 'id')).hidden = true;
+                }
+            });
+        }
     }
 
-    function chkTest(divID) {
-        const a = document.getElementById(divID).hidden;
-        console.log(a);
+    function swAlert(Message , RefreshPage) {
+        if (RefreshPage == false) {
+            swal("{{ trans('background.header_error') }}" , Message , 'error');
+        } else {
+            swal({
+                title: "{{ trans('background.header_error') }}",
+                text: Message,
+                icon: "warning",
+                buttons: true,
+            }).then((willTry) => {
+                if (willTry) {
+                    window.location.href = "";
+                }
+            });
+        }
+    }
+
+    function chkInput(divID) {
+        var ArrChk = DivHiddenID(null , 'code');
+        var res = true;
+        var value = {
+            "BG" : null,
+            "FC" : null,
+            "BC" : null,
+            "AD" : null
+        };
+
+        ArrChk.forEach(element => {
+            const tmp_check = document.getElementById(DivHiddenID(element , 'id')).hidden;
+            value[element] = (divID == element) ? ((tmp_check == false) ? true : false) : ((tmp_check == true) ? true : false);
+        });
+        // Assign value
+
+        Object.keys(value).forEach(function (vl) {
+            if (value[vl] == false) {
+                res = false;
+
+            }
+        });
+
+        return res;
+        // return value
+
     }
 
     function SetButtonColorExam() {
@@ -737,5 +808,55 @@
             document.getElementById("ExampleButton").innerHTML = tmpHtml.replace("ButtonCode",tmpData);
         }
     }
+
+    function submitConfig() {
+        var FormID = document.getElementById("AdminConfig");
+        var GetSelectType = FormID.elements["modify"].value ;
+        var ChkDivEnable = chkInput(GetSelectType);
+
+        if (GetSelectType == null || GetSelectType == "") {
+            swAlert("Please select config type!" , false);
+        } else {
+
+            if (!ChkDivEnable) {
+                swAlert("Your form is invalid. Click OK to try again" , true);
+            } else {
+                const id_div = DivHiddenID(GetSelectType , 'id');
+                const property_div = DivHiddenID(GetSelectType , 'prop');
+                var res = false;
+                var chk_val = [];
+                property_div.forEach(pd => {
+                    if (pd == null || pd == "") {
+                        chk_val.push(false);
+                    } else {
+                        if (document.getElementById(pd).value == "" || document.getElementById(pd).value == null) {
+                            chk_val.push(false);
+                        } else {
+                            chk_val.push(true);
+                        }
+                    }
+                });
+
+                chk_val.forEach(cv => {
+                    if (cv == false) {
+                        res = false;
+                        return;
+                    } else {
+                        res = true;
+                    }
+                });
+
+                if (!res) {
+                    swAlert("Please enter config value!" , false);
+                } else {
+                    console.log("Done");
+                }
+            }
+            // swAlert("pls enter value before submit form!" , false);
+
+        }
+
+    }
+
 </script>
 @endsection
