@@ -16,7 +16,7 @@ class ProfileTPortfolioMast extends Migration
             $table->string('portfolio_name_th')->nullable(true)->comment('ชื่อผลงาน (ไทย)');
             $table->string('portfolio_name_en')->nullable(true)->comment('ชื่อผลงาน (อังกฤษ)');
             $table->string('portfolio_tag')->nullable(false)->comment('แท็กของชิ้นงาน');
-            $table->string('portfolio_images')->nullable(false)->comment('รูปภาพชิ้นงาน');
+            $table->string('portfolio_images' , '2000')->nullable(false)->comment('รูปภาพชิ้นงาน');
             $table->string('portfolio_desc_th' , 500)->nullable(true)->comment('อธิบายเกี่ยวกับชิ้นงาน (ไทย)');
             $table->string('portfolio_desc_en' , 500)->nullable(true)->comment('อธิบายเกี่ยวกับชิ้นงาน (อังกฤษ)');
             $table->dateTime('last_upd_date')->default(DB::raw('CURRENT_TIMESTAMP'))->comment('วันที่แก้ไขข้อมูลล่าสุด');

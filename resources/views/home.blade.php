@@ -635,10 +635,10 @@
             <center>
                 <div class="col-md-8">
                     <h5>ABOUT US</h5>
-                    <div class="col-sm-12">
+                    {{-- <div class="col-sm-12">
                         <button class="btn {{ $btn_color }}"><i class="fas fa-book"></i> {{ trans('home.btn_usermanual') }}</button>
                         <button class="btn {{ $btn_color }}"><i class="fas fa-bug"></i> {{ trans('home.btn_reportbug') }}</button>
-                    </div>
+                    </div> --}}
                     <hr width="50%">
                     <h6>{{ trans('home.credit-text') }}</h6>
                     <h6>
