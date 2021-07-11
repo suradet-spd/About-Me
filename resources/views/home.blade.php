@@ -26,30 +26,77 @@
     {{-- Styles --}}
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
+        @php
+            $backgroundType = ($system["background_color"] == null) ? null : $system["background_color"]->background_type;
+            $bg_primary = ($system["background_color"] == null) ? "#00000" : (($system["background_color"]->primary_color == null) ? "#FFFFF" : $system["background_color"]->primary_color);
+            $bg_secondary = ($system["background_color"] == null ) ? "#FFFFF" : (($system["background_color"]->secondary_color == null) ? "#FFFFF" : $system["background_color"]->secondary_color);
+
+            $fontColor = ($system["font_color"] == null) ? "#FFFFF" : (($system["font_color"]->font_color == null) ? "#FFFFF" : $system["font_color"]->font_color);
+
+            $btn_color = ($system["button_color"] == null) ? "btn-outline-dark" : (($system["button_color"]->button_color == null) ? "btn-outline-light" : $system["button_color"]->button_color);
+            $account = array(
+                "line" => ($system["account_detail"] == null ) ? null : (($system["account_detail"]->LineAccount == null) ? null : $system["account_detail"]->LineAccount),
+                "mail" => ($system["account_detail"] == null) ? null : (($system["account_detail"]->MailAccount == null) ? null : $system["account_detail"]->MailAccount)
+            );
+        @endphp
+        @if ($backgroundType == "G")
+            <style>
+                body{
+                    background: linear-gradient( -500deg, {{ $bg_secondary }}, {{ $bg_primary }} , {{ $bg_primary }} , {{ $bg_secondary }} );
+                    background-size: 800% 800%;
+                    animation: gradient 20s ease infinite;
+                    color: {{ $fontColor }};
+                }
+                .animate-bg{
+                    background: linear-gradient( -500deg, {{ $bg_secondary }}, {{ $bg_primary }} , {{ $bg_primary }} , {{ $bg_secondary }} );
+                    background-size: 800% 800%;
+                    animation: gradient 20s ease infinite;
+                }
+
+                .footer {
+                    position: absolute;
+                    left: 0;
+                    bottom: 0;
+                    width: 100%;
+                    background: linear-gradient( -500deg, {{ $bg_secondary }}, {{ $bg_primary }} , {{ $bg_primary }} , {{ $bg_secondary }} );
+                    background-size: 800% 800%;
+                    animation: gradient 20s ease infinite;
+                    text-align: center;
+                    color: {{ $fontColor }};
+
+                }
+
+                @keyframes gradient {
+                    0% {
+                        background-position: 0% 50%;
+                    }
+                    50% {
+                        background-position: 100% 50%;
+                    }
+                    100% {
+                        background-position: 0% 50%;
+                    }
+                }
+            </style>
+        @else
+            <style>
+                body{
+                    background-color: {{ $bg_primary }};
+                    color: {{ $fontColor }};
+                }
+                .footer {
+                    position: absolute;
+                    left: 0;
+                    bottom: 0;
+                    width: 100%;
+                    color: {{ $fontColor }};
+                    text-align: center;
+                    background-color: {{ $bg_primary }};
+                }
+            </style>
+        @endif
+
     <style>
-        body{
-            background: linear-gradient( -500deg, rgb(34, 36, 70), rgb(38,40,92), rgb(77,80,152), rgb(117,120,205) );
-            background-size: 800% 800%;
-            animation: gradient 20s ease infinite;
-        }
-        .animate-bg{
-            background: linear-gradient( -500deg, rgb(34, 36, 70), rgb(38,40,92), rgb(77,80,152), rgb(117,120,205) );
-            background-size: 800% 800%;
-            animation: gradient 20s ease infinite;
-        }
-
-        .footer {
-            position: absolute;
-            left: 0;
-            bottom: 0;
-            width: 100%;
-            background: linear-gradient( -500deg, rgb(34, 36, 70), rgb(38,40,92), rgb(77,80,152), rgb(117,120,205) );
-            background-size: 800% 800%;
-            animation: gradient 20s ease infinite;
-            color: white;
-            text-align: center;
-        }
-
         .set-center {
             margin: 0;
             position: absolute;
@@ -59,19 +106,6 @@
             -ms-transform: translate(-50%, -50%);
             transform: translate(-50%, -50%);
         }
-
-        @keyframes gradient {
-            0% {
-                background-position: 0% 50%;
-            }
-            50% {
-                background-position: 100% 50%;
-            }
-            100% {
-                background-position: 0% 50%;
-            }
-        }
-
     </style>
 @endsection
 
@@ -80,21 +114,14 @@
         {{-- Menu Zone --}}
         <nav class="navbar navbar-expand-md navbar-light shadow-sm animate-bg">
             <div class="container">
-                <a class="navbar-brand text-white" href="{{ url('/') }}">
+                <a class="navbar-brand" href="{{ url('/') }}" style="color: {{ $fontColor }}">
                     <h4>{{ trans('home.LogoName') }}</h4>
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
-                @php
-                    $str = "btn-outline-light";
-                @endphp
-
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    {{-- Left Side Of Navbar --}}
-                    {{-- <ul class="navbar-nav mr-auto">
-                    </ul> --}}
 
                     {{-- Right Side Of Navbar --}}
                     <ul class="navbar-nav ml-auto">
@@ -106,7 +133,7 @@
                                 <li class="nav-item">
 
                                     <a id="LoginBTN" class="nav-link text-white" style="cursor: pointer" data-toggle="modal" data-target="#md_login">
-                                        <button class="btn {{ $str }}">
+                                        <button class="btn {{ $btn_color }}">
                                             <i class="fas fa-sign-in-alt"></i> {{ trans('home.LoginMenu') }}
                                         </button>
                                     </a>
@@ -116,7 +143,7 @@
                             @endif
                             <li class="nav-item">
                                 <a id="RegisterBTN" class="nav-link text-white" style="cursor: pointer" data-toggle="modal" data-target="#md_register">
-                                    <button class="btn {{ $str }}">
+                                    <button class="btn {{ $btn_color }}">
                                         <i class="fas fa-user-plus"></i> {{ trans('home.RegisterMenu') }}
                                     </button>
                                 </a>
@@ -126,7 +153,7 @@
                                 <li class="nav-item dropdown">
                                     <h5>
                                         <a id="AdminMenuID" class="nav-link text-white" style="cursor: pointer" data-toggle="modal" data-target="#md_adminmenu">
-                                            <button class="btn {{ $str }}">
+                                            <button class="btn {{ $btn_color }}">
                                                 <i class="fas fa-tools"></i> {{ trans('home.AdminMenu') }}
                                             </button>
                                         </a>
@@ -138,7 +165,7 @@
                             @if (Auth::user()->gen_profile_flag == "N")
                                 <li class="nav-item">
                                     <a href="{{ route('MyProfile' , 'about') }}" target="_blank" class="nav-link text-white" style="cursor: pointer">
-                                        <button class="btn {{ $str }}">
+                                        <button class="btn {{ $btn_color }}">
                                             <i class="fas fa-plus-square"></i> {{ trans('home.CreateMenu') }}
                                         </button>
                                     </a>
@@ -146,7 +173,7 @@
                             @else
                                 <li class="nav-item">
                                     <a href="{{ route('MyProfile' , 'about') }}" class="nav-link text-white" style="cursor: pointer">
-                                        <button class="btn {{ $str }}">
+                                        <button class="btn {{ $btn_color }}">
                                             <i class="far fa-user"></i> {{ trans('home.ViewMenu') }}
                                         </button>
                                     </a>
@@ -155,7 +182,7 @@
                             <li class="nav-item">
                                 <h5>
                                     <a class="nav-link text-white" href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
-                                        <button class="btn {{ $str }}">
+                                        <button class="btn {{ $btn_color }}">
                                             <i class="fas fa-sign-out-alt"></i> {{ trans('home.LogoutMenu') }}
                                         </button>
                                     </a>
@@ -171,13 +198,13 @@
 
                             @if ($lang == "en")
                                 <a href="{{ url('change' , 'th') }}" class="nav-link text-white" style="cursor: pointer">
-                                    <button class="btn {{ $str }}">
+                                    <button class="btn {{ $btn_color }}">
                                         <i class="fas fa-globe-asia"></i> TH
                                     </button>
                                 </a>
                             @else
                                 <a href="{{ url('change' , 'en') }}" class="nav-link text-white" style="cursor: pointer">
-                                    <button class="btn {{ $str }}">
+                                    <button class="btn {{ $btn_color }}">
                                         <i class="fas fa-globe-americas"></i> EN
                                     </button>
                                 </a>
@@ -196,8 +223,8 @@
             <div class="container">
                 <div class="col-md-8 mx-auto mb-5">
                     <br>
-                    <div class="container mx-auto text-white text-center">
-                        <p><h1 class="display-4">{{ trans('home.PromoteTextHead') }}</h1></p>
+                    <div class="container mx-auto text-center">
+                        <p><h1 class="display-4" style="color: {{ $fontColor }}">{{ trans('home.PromoteTextHead') }}</h1></p>
                     </div>
 
                     <form action="{{ route('search.profile') }}" id="SerchNameId" method="POST">
@@ -211,10 +238,10 @@
                     <div class="container">
                         <div class="row">
                             <div class="col text-center">
-                                <button class="btn {{ $str }}" onclick="Javascript:submitSearchForm()">
+                                <button class="btn {{ $btn_color }}" onclick="Javascript:submitSearchForm()">
                                     <i class="fas fa-search"></i> {{ trans('home.SearchButton') }}
                                 </button>
-                                <button class="btn btn-danger" onclick="Javascript:ResetText()">
+                                <button class="btn {{ $btn_color }}" onclick="Javascript:ResetText()">
                                     <i class="fas fa-eraser"></i> {{ trans('home.ResetButton') }}
                                 </button>
                             </div>
@@ -235,7 +262,7 @@
 
                 {{-- Modal Header --}}
                 <div class="modal-header">
-                <h4 class="modal-title">Profile Listing</h4>
+                <h4 class="modal-title">{{ trans('home.view_md_header_search') }}</h4>
                 </div>
 
                 {{-- Modal body --}}
@@ -245,10 +272,10 @@
                             <thead>
                                 <tr class="text-center">
                                     <th>
-                                        <h5><b>Name</b></h5>
+                                        <h5><b>{{ trans('home.view_md_tab_search1') }}</b></h5>
                                     </th>
                                     <th>
-                                        <h5><b>Action</b></h5>
+                                        <h5><b>{{ trans('home.view_md_tab_search2') }}</b></h5>
                                     </th>
                                 </tr>
                             </thead>
@@ -287,23 +314,22 @@
 
                     <!-- Modal Header -->
                     <div class="modal-header">
-                    <h4 class="modal-title">System Config</h4>
-                    {{-- <button type="button" class="close" data-dismiss="modal">&times;</button> --}}
+                    <h4 class="modal-title">{{ trans('home.home_md_config_header') }}</h4>
                     </div>
 
                     <!-- Modal body -->
                     <div class="modal-body">
                         <div class="container">
                             <div class="col col-sm-12">
-                                <form id="AdminConfig" action="#" method="POST">
+                                <form id="AdminConfig" action="{{ route('systemConfig') }}" method="POST">
                                     @csrf
-                                    <label for="modify" class="col-form-label">Customize type : </label>
+                                    <label for="modify" class="col-form-label">{{ trans('home.md_config_type_label') }}</label>
                                     <select name="modify" id="modifyID" class="custom-select mb-3" onchange="SwitchRender();">
-                                        <option value="" selected="" disabled="">-- select config type --</option>
-                                        <option value="BG">Background color</option>
-                                        <option value="FC">Font color</option>
-                                        <option value="BC">Button color</option>
-                                        <option value="AD">Account Detail</option>
+                                        <option value="" selected>{{ trans('home.md_config_type_default') }}</option>
+                                        <option value="BG">{{ trans('home.md_config_type_1') }}</option>
+                                        <option value="FC">{{ trans('home.md_config_type_2') }}</option>
+                                        <option value="BC">{{ trans('home.md_config_type_3') }}</option>
+                                        <option value="AD">{{ trans('home.md_config_type_4') }}</option>
                                     </select>
 
                                     <hr width="95%">
@@ -329,16 +355,16 @@
 
                                     <div id="RenderFontColorID" hidden>
                                         <div class="form-group">
-                                            <label for="SetFontColor" class="col-form-label text-md-left">Font Color : </label>
-                                            <input type="color" class="form-control" name="SetFontColor" id="SetFontColorID">
+                                            <label for="SetFontColor" class="col-form-label text-md-left">{{ trans('home.md_config_font_color') }}</label>
+                                            <input type="color" class="form-control" name="SetFontColor" id="SetFontColorID" value="{{ $fontColor }}">
                                         </div>
                                     </div>
 
                                     <div id="RenderButtonColorID" hidden>
                                         <div class="form-group">
-                                            <label for="SetButtonColor" class="col-form-label text-md-left">Button Color type : </label>
+                                            <label for="SetButtonColor" class="col-form-label text-md-left">{{ trans('home.md_config_btn_color') }}</label>
                                             <select name="SetButtonColor" id="SetButtonColorID" class="custom-select" onchange="SetButtonColorExam()">
-                                                <option value="" selected disabled>Select Button type color</option>
+                                                <option value="" selected disabled>{{ trans('home.md_config_btn_default') }}</option>
                                                 <option value="btn-primary">Primary Button</option>
                                                 <option value="btn-secondary">Secondary Button</option>
                                                 <option value="btn-success">Success Button</option>
@@ -363,13 +389,13 @@
 
                                     <div id="RenderAccountDetailID" hidden>
                                         <div class="form-group">
-                                            <label for="SetLineAccount" class="col-form-label text-md-left">Line Account : </label>
-                                            <input type="text" class="form-control" name="SetLineAccount" id="SetLineAccountID" placeholder="Ex : @bigfat">
+                                            <label for="SetLineAccount" class="col-form-label text-md-left">{{ trans('home.md_line_acc') }}</label>
+                                            <input type="text" class="form-control" name="SetLineAccount" id="SetLineAccountID" placeholder="Ex : @LineAccount" value="{{ $account["line"] }}">
                                         </div>
 
                                         <div class="form-group">
-                                            <label for="SetMailAccount" class="col-form-label text-md-left">Mail Account : </label>
-                                            <input type="email" class="form-control" name="SetMailAccount" id="SetMailAccountID" placeholder="Ex : bigfat@loocal.com">
+                                            <label for="SetMailAccount" class="col-form-label text-md-left">{{ trans('home.md_mail_acc') }}</label>
+                                            <input type="email" class="form-control" name="SetMailAccount" id="SetMailAccountID" placeholder="Ex : AdminEmail@loocal.com" value="{{ $account["mail"] }}">
                                         </div>
                                     </div>
 
@@ -380,8 +406,8 @@
 
                     <!-- Modal footer -->
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-success" onclick="submitConfig()">Submit</button>
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-success" onclick="submitConfig()">{{ trans('home.md_config_confirm') }}</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">{{ trans('home.md_config_cancel') }}</button>
                     </div>
 
                 </div>
@@ -610,18 +636,24 @@
                 <div class="col-md-8">
                     <h5>ABOUT US</h5>
                     <div class="col-sm-12">
-                        <button class="btn {{ $str }}"><i class="fas fa-book"></i> {{ trans('home.btn_usermanual') }}</button>
-                        <button class="btn btn-outline-warning"><i class="fas fa-bug"></i> {{ trans('home.btn_reportbug') }}</button>
+                        <button class="btn {{ $btn_color }}"><i class="fas fa-book"></i> {{ trans('home.btn_usermanual') }}</button>
+                        <button class="btn {{ $btn_color }}"><i class="fas fa-bug"></i> {{ trans('home.btn_reportbug') }}</button>
                     </div>
                     <hr width="50%">
                     <h6>{{ trans('home.credit-text') }}</h6>
                     <h6>
-                        <i class="fas fa-envelope-open-text fa-2x"></i> : <a href="mailto:yubanarchy@gmail.com">yubanarchy@gmail.com </a>
-                        <i class="fab fa-line fa-2x"></i> : @bigfatdev
+                        @if ($account["mail"] != null )
+                            <i class="fas fa-envelope-open-text fa-2x"></i> : <a href="mailto:{{ $account["mail"] }}">{{ $account["mail"] }} </a>
+                        @endif
+
+                        @if ($account["line"] != null )
+                            <i class="fab fa-line fa-2x"></i> : {{ $account["line"] }}
+                        @endif
+
                     </h6>
                     <hr width="20%">
                     <h6>
-                        <p>Copyright © {{ date('Y') }}<a href="{{ route('ViewProfile' , ['type'=> 'about' , 'user_name' => 'suradet.sripradit']) }}" target="_blank"> Bigfat-Dev </a>All rights reserved.</p>
+                        <p>Copyright © {{ date('Y') }} <b>Bigfat-Dev</b> All rights reserved.</p>
                     </h6>
                 </div>
             </center>
@@ -711,8 +743,8 @@
         const tmpHtml = '<div class="form-group">||</div>';
         const mast = document.getElementById("SetBackgroundTypeID").value;
         const color = {
-            "Primary": (mast == "" || mast == null) ? null : '<label for="PrimaryColor" class="col-form-label text-md-left">Primary Color : </label><input type="color" class="form-control" name="PrimaryColor" id="PrimaryColorID">',
-            "Secondary": (mast == "C" || mast == "" || mast == null) ? null : '<label for="SecondaryColor" class="col-form-label text-md-left">Secondary Color : </label><input type="color" class="form-control" name="SecondaryColor" id="SecondaryColorID">',
+            "Primary": (mast == "" || mast == null) ? null : '<label for="PrimaryColor" class="col-form-label text-md-left">Primary Color : </label><input type="color" class="form-control" name="PrimaryColor" id="PrimaryColorID" value="{{ $bg_primary }}">',
+            "Secondary": (mast == "C" || mast == "" || mast == null) ? null : '<label for="SecondaryColor" class="col-form-label text-md-left">Secondary Color : </label><input type="color" class="form-control" name="SecondaryColor" id="SecondaryColorID" value="{{ $bg_secondary }}">',
         }
         document.getElementById("backgroundColorDet").innerHTML = "".concat((color["Primary"] == null) ? "" : tmpHtml.replace("||" , color["Primary"]) , (color["Secondary"] == null) ? "" : tmpHtml.replace("||" , color["Secondary"]));
     }
@@ -827,7 +859,7 @@
                 var chk_val = [];
                 property_div.forEach(pd => {
                     if (pd == null || pd == "") {
-                        chk_val.push(false);
+                        chk_val.push(true);
                     } else {
                         if (document.getElementById(pd).value == "" || document.getElementById(pd).value == null) {
                             chk_val.push(false);
@@ -847,13 +879,11 @@
                 });
 
                 if (!res) {
-                    swAlert("Please enter config value!" , false);
+                    swAlert("pls enter value before submit form!" , false);
                 } else {
-                    console.log("Done");
+                    FormID.submit();
                 }
             }
-            // swAlert("pls enter value before submit form!" , false);
-
         }
 
     }

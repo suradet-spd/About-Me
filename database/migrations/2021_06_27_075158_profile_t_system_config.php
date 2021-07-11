@@ -17,15 +17,14 @@ class ProfileTSystemConfig extends Migration
                     FC = Font Color
                     BC = Button Color
 
-                    LA = Line Account
-                    MA = Mail Account
+                    AD = Account detail
 
                     AN = Anouncement
 
                     AS = Admin website
                 */
-            $table->dateTime('efft_date')->comment('วันที่มีผลของการตั้งค่า');
-            $table->dateTime('exp_date')->default(null)->comment('วันที่สิ้นสุดผลของการตั้งค่า');
+            $table->dateTime('efft_date')->default(DB::raw('CURRENT_TIMESTAMP'))->comment('วันที่มีผลของการตั้งค่า');
+            $table->dateTime('exp_date')->nullable(true)->default(null)->comment('วันที่สิ้นสุดผลของการตั้งค่า');
             $table->string('config_desc' , 3000)->nullable(false)->comment('รายละเอียดการตั้งค่า');
             $table->dateTime('last_upd_date')->default(DB::raw('CURRENT_TIMESTAMP'))->comment('วันที่แก้ไขข้อมูลล่าสุด');
             $table->string('upd_user_id', 5)->nullable(false)->comment('ผู้แก้ไขข้อมูล');
