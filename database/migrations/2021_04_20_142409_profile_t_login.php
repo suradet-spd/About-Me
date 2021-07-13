@@ -45,6 +45,11 @@ class ProfileTLogin extends Migration
             $table->string('upd_user_id', 5)->nullable(false)->comment('ผู้แก้ไขข้อมูล');
 
         });
+
+        DB::statement(
+            "ALTER TABLE " . $this->table_name . "
+            ADD CONSTRAINT `FK_profile_location` FOREIGN KEY (`location_id`) REFERENCES `profile_t_location` (`location_id`);"
+        );
     }
 
     public function down()
